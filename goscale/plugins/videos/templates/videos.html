@@ -1,4 +1,9 @@
 {% load i18n %}
+{% load sekizai_tags %}
+
+{% addtoblock "js" %}<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>{% endaddtoblock %}
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css"></script>{% endaddtoblock %}
+
 {% if posts %}
     {{ posts }}
 {% endif %}
