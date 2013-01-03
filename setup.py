@@ -16,6 +16,7 @@ setup(
     url = "https://bitbucket.org/littlepea12/goscale/",
     include_package_data = True,
     install_requires = [
+        "unidecode",
         "Django >= 1.1.1",
         "django-cms >= 2.2",
     ]
