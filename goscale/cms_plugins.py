@@ -6,7 +6,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     """
     Base class for GoScale plugins
     """
-    exclude = ('posts',)
+    exclude = ['posts',]
     plugin_templates = None
 
     def get_form(self, *args, **kwargs):
@@ -14,6 +14,8 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         if self.plugin_templates:
             form.base_fields['template'] = forms.ChoiceField(choices=self.plugin_templates)
             print form.base_fields['template'].choices
+        else:
+            self.exclude.append('template')
         return form
 
     def render(self, context, instance, placeholder):

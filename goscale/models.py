@@ -89,7 +89,7 @@ class GoscaleCMSPlugin(CMSPlugin):
     """
     #    plugin_templates = PLUGIN_TEMPLATES
     # Fields
-    posts = models.ManyToManyField(Post, related_name='plugins', verbose_name=_('Posts'))
+    posts = models.ManyToManyField(Post, verbose_name=_('Posts'))
     template = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Template'))
 
     # Private Attributes
@@ -141,6 +141,14 @@ class GoscaleCMSPlugin(CMSPlugin):
         return '<br />'.join(msg)
 
     # Private methods
+    def _get_data_source_url(self):
+        """This method should return URL to identify Posts.
+        Different content types may store the URL in a different parameters or even create a dummy one
+        """
+        if 'url' not in self.__dict__:
+            return None
+        return self.__getattribute__('url')
+
     def _get_dummy_datetime(self):
         """ This method is to store posts which have no publish date.
         Please note that post retrieved later will have an earlier publication date - just as it is in RSS feeds.

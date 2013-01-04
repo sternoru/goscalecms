@@ -264,22 +264,22 @@ from django.conf import settings
 #    else:
 #        return '/%s' % lang
 #
-#def process_feed_tz_delta(date_string):
-#    date_match = re.findall('[\-\+]\d{2}:?\d{2}', date_string)
-#    if date_match:
-#        factor = 1
-#        tz_string = date_match[0].replace(':', '')
-#        if tz_string.startswith('-'):
-#            factor = -1
-#        tz_delta = ((int(tz_string[-4:-2]) * 3600) + (int(tz_string[-2:]) * 60)) * factor
-#        return tz_delta
-#    return 0
-#
-#def get_datetime_by_parsed(pDate, tz_delta=0):
-#    if not pDate:
-#        return None
-#    return datetime.datetime(pDate[0], pDate[1],pDate[2], pDate[3], pDate[4], pDate[5]) + datetime.timedelta(seconds=tz_delta)
-#
+def process_feed_tz_delta(date_string):
+    date_match = re.findall('[\-\+]\d{2}:?\d{2}', date_string)
+    if date_match:
+        factor = 1
+        tz_string = date_match[0].replace(':', '')
+        if tz_string.startswith('-'):
+            factor = -1
+        tz_delta = ((int(tz_string[-4:-2]) * 3600) + (int(tz_string[-2:]) * 60)) * factor
+        return tz_delta
+    return 0
+
+def get_datetime_by_parsed(pDate, tz_delta=0):
+    if not pDate:
+        return None
+    return datetime.datetime(pDate[0], pDate[1],pDate[2], pDate[3], pDate[4], pDate[5]) + datetime.timedelta(seconds=tz_delta)
+
 ##@decorators.cache_func
 #def get_params(data_source_dict, data_source_obj):
 #    """Intersect a data_source dict and a data_source_obj and returns a dict
@@ -305,19 +305,19 @@ from django.conf import settings
 #        if key not in exclude:
 #            ret_dict[key] = value
 #    return ret_dict
-#
-#def get_short_summary(html):
-#    max_length_shortcontent = settings.GOSCALE_MAX_LENGTH_SHORTCONTENT
-#    content_temp = html_utils.strip_tags(html)
-#    if len(content_temp) < max_length_shortcontent:
-#        return content_temp
-#    shortcontent_temp = content_temp[:max_length_shortcontent]
-#    if shortcontent_temp.rfind('.') != -1:
-#        shortcontent_temp = shortcontent_temp[:shortcontent_temp.rfind('.')+1]
-#    else:
-#        shortcontent_temp = shortcontent_temp[:shortcontent_temp.rfind(' ')+1] + '...'
-#    return shortcontent_temp
-#
+
+def get_short_summary(html):
+    max_length_shortcontent = conf.GOSCALE_POST_SUMMARY_LIMIT
+    content_temp = html_utils.strip_tags(html)
+    if len(content_temp) < max_length_shortcontent:
+        return content_temp
+    shortcontent_temp = content_temp[:max_length_shortcontent]
+    if shortcontent_temp.rfind('.') != -1:
+        shortcontent_temp = shortcontent_temp[:shortcontent_temp.rfind('.')+1]
+    else:
+        shortcontent_temp = shortcontent_temp[:shortcontent_temp.rfind(' ')+1] + '...'
+    return shortcontent_temp
+
 ##@decorators.cache_func
 #def filter_content_types(content_type):
 #    return [class_name for class_name in settings.GOSCALE_CONTENT_TYPES if settings.CONTENT_TYPES['class_name'].get('type') == content_type]
