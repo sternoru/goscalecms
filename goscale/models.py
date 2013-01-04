@@ -91,6 +91,7 @@ class GoscaleCMSPlugin(CMSPlugin):
     # Fields
     posts = models.ManyToManyField(Post, verbose_name=_('Posts'))
     template = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Template'))
+    title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Title'))
 
     # Private Attributes
     _dummy_datetime = datetime.datetime.now()

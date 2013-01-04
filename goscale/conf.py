@@ -19,6 +19,8 @@ GOSCALE_STANDARD_TZ_DELTA = getattr(settings, 'GOSCALE_STANDARD_TZ_DELTA', 0)
 #short content (number of characters) it will be
 GOSCALE_POST_SUMMARY_LIMIT = getattr(settings, 'GOSCALE_POST_SUMMARY_LIMIT', 300)
 
+GOSCALE_DEFAULT_PAGE_SIZE = getattr(settings, 'GOSCALE_DEFAULT_PAGE_SIZE', 10)
+
 #if you plan to use a module which is using GoScale's "blogger" content
 #type (see GOSCALE_CONTENT_TYPES and GOSCALE_MODULES setting)
 #please set this to a fallback blogname (from blogspot,com)

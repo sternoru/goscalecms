@@ -5,6 +5,7 @@ import simplejson
 import datetime
 from goscale import models as goscale_models
 from goscale import utils
+from goscale import conf
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
@@ -16,6 +17,10 @@ class Feed(goscale_models.GoscaleCMSPlugin):
     """
     url = models.URLField(max_length=250, verbose_name=_('Feed URL'),
         help_text='ex: http://feeds.bbci.co.uk/news/technology/rss.xml')
+    page_size = models.PositiveSmallIntegerField(default=conf.GOSCALE_DEFAULT_PAGE_SIZE,
+        verbose_name=_('Posts per page'), help_text=_('set 0 for unlimited.'))
+    show_date = models.BooleanField(default=False, verbose_name=_('Show date in posts'),
+        help_text=_('If checked the date will be shown along with the post content.'))
 
     def _get_data(self):
         url = self._get_data_source_url()

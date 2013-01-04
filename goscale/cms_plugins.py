@@ -1,3 +1,5 @@
+import simplejson
+
 from django import forms
 from cms.plugin_base import CMSPluginBase
 from goscale.models import GoscaleCMSPlugin
@@ -21,5 +23,13 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     def render(self, context, instance, placeholder):
         if instance and instance.template:
             self.render_template = instance.template
-        context['posts'] = [post.json() for post in instance.posts.all()]
+        extra_context = {}
+        extra_context['posts'] = [post.json() for post in instance.posts.all()]
+        ignore_fields = ['changed_date', 'cmsplugin', 'cmsplugin_ptr', 'creation_date', 'id', 'language', 'level',
+                        'lft', 'parent', 'placeholder', 'plugin_type', 'posts', 'rght', 'tree_id']
+        for field in instance._meta.get_all_field_names():
+            if field not in ignore_fields:
+                extra_context[field] = instance.__getattribute__(field)
+        extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
+        context.update(extra_context)
         return context
