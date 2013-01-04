@@ -1,7 +1,12 @@
-from goscale.plugins.cms_plugins import GoscaleCMSPluginBase
+from goscale.cms_plugins import GoscaleCMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import ugettext_lazy as _
 import models
+
+PLUGIN_TEMPLATES = (
+    ('videos.html', _('Videos inline')),
+    ('videos_popup.html', _('Videos in a pop-up')),
+)
 
 class YouKuPlugin(GoscaleCMSPluginBase):
     """
@@ -9,6 +14,7 @@ class YouKuPlugin(GoscaleCMSPluginBase):
     """
     model = models.YouKu
     name = _("YouKu Videos (GoSCale)")
-    render_template = "videos.html"
+    plugin_templates = PLUGIN_TEMPLATES
+    render_template = PLUGIN_TEMPLATES[0][0]
 
 plugin_pool.register_plugin(YouKuPlugin)

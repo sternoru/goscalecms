@@ -3,14 +3,14 @@ import feedparser
 import urllib2
 import simplejson
 import datetime
-from goscale.plugins import models as goscale_plugin_models
+from goscale import models as goscale_models
 from goscale import utils
 from django.db import models
 from django.db.models import signals
 from django.utils.translation import ugettext as _
 
 
-class YouKu(goscale_plugin_models.GoscaleCMSPlugin):
+class YouKu(goscale_models.GoscaleCMSPlugin):
     """
     YouKu Videos
     """
@@ -23,7 +23,7 @@ class YouKu(goscale_plugin_models.GoscaleCMSPlugin):
             # this regex can also handle unicode encoded characters in the id.
             return re.match(r'(http://)?(u.|www.)?(youku.com/)?(playlist_show/id_|user_show/uid_)?((.+)[^\.html])', link).group(5)
         except AttributeError:
-            raise goscale_plugin_models.WrongAttribute(attribute='playlist')
+            raise goscale_models.WrongAttribute(attribute='playlist')
 
     def _get_data_source_url(self):
         if self.playlist:
@@ -74,4 +74,4 @@ class YouKu(goscale_plugin_models.GoscaleCMSPlugin):
             })
         return super(YouKu, self)._store_post(stored_entry)
 
-signals.post_save.connect(goscale_plugin_models.update_posts, sender=YouKu)
+signals.post_save.connect(goscale_models.update_posts, sender=YouKu)
