@@ -1,25 +1,33 @@
 {% load i18n cms_tags menu_tags sekizai_tags %}
 
 {% addtoblock "css" %}
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css"></script>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endaddtoblock %}
 
 {% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/swfobject.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/tools.scrollable-1.0.5.min.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>
 {% endaddtoblock %}
 
+<div id="page-title">
+	<div class="PageTitleLogo">
+		{% trans "Videos" %}
+	</div>
+</div>
+
 {% if posts %}
 	<div class="goscale-plugins-videos">
-		<div id="topBar">
+		<div class="topBar">
 			<div class="videoListContainer">
 				<div class="arrow PrevScroll"></div>
 				<div class="videos">
 					<div class="VideosList">
 						{% for video in posts %}
 							<div class="VideoItem">
-								<div class="VideoContainer" data-url="{{ video.video_url }}" data-id="{{ video.video_id }}" data-author="{{ video.author }}">
+								<div class="VideoContainer" data-url="{{ video.video_url }}" data-id="{{ video.video_id }}" data-title="{{ video.title|safe }}"{% if video.author %} data-author="{{ video.author }}"{% endif %}{% if video.permanent_link %} data-link="{{ video.permanent_link }}"{% endif %}{% if video.author_url %} data-authorUrl="{{ video.author_url }}"{% endif %}{% if video.rating %} data-rating="{{ video.rating }}"{% endif %}{% if video.view_count %} data-views="{{ video.view_count }}"{% endif %}>
 									<div class="VideoImage"><img src="{{ video.thumbnail }}" alt="{{ video.title|safe }}" /></div>
 									<div class="VideoTitle">{{ video.title|safe }}</div>
 								</div>
@@ -32,13 +40,9 @@
 		</div>
 		<div class="Clear"></div>
 		<!-- content -->
-		<div id="content">
-			<div class="PageTitleLogo">
-				{% trans "Videos" %}
-			</div>
+		<div class="video-content">
 			<div class="selectedVideoContainer"></div>
 			<div class="selectedVideoInformation"></div>
 		</div>
 	</div>
 {% endif %}
-{{ posts }}

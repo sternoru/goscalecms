@@ -1,66 +1,73 @@
-.videoListContainer {
-	width: 100%;
-	height: 146px;
-	position: relative;
-	padding: 20px 40px;
-	box-sizing: border-box;
+.goscale-plugins-videos {
+	
 }
-	.videoListContainer .arrow {
-		position: absolute;
-		width: 27px;
-		height: 27px;
-		top: 60px;
-		cursor: pointer;
-	}
-	.videoListContainer .arrow.disabled {
-		visibility: hidden;
-	}
-	.videoListContainer .arrow.PrevScroll {
-		background: url('../img/left.png') center center no-repeat;
-		left: 0;
-	}
-	.videoListContainer .arrow.NextScroll {
-		background: url('../img/right.png') center center no-repeat;
-		right: 0;
-	}
-	.videoListContainer .videos {
-		position: relative;
+	.videoListContainer {
 		width: 100%;
-		height: 106px;
-		overflow: hidden;
+		height: 146px;
+		position: relative;
+		padding: 20px 40px;
+		box-sizing: border-box;
 	}
-		.videoListContainer .videos .VideosList {
+		.videoListContainer .arrow {
 			position: absolute;
-			width: 20000em;
-			height: 106px;
+			width: 27px;
+			height: 27px;
+			top: 60px;
+			cursor: pointer;
 		}
-			.videoListContainer .videos .VideosList .VideoItem {
-				display: inline-block;
-				padding: 0 5px;
+		.videoListContainer .arrow.disabled {
+			visibility: hidden;
+		}
+		.videoListContainer .arrow.PrevScroll {
+			background: url('../img/left.png') center center no-repeat;
+			left: 0;
+		}
+		.videoListContainer .arrow.NextScroll {
+			background: url('../img/right.png') center center no-repeat;
+			right: 0;
+		}
+		.videoListContainer .videos {
+			position: relative;
+			width: 100%;
+			height: 106px;
+			overflow: hidden;
+		}
+			.videoListContainer .videos .VideosList {
+				position: absolute;
+				width: 20000em;
+				height: 106px;
 			}
-				.videoListContainer .videos .VideosList .VideoContainer {
-					position: relative;
-					width: 128px;
-					height: 96px;
-					border: 5px solid #444;
-					cursor: pointer;
+				.videoListContainer .videos .VideosList .VideoItem {
+					display: inline-block;
+					padding: 0 5px;
 				}
-				.videoListContainer .videos .VideosList .VideoContainer.selected {
-					border-color: #bbb;
-				}
-					.videoListContainer .videos .VideosList .VideoContainer .VideoImage img {
+					.videoListContainer .videos .VideosList .VideoContainer {
+						position: relative;
 						width: 128px;
 						height: 96px;
+						border: 5px solid #444;
+						cursor: pointer;
 					}
-					.videoListContainer .videos .VideosList .VideoContainer .VideoTitle {
-						position: absolute;
-						left: 0;
-						bottom: 0;
-						width: 122px;
-						height: auto;
-						padding: 3px;
-						background: url('../img/title-bg.png') left top repeat;
-						font-weight: bold;
-						text-align: left;
-						color: #444;
+					.videoListContainer .videos .VideosList .VideoContainer.selected {
+						border-color: #bbb;
 					}
+						.videoListContainer .videos .VideosList .VideoContainer .VideoImage img {
+							width: 128px;
+							height: 96px;
+						}
+						.videoListContainer .videos .VideosList .VideoContainer .VideoTitle {
+							position: absolute;
+							left: 0;
+							bottom: 0;
+							width: 122px;
+							height: auto;
+							padding: 3px;
+							background: url('../img/title-bg.png') left top repeat;
+							font-weight: bold;
+							text-align: left;
+							color: #444;
+						}
+	.goscale-plugins-videos .video-content .selectedVideoContainer, .goscale-plugins-videos .video-content .selectedVideoInformation {
+		width: 425px;
+		margin: 0 auto;
+	}

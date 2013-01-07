@@ -9,21 +9,30 @@
 			prev: '.PrevScroll',
 			disabledClass: 'disabled'
 		});
-		$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').click(function() {
-			var $container = $pluginContainer.find('#content .selectedVideoContainer'),
+		$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').click(function(event) {
+			event.preventDefault();
+			$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').removeClass('selected');
+			$(this).addClass('selected');
+			var $container = $pluginContainer.find('.video-content .selectedVideoContainer'),
 				rand = Math.floor((Math.random()*1000)+1);
 			
-			/*$container.html(['<div id="video', rand, '"></div>'].join(''));
-			swfobject.embedSWF(item.video_url, $container.find('.videoContainer'), "425", "344", "9.0.0");
+			$container.html(['<div id="video', rand, '"></div>'].join(''));
+			swfobject.embedSWF($(this).data('url'), ['video', rand].join(''), "425", "344", "9.0.0");
 			var html = [];
-			html.push('<a href="'+item.permanent_link+langParam+'">'+item.title+'</a><br />');
-			html.push(authorLabel+': <a href="'+item.author_url+'" target="_blank">'+item.author+'</a>');
-			if (typeof(item.rating) != 'undefined') html.push('<div class="VideoRating">'+ratingLabel+': <img src="/media/images/rating/'+item.rating+'.gif" alt="'+item.rating+'" /></div>');
-			html.push('<div>'+viewsLabel+': '+item.view_count+'</div>');
-			$('#videoInformation').html(html.join(''));
-			
-			var content = '';*/
+			html.push('<a href="#">', $(this).data('title'), '</a><br />');
+			if($(this).data('author')) {
+				var authorUrl = $(this).data('authorUrl') ? $(this).data('authorUrl') : '#';
+				html.push('Author: <a href="', authorUrl, '" target="_blank">', $(this).data('author'), '</a>');
+			}
+			if($(this).data('rating')) {
+				html.push('<div class="VideoRating">Rating: <img src="/media/images/rating/', $(this).data('rating'), '.gif" /></div>');
+			}
+			if($(this).data('views')) {
+				html.push('<div>Views: ', $(this).data('views'), '</div>');
+			}
+			$pluginContainer.find('.video-content .selectedVideoInformation').html(html.join(''));
 		});
+		$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').eq(0).click();
 	};
 	$('.goscale-plugins-videos').goscalePluginsVideos();
 })(jQuery);
