@@ -7,7 +7,11 @@ gettext_noop = lambda s: s
 DEFAULT_LANGUAGE = getattr(settings, 'DEFAULT_LANGUAGE', 'en')
 
 #set this if you want to use django's cache in production
-GOSCALE_CACHE_DURATION = getattr(settings, 'CMS_CACHE_DURATIONS', {'content': 1})['content']
+GOSCALE_CACHE_DURATION = getattr(
+    settings,
+    'GOSCALE_CACHE_DURATION',
+    getattr(settings, 'CMS_CACHE_DURATIONS', {'content': 1})['content']
+)
 #set this if you want to use browser cache for your site on production
 GOSCALE_BROWSER_CACHE_MAX_AGE = getattr(settings, 'GOSCALE_CACHE_DURATION', GOSCALE_CACHE_DURATION)
 

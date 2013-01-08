@@ -18,6 +18,7 @@ setup(
     install_requires = [
         "unidecode",
         "feedparser",
+        "gdata",
         "Django >= 1.1.1",
         "django-cms >= 2.2",
     ]

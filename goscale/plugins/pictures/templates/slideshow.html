@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+<h1>Title: {{ title }}</h1>
+
+<p><textarea>{{ debug }}</textarea></p>
+
+{% if posts %}
+    {{ posts }}
+{% endif %}

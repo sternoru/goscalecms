@@ -24,7 +24,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         if instance and instance.template:
             self.render_template = instance.template
         extra_context = {}
-        extra_context['posts'] = [post.json() for post in instance.posts.all()]
+        extra_context['posts'] = instance.get_posts()
         ignore_fields = ['changed_date', 'cmsplugin', 'cmsplugin_ptr', 'creation_date', 'id', 'language', 'level',
                         'lft', 'parent', 'placeholder', 'plugin_type', 'posts', 'rght', 'tree_id']
         for field in instance._meta.get_all_field_names():

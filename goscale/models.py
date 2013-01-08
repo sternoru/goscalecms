@@ -8,6 +8,7 @@ from django.utils import simplejson
 from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.core.cache import cache
 
 import unidecode
 
@@ -105,7 +106,7 @@ class GoscaleCMSPlugin(CMSPlugin):
         self.posts = oldinstance.posts.all()
 
     # Public methods
-    def get_cache_key(self, offset=0, limit=0, post_slug=''):
+    def get_cache_key(self, offset=0, limit=0, order=None, post_slug=''):
         """ The return of Get
         """
         return hashlib.sha1(
@@ -115,9 +116,27 @@ class GoscaleCMSPlugin(CMSPlugin):
                 str(self._fields),
                 str(offset),
                 str(limit),
+                str(order),
                 str(post_slug),
                 ])
         ).hexdigest()
+
+    def get_posts(self, offset=0, limit=1000, order=conf.GOSCALE_DEFAULT_CONTENT_ORDER):
+        """ This method returns list of Posts for this Data Source starting at a given offset and not more than limit
+        It will call content-specific methods:
+             _format() to format output from the DataStore
+        """
+        cache_key = self.get_cache_key(offset, limit, order)
+        content = cache.get(cache_key)
+        if content:
+            return content
+        self.update() #TODO: update somewhere else
+        query = self._get_query()
+        posts = query[offset:offset+limit]
+        posts = self._format(posts)
+        cache_duration = conf.GOSCALE_CACHE_DURATION if posts else 1
+        cache.set(cache_key, posts, cache_duration)
+        return posts
 
     def update(self):
         """This method should be called to update associated Posts
@@ -178,6 +197,17 @@ class GoscaleCMSPlugin(CMSPlugin):
         stored_entry.save()
         self.posts.add(stored_entry)
         return None
+
+    def _get_query(self, order=conf.GOSCALE_DEFAULT_CONTENT_ORDER):
+        """ This method is just to evade code duplication in count() and get_content, since they do basically the same thing"""
+        return self.posts.all().order_by(order)
+
+    def _format(self, posts):
+        """ This method is called by get_content() method"""
+        formated_posts = []
+        for post in posts:
+            formated_posts.append(post.json())
+        return formated_posts
 
 
 def update_posts(**kwargs):
