@@ -1,10 +1,40 @@
 {% load i18n %}
 {% load sekizai_tags %}
 
-<h1>Title: {{ title }}</h1>
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.feeds.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
 
-<p><textarea>{{ debug }}</textarea></p>
+{% block posts_content %}
+	<div class="goscale-plugins-feeds">
+		<div class="PageTitleLogo">
+			{{ title }}
+		</div>
 
-{% if posts %}
-    {{ posts }}
-{% endif %}
+		{% if posts %}
+			<dl class="ContentList">
+				{% for post in posts %}
+					<dt>
+						<span>
+							<a href="#">{{ post.title }}</a>
+						</span>
+						<div class="EntryDate">{{ post.published }}</div>
+					</dt>
+					<dd>
+						<div class="ContentListDescription">
+							{{ post.description }}
+						</div>
+					</dd>
+				{% endfor %}
+			</dl>
+		{% endif %}
+
+		<!--div class="Paging">
+			<div class="PagingItem"><a href="?page=2">Prev</a></div>
+			<div class="PagingItem"><a href="?page=1">1</a></div>
+			<div class="PagingItem"><a href="?page=2">2</a></div>
+			<div class="PagingItemActive">3</div>
+		</div-->
+	</div>
+{% endblock %}

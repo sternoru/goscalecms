@@ -12,14 +12,11 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>
 {% endaddtoblock %}
 
-<div id="page-title">
-	<div class="PageTitleLogo">
-		{% trans "Videos" %}
-	</div>
-</div>
-
 {% if posts %}
 	<div class="goscale-plugins-videos">
+		<div class="PageTitleLogo">
+			{{ title }}
+		</div>
 		<div class="topBar">
 			<div class="videoListContainer">
 				<div class="arrow PrevScroll"></div>

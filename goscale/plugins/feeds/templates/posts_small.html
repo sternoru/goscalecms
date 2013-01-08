@@ -1,3 +1,40 @@
 {% extends "posts.html" %}
 {% load i18n %}
 {% load sekizai_tags %}
+
+{% block posts_content %}
+	{% if posts %}
+		<div class="goscale-plugins-feeds">
+			<div class="box-sidebar">
+				<div class="boxtop"><div></div></div>
+				<div class="boxcontent">
+					<dl id="shortnews" class="ContentList">
+						<dt>
+							<div class="TitleContainer">
+								<span id="shortnewsFeedTitle">BBC News</span>
+							</div>
+						</dt>
+						<dd>
+							<div id="shortnewsContainer" class="ContentListDescription">
+								{% for post in posts %}
+									<div id="shortNewsContent">
+										<div class="snTitle">
+											<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
+										</div>
+										<div class="snDescription">
+											{{ post.description }}
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+							<div class="RssLink">
+								<a href="#" target="_blank">{% trans "RSS" %}</a>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="boxbottom"><div></div></div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

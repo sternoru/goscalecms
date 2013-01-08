@@ -1,6 +1,14 @@
 .goscale-plugins-videos {
 	
 }
+	.PageTitleLogo {
+		font-family:Georgia;
+		font-size: 22px;
+		color:#2F2F2F;
+		height:2.5em;
+		margin: 20px auto 0 auto;
+		width: 100%;
+	}
 	.videoListContainer {
 		width: 100%;
 		height: 146px;
