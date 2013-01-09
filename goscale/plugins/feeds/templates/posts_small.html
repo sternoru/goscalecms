@@ -9,11 +9,13 @@
 				<div class="boxtop"><div></div></div>
 				<div class="boxcontent">
 					<dl id="shortnews" class="ContentList">
-						<dt>
-							<div class="TitleContainer">
-								<span id="shortnewsFeedTitle">BBC News</span>
-							</div>
-						</dt>
+						{% if title %}
+							<dt>
+								<div class="TitleContainer">
+									<span id="shortnewsFeedTitle">{{ title }}</span>
+								</div>
+							</dt>
+						{% endif %}
 						<dd>
 							<div id="shortnewsContainer" class="ContentListDescription">
 								{% for post in posts %}

@@ -17,9 +17,11 @@
 <div class="goscale-plugins-pictures" data-type="grid">
 	{% if title %}<h1>{{ title }}</h1>{% endif %}
 
-	<div class="am-container loading">
+	<div class="am-container loading no-al">
 		{% for image in posts %}
 			<a href="{{ image.url }}"{% if image.description != null %} title="{{ image.description }}"{% endif %} rel="prettyPhoto[pp_gal]"><img src="{{ image.thumbnails.s288.url }}" /></a>
 		{% endfor %}
 	</div>
 </div>
+
+<div class="clear"></div>

@@ -17,7 +17,7 @@
 <div class="goscale-plugins-pictures" data-type="thumbnails">
 	{% if title %}<h1>{{ title }}</h1>{% endif %}
 	
-	<ul class="gallery">
+	<ul class="gallery no-al">
 		{% for image in posts %}
 			<li><img src="{{ image.thumbnails.s800.url }}" {# data-frame="{{ image.thumbnails.s144.url }}" #} /></li>
 		{% endfor %}

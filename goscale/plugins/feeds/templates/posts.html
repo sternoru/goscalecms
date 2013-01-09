@@ -11,9 +11,7 @@
         {% include "post.html" %}
     {% else %}
         <div class="goscale-plugins-feeds">
-            <div class="PageTitleLogo">
-                {{ title }}
-            </div>
+            {% if title %}<h1>{{ title }}{% endif %}</h1>
 
             {% if posts %}
                 <dl class="ContentList">
