@@ -21,15 +21,24 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         return form
 
     def render(self, context, instance, placeholder):
+        extra_context = {}
+        # use template from the instance if provided
         if instance and instance.template:
             self.render_template = instance.template
-        extra_context = {}
+        # get plugin posts
         extra_context['posts'] = instance.get_posts()
+        # get single post if requested
+        slug = context['request'].GET.get('post')
+        if slug:
+            extra_context['post'] = instance.get_post(slug)
+        # get plugin attributes
         ignore_fields = ['changed_date', 'cmsplugin', 'cmsplugin_ptr', 'creation_date', 'id', 'language', 'level',
                         'lft', 'parent', 'placeholder', 'plugin_type', 'posts', 'rght', 'tree_id']
         for field in instance._meta.get_all_field_names():
             if field not in ignore_fields:
                 extra_context[field] = instance.__getattribute__(field)
+        # add debug for development
         extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
+        # return updated context
         context.update(extra_context)
         return context

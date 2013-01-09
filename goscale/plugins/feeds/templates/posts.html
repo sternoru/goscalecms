@@ -17,7 +17,7 @@
 				{% for post in posts %}
 					<dt>
 						<span>
-							<a href="#">{{ post.title }}</a>
+							<a href="?post={{ post.slug }}">{{ post.title }}</a>
 						</span>
 						<div class="EntryDate">{{ post.published }}</div>
 					</dt>

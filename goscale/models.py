@@ -138,6 +138,18 @@ class GoscaleCMSPlugin(CMSPlugin):
         cache.set(cache_key, posts, cache_duration)
         return posts
 
+    def get_post(self, slug):
+        """ This method returns a single post by slug
+        """
+        cache_key = self.get_cache_key(post_slug=slug)
+        content = cache.get(cache_key)
+        if not content:
+            post = Post.objects.get(slug=slug)
+            content = self._format(post)
+            cache_duration = conf.GOSCALE_CACHE_DURATION if post else 1
+            cache.set(cache_key, content, cache_duration)
+        return content
+
     def update(self):
         """This method should be called to update associated Posts
         It will call content-specific methods:
@@ -204,6 +216,9 @@ class GoscaleCMSPlugin(CMSPlugin):
 
     def _format(self, posts):
         """ This method is called by get_content() method"""
+        if posts.__class__ == Post:
+            # format a single post
+            return posts.json()
         formated_posts = []
         for post in posts:
             formated_posts.append(post.json())
