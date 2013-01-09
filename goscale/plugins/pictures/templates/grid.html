@@ -1,10 +1,25 @@
 {% load i18n %}
 {% load sekizai_tags %}
 
-<h1>Title: {{ title }}</h1>
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/image.montage.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/pretty.photo.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
 
-<p><textarea>{{ debug }}</textarea></p>
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.montage.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.js"></script>
+{% endaddtoblock %}
 
-{% if posts %}
-    {{ posts }}
-{% endif %}
+<div class="goscale-plugins-pictures" data-type="grid">
+	{% if title %}<h1>{{ title }}</h1>{% endif %}
+
+	<div class="am-container loading">
+		{% for image in posts %}
+			<a href="{{ image.url }}"{% if image.description != null %} title="{{ image.description }}"{% endif %} rel="prettyPhoto[pp_gal]"><img src="{{ image.thumbnails.s288.url }}" /></a>
+		{% endfor %}
+	</div>
+</div>

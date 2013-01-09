@@ -14,9 +14,7 @@
 
 {% if posts %}
 	<div class="goscale-plugins-videos">
-		<div class="PageTitleLogo">
-			{{ title }}
-		</div>
+		{% if title %}<h1>{{ title }}</h1>{% endif %}
 		<div class="topBar">
 			<div class="videoListContainer">
 				<div class="arrow PrevScroll"></div>
