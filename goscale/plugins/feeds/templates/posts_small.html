@@ -19,7 +19,7 @@
 								{% for post in posts %}
 									<div id="shortNewsContent">
 										<div class="snTitle">
-											<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
+											<a href="?post={{ post.slug }}&plugin_id={{ plugin_id }}" target="_blank">{{ post.title }}</a>
 										</div>
 										<div class="snDescription">
 											{{ post.description }}

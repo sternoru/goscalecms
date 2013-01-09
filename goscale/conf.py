@@ -6,6 +6,8 @@ gettext_noop = lambda s: s
 
 DEFAULT_LANGUAGE = getattr(settings, 'DEFAULT_LANGUAGE', 'en')
 
+GOSCALE_DEFAULT_POST_PLUGIN = getattr(settings, 'GOSCALE_DEFAULT_POST_PLUGIN', 'post.html')
+
 #set this if you want to use django's cache in production
 GOSCALE_CACHE_DURATION = getattr(
     settings,

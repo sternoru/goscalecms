@@ -21,6 +21,8 @@ class Feed(goscale_models.GoscaleCMSPlugin):
         verbose_name=_('Posts per page'), help_text=_('set 0 for unlimited.'))
     show_date = models.BooleanField(default=False, verbose_name=_('Show date in posts'),
         help_text=_('If checked the date will be shown along with the post content.'))
+    external_links = models.BooleanField(default=False, verbose_name=_('Open external links'),
+        help_text=_('If checked posts will link to the original source, otherwise will open internally.'))
 
     def _get_data(self):
         url = self._get_data_source_url()
