@@ -28,7 +28,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         # get plugin posts
         extra_context['posts'] = instance.get_posts()
         # get single post if requested
-        slug = context['request'].GET.get('post')
+        slug = context['request'].GET.get('post') if 'request' in context else None
         if slug:
             extra_context['post'] = instance.get_post(slug)
         # get plugin attributes
