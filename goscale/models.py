@@ -106,6 +106,15 @@ class GoscaleCMSPlugin(CMSPlugin):
         self.posts = oldinstance.posts.all()
 
     # Public methods
+    def get_fields_dict(self):
+        fields_dict = {}
+        ignore_fields = ['changed_date', 'cmsplugin', 'cmsplugin_ptr', 'creation_date', 'id', 'language', 'level',
+                         'lft', 'parent', 'placeholder', 'plugin_type', 'posts', 'rght', 'tree_id']
+        for field in self._meta.get_all_field_names():
+            if field not in ignore_fields:
+                fields_dict[field] = self.__getattribute__(field)
+        return fields_dict
+
     def get_cache_key(self, offset=0, limit=0, order=None, post_slug=''):
         """ The return of Get
         """
@@ -113,7 +122,7 @@ class GoscaleCMSPlugin(CMSPlugin):
             '.'.join([
                 self.__module__,
                 self.__class__.__name__,
-                str(self._fields),
+                str(self._get_data_source_url()),
                 str(offset),
                 str(limit),
                 str(order),

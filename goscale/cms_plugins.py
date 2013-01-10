@@ -44,11 +44,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         if slug:
             extra_context['post'] = instance.get_post(slug)
         # get plugin attributes
-        ignore_fields = ['changed_date', 'cmsplugin', 'cmsplugin_ptr', 'creation_date', 'id', 'language', 'level',
-                        'lft', 'parent', 'placeholder', 'plugin_type', 'posts', 'rght', 'tree_id']
-        for field in instance._meta.get_all_field_names():
-            if field not in ignore_fields:
-                extra_context[field] = instance.__getattribute__(field)
+        extra_context.update(instance.get_fields_dict())
         # add debug for development
         extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
         # setup a paginator
