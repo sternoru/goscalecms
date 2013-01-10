@@ -27,8 +27,8 @@ h1 {
 		border: 1px solid #999;
 	}
 		.slides_container > div {
-			width: 642px;
-			height: 429px;
+			/*width: 642px;
+			height: 429px;*/
 			display: block;
 			border: 10px solid #fff;
 		}
