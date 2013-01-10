@@ -54,6 +54,16 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
             raise goscale_models.WrongAttribute(attribute='url')
         return id
 
+    def _get_entry_link(self, entry):
+        """ Returns a unique link for an entry
+        """
+        entry_link = None
+        for link in entry.link:
+            if '/data/' not in link.href and '/lh/' not in link.href:
+                entry_link = link.href
+                break
+        return entry_link or entry.link[0].href
+
     def _get_data(self, album_id=None):
         data = []
         id = self._regex_id()
@@ -81,11 +91,6 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
         stored_entry.content_type = self.type
         if 1==1 or self.type == 'photos': # ignore type for now
             # is photo
-            entry_link = None
-            for link in entry.link:
-                if '/data/' not in link.href and '/lh/' not in link.href:
-                    entry_link = link.href
-                    break
             width = int(entry.width.text)
             height = int(entry.height.text)
             orientation = 'landscape' if width > height else 'portrait'
@@ -108,7 +113,7 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
                     'width': small if height > width else big
                 }
             url = thumbnails['s144']['url'].replace('s144', 's%s' % max)
-            stored_entry.link = entry_link or entry.link[0].href
+            stored_entry.link = self._get_entry_link(entry)
             summarytext = ''
             if entry.summary.text != None:
                 summarytext = unicode(entry.summary.text, "utf-8")

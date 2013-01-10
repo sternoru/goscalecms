@@ -168,17 +168,19 @@ class GoscaleCMSPlugin(CMSPlugin):
         """
         #get the raw data
         data = self._get_data()
+        self.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
         #iterate through them and for each item
         msg = []
         for entry in data:
-            stored_entry, is_new = Post.objects.get_or_create(link=entry.link)
+            link = self._get_entry_link(entry)
+            stored_entry, is_new = Post.objects.get_or_create(link=link)
             self._store_post(stored_entry, entry)
             if is_new is True:
             #self._set_dates(stored_entry)
             #                self._store_post(stored_entry, entry)
-                msg.append('Post "%s" added.' % entry.link)
+                msg.append('Post "%s" added.' % link)
             else:
-                msg.append('Post "%s" already saved.' % entry.link)
+                msg.append('Post "%s" already saved.' % link)
         return '<br />'.join(msg)
 
     # Private methods
@@ -189,6 +191,14 @@ class GoscaleCMSPlugin(CMSPlugin):
         if 'url' not in self.__dict__:
             return None
         return self.__getattribute__('url')
+
+    def _get_entry_link(self, entry):
+        """ Returns a unique link for an entry
+
+        Most likely an external link from the original source.
+        Override it if you need to alter an original link or generate your own.
+        """
+        return entry.link
 
     def _get_dummy_datetime(self):
         """ This method is to store posts which have no publish date.
@@ -236,7 +246,6 @@ class GoscaleCMSPlugin(CMSPlugin):
 
 def update_posts(**kwargs):
     plugin = kwargs['instance']
-    plugin.posts.all().delete() # TODO: handle old posts deleting if source changes without deleting every time
     plugin.update()
 
 
