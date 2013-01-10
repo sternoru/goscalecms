@@ -13,6 +13,15 @@
         <div class="goscale-plugins-feeds">
             {% if title %}<h1>{{ title }}{% endif %}</h1>
 
+            {% if paginator %}
+                <p>paginator: {{ paginator }}</p>
+                <p>pages: {{ paginator.page_range }}</p>
+                <p>count: {{ paginator.count }}</p>
+                <p>num_pages: {{ paginator.num_pages }}</p>
+                <p>page: {{ page }}</p>
+                <p>page.number: {{ page.number }}</p>
+            {% endif %}
+
             {% if posts %}
                 <dl class="ContentList">
                     {% for post in posts %}
