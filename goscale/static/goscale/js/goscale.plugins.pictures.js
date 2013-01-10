@@ -1,6 +1,8 @@
 (function($) {
     $.fn.goscalePluginsPictures = function() {
-		$picturesContainer = $(this);
+		var $picturesContainer = $(this),
+			autoplay = $picturesContainer.data('autoplay') == 'True' ? true : false;
+		
 		switch($picturesContainer.data('type')) {
 			case 'grid':
 				var $container 	= $picturesContainer.find('.am-container'),
@@ -58,7 +60,7 @@
 				$picturesContainer.find(".slides").slides({
 					preload: true,
 					preloadImage: $picturesContainer.find('.loader img').attr('src'),
-					play: $picturesContainer.data('autoplay') ? 4000 : 0,
+					play: autoplay ? 4000 : 0,
 					hoverPause: true
 				});
 			break;
@@ -69,7 +71,7 @@
 					panel_height: $picturesContainer.data('height') ? $picturesContainer.data('height') : undefined,
 					frame_width: $picturesContainer.data('thumbnailWidth') ? $picturesContainer.data('thumbnailWidth') : undefined,
 					frame_height: $picturesContainer.data('thumbnailHeight') ? $picturesContainer.data('thumbnailHeight') : undefined,
-					autoplay: $picturesContainer.data('autoplay')
+					autoplay: autoplay
 				});
 			break;
 			case 'mini':
@@ -101,8 +103,10 @@
 					* start the slideshow
 					*/
 					
-					if($picturesContainer.data('autoplay')) {
-						play();
+					play();
+					
+					if(!autoplay) {
+						pause();
 					}
 					
 					/**
