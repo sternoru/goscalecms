@@ -101,6 +101,12 @@ class GoscaleCMSPlugin(CMSPlugin):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        title = self.title or self.template.replace('.html', '').capitalize() or str(self.id)
+        if len(title) > 17:
+            title = '%s...' % title[:17]
+        return title
+
     # Override metods
     def copy_relations(self, oldinstance):
         self.posts = oldinstance.posts.all()

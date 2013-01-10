@@ -6,7 +6,7 @@ import models
 PLUGIN_TEMPLATES = (
     ('grid.html', _('Grid')),
     ('slideshow.html', _('Slideshow')),
-    ('slideshow_with_thumbnails.html', _('Slideshow with ')),
+    ('slideshow_with_thumbnails.html', _('Slideshow with thumbnails')),
     ('slideshow_mini.html', _('Mini slideshow (sidebar)')),
 )
 
