@@ -15,11 +15,21 @@ from django.utils.translation import ugettext as _
 
 class Picasa(goscale_models.GoscaleCMSPlugin):
     """
-    RSS Feed posts
+    Picasa photos
     """
     url = models.CharField(max_length=250, verbose_name=_('Picasa user or album link'),
-        help_text='user: https://plus.google.com/photos/114610201247248895941/<br/> \
-            album: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137')
+        help_text=_('user: https://plus.google.com/photos/114610201247248895941/<br/> \
+            album: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137'))
+    width = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Container width'),
+        help_text=_('Width of a slideshow container or a lightbox.'))
+    height = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Container height'),
+        help_text=_('Height of a slideshow container or a lightbox.'))
+    thumbnail_width = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Thumbnail width'),
+        help_text=_('Width of a thumbnail.'))
+    thumbnail_height = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Thumbnail height'),
+        help_text=_('Height of a thumbnail.'))
+    autoplay = models.BooleanField(default=False, verbose_name=_('Autoplay'),
+        help_text=_('If set slideshow will start automatically.'))
     user = None
     album = None
     type = 'photos'
