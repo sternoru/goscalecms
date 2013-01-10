@@ -16,6 +16,8 @@ class YouKu(goscale_models.GoscaleCMSPlugin):
     """
     playlist = models.CharField(max_length=250, verbose_name=_('Youku playlist'),
         help_text='ex: http://www.youku.com/playlist_show/id_17031624.html')
+    lightbox = models.BooleanField(default=False, verbose_name=_('Open videos in a lightbox'),
+        help_text=_('If checked videos will open in a lightbox, otherwise inline.'))
 
     def _regex_id(self, link=None):
         link = link or self.playlist
