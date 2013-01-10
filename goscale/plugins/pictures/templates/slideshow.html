@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.js"></script>
 {% endaddtoblock %}
 
-<div class="goscale-plugins-pictures" data-type="slideshow">
+<div class="goscale-plugins-pictures" data-type="slideshow" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
 	{% if title %}<h1>{{ title }}</h1>{% endif %}
 
 	<div class="slides no-al">

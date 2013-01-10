@@ -1,3 +1,15 @@
 {% load i18n %}
 
-Post: {{ post }}
+<dl class="ContentList">
+	<dt>
+		<span>
+			{{ post.title }}
+		</span>
+		<div class="EntryDate">{{ post.published }}</div>
+	</dt>
+	<dd>
+		<div class="ContentListDescription">
+			{{ post.description|safe }}
+		</div>
+	</dd>
+</dl>

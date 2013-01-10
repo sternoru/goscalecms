@@ -47,20 +47,41 @@
 				});
 			break;
 			case 'slideshow':
+				if($picturesContainer.data('width')) {
+					$picturesContainer.find(".slides_container").css('width', $picturesContainer.data('width'));
+					$picturesContainer.find(".slides_container img").css('width', $picturesContainer.data('width') - 22);
+				}
+				if($picturesContainer.data('height')) {
+					$picturesContainer.find(".slides_container").css('height', $picturesContainer.data('height'));
+					$picturesContainer.find(".slides_container img").css('height', $picturesContainer.data('height') - 22);
+				}
 				$picturesContainer.find(".slides").slides({
 					preload: true,
-					preloadImage: $picturesContainer.find('.loader img').attr('src')
+					preloadImage: $picturesContainer.find('.loader img').attr('src'),
+					play: $picturesContainer.data('autoplay') ? 4000 : 0,
+					hoverPause: true
 				});
 			break;
 			case 'thumbnails':
-				$picturesContainer.find('.gallery').galleryView({
-					/*panel_width: 800,
-					panel_height: 600,
-					frame_width: 120,
-					frame_height: 90*/
+				var $gallery = $picturesContainer.find('.gallery');
+				$gallery.galleryView({
+					panel_width: $picturesContainer.data('width') ? $picturesContainer.data('width') : undefined,
+					panel_height: $picturesContainer.data('height') ? $picturesContainer.data('height') : undefined,
+					frame_width: $picturesContainer.data('thumbnailWidth') ? $picturesContainer.data('thumbnailWidth') : undefined,
+					frame_height: $picturesContainer.data('thumbnailHeight') ? $picturesContainer.data('thumbnailHeight') : undefined,
+					autoplay: $picturesContainer.data('autoplay')
 				});
 			break;
 			case 'mini':
+				if($picturesContainer.data('width')) {
+					$('#msg_slideshow').css('width', $picturesContainer.data('width'));
+					$('#msg_wrapper').css('width', $picturesContainer.data('width'));
+				}
+				if($picturesContainer.data('height')) {
+					$('#msg_slideshow').css('height', $picturesContainer.data('height'));
+					$('#msg_wrapper').css('height', $picturesContainer.data('height'));
+				}
+				
 				$(function() {
 					/**
 					* interval : time between the display of images
@@ -79,7 +100,10 @@
 					/**
 					* start the slideshow
 					*/
-					play();
+					
+					if($picturesContainer.data('autoplay')) {
+						play();
+					}
 					
 					/**
 					* show the controls when 

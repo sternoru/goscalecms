@@ -12,8 +12,8 @@
     {% else %}
         <div class="goscale-plugins-feeds">
             {% if title %}<h1>{{ title }}{% endif %}</h1>
-
-            {% if paginator %}
+			
+			{% if paginator %}
                 <p>paginator: {{ paginator }}</p>
                 <p>pages: {{ paginator.page_range }}</p>
                 <p>count: {{ paginator.count }}</p>
@@ -21,19 +21,25 @@
                 <p>page: {{ page }}</p>
                 <p>page.number: {{ page.number }}</p>
             {% endif %}
-
+			
             {% if posts %}
                 <dl class="ContentList">
                     {% for post in posts %}
                         <dt>
                             <span>
-                                <a href="?post={{ post.slug }}&plugin_id={{ plugin_id }}">{{ post.title }}</a>
+                                {% if external_links %}
+									<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
+								{% else %}
+									<a href="?post={{ post.slug }}&plugin_id={{ plugin_id }}">{{ post.title }}</a>
+								{% endif %}
                             </span>
-                            <div class="EntryDate">{{ post.published }}</div>
+                            {% if show_date %}
+								<div class="EntryDate">{{ post.published }}</div>
+							{% endif %}
                         </dt>
                         <dd>
                             <div class="ContentListDescription">
-                                {{ post.description }}
+                                {{ post.description|safe }}
                             </div>
                         </dd>
                     {% endfor %}

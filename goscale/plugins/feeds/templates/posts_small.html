@@ -21,16 +21,23 @@
 								{% for post in posts %}
 									<div id="shortNewsContent">
 										<div class="snTitle">
-											<a href="?post={{ post.slug }}&plugin_id={{ plugin_id }}" target="_blank">{{ post.title }}</a>
+											{% if external_links %}
+												<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
+											{% else %}
+												<a href="?post={{ post.slug }}&plugin_id={{ plugin_id }}" target="_blank">{{ post.title }}</a>
+											{% endif %}
 										</div>
+										{% if show_date %}
+											<div class="EntryDate">{{ post.published }}</div>
+										{% endif %}
 										<div class="snDescription">
-											{{ post.description }}
+											{{ post.summary }}
 										</div>
 									</div>
 								{% endfor %}
 							</div>
 							<div class="RssLink">
-								<a href="#" target="_blank">{% trans "RSS" %}</a>
+								<a href="{{ url }}" target="_blank">{% trans "RSS" %}</a>
 							</div>
 						</dd>
 					</dl>
