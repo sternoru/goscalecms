@@ -79,3 +79,9 @@
 		width: 425px;
 		margin: 0 auto;
 	}
+
+
+/* lightbox style */
+.video-lb-container {
+	display: none;
+}

@@ -1,6 +1,9 @@
 {% load i18n cms_tags menu_tags sekizai_tags %}
 
 {% addtoblock "css" %}
+	{% if lightbox %}
+		<link rel="stylesheet" href="{{ STATIC_URL }}goscale/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	{% endif %}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endaddtoblock %}
@@ -9,6 +12,11 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/swfobject.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/tools.scrollable-1.0.5.min.js"></script>
+	{% if lightbox %}
+		<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.mousewheel.js"></script>
+	{% endif %}
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>
 {% endaddtoblock %}
 
@@ -22,10 +30,16 @@
 					<div class="VideosList">
 						{% for video in posts %}
 							<div class="VideoItem">
+								{% if lightbox %}
+									<a class="video-lb no-al" href="#video-lb">
+								{% endif %}
 								<div class="VideoContainer" data-url="{{ video.video_url }}" data-id="{{ video.video_id }}" data-title="{{ video.title|safe }}"{% if video.author %} data-author="{{ video.author }}"{% endif %}{% if video.permanent_link %} data-link="{{ video.permanent_link }}"{% endif %}{% if video.author_url %} data-authorUrl="{{ video.author_url }}"{% endif %}{% if video.rating %} data-rating="{{ video.rating }}"{% endif %}{% if video.view_count %} data-views="{{ video.view_count }}"{% endif %}>
 									<div class="VideoImage"><img src="{{ video.thumbnail }}" alt="{{ video.title|safe }}" /></div>
 									<div class="VideoTitle">{{ video.title|safe }}</div>
 								</div>
+								{% if lightbox %}
+									</a>
+								{% endif %}
 							</div>
 						{% endfor %}
 					</div>
@@ -35,9 +49,17 @@
 		</div>
 		<div class="Clear"></div>
 		<!-- content -->
+		{% if lightbox %}
+			<div class="video-lb-container">
+				<div id="video-lb">
+		{% endif %}
 		<div class="video-content">
 			<div class="selectedVideoContainer"></div>
 			<div class="selectedVideoInformation"></div>
 		</div>
+		{% if lightbox %}
+				</div>
+			</div>
+		{% endif %}
 	</div>
 {% endif %}

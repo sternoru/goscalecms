@@ -1,6 +1,8 @@
 (function($) {
     $.fn.goscalePluginsVideos = function() {
-		var $pluginContainer = $(this);
+		var $pluginContainer = $(this),
+			lightbox = $pluginContainer.find('a.video-lb') ? true : false;
+		
 		$pluginContainer.find('.videoListContainer .videos').scrollable({
 			horizontal:true,
 			size: Math.floor($pluginContainer.find('.videoListContainer').width() / ($pluginContainer.find('.videoListContainer .VideoItem').width() + 13)),
@@ -32,7 +34,13 @@
 			}
 			$pluginContainer.find('.video-content .selectedVideoInformation').html(html.join(''));
 		});
-		$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').eq(0).click();
+		
+		if(lightbox) {
+			$pluginContainer.find('a.video-lb').fancybox();
+		}
+		else {
+			$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').eq(0).click();
+		}
 	};
 	$('.goscale-plugins-videos').goscalePluginsVideos();
 })(jQuery);
