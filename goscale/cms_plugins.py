@@ -18,7 +18,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
 
     def get_form(self, *args, **kwargs):
         form = super(GoscaleCMSPluginBase, self).get_form(*args, **kwargs)
-        if self.plugin_templates:
+        if self.plugin_templates and len(self.plugin_templates) > 1:
             form.base_fields['template'] = forms.ChoiceField(choices=self.plugin_templates)
             print form.base_fields['template'].choices
         else:

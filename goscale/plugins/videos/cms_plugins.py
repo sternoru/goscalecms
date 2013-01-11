@@ -5,7 +5,6 @@ import models
 
 PLUGIN_TEMPLATES = (
     ('videos.html', _('Videos inline')),
-    ('videos_popup.html', _('Videos in a pop-up')),
 )
 
 class YouKuPlugin(GoscaleCMSPluginBase):
