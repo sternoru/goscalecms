@@ -18,12 +18,14 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
     Google Calendar Events
     """
     url = models.CharField(max_length=250, verbose_name=_('Calendar feed URL'),
-        help_text=_('user: https://plus.google.com/photos/114610201247248895941/<br/> \
-            album: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137'))
+        help_text=_('XML link from "Private Address" in your "Calendar Settings"<br/> \
+            ex: https://www.google.com/calendar/feeds/5qc0048gbti1s87faijksu67lc%40group.calendar.google.com/private-31d8c813eaadb4e9e6a3c73961e404e4/basic'))
+    page_size = models.PositiveSmallIntegerField(default=conf.GOSCALE_DEFAULT_PAGE_SIZE,
+        verbose_name=_('Events per page'), help_text=_('set 0 for unlimited.'))
     show_datepicker = models.BooleanField(default=False, verbose_name=_('Show date picker'),
-        help_text=_('If set slideshow will start automatically.'))
+        help_text=_('If set there will be a simple datepicker control in the side to choose a start date.'))
     show_past = models.BooleanField(default=False, verbose_name=_('Show past events'),
-        help_text=_('If set slideshow will start automatically.'))
+        help_text=_('If set past events will be shown.'))
     id = None
 
     def _get_data(self):
