@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/image.montage.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/pretty.photo.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.montage.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.js"></script>
+{% endaddtoblock %}
+
+<div class="goscale-plugins-pictures" data-type="grid" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
+	{% if title %}<h1>{{ title }}</h1>{% endif %}
+
+	<div class="am-container loading no-al">
+		{% for image in posts %}
+			<a href="{{ image.url }}"{% if image.description != null %} title="{{ image.description }}"{% endif %} rel="prettyPhoto[pp_gal]"><img src="{{ image.thumbnails.s288.url }}" /></a>
+		{% endfor %}
+	</div>
+</div>
+
+<div class="clear"></div>

@@ -1,0 +1,69 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/mini.slideshow.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.js"></script>
+{% endaddtoblock %}
+
+<div class="goscale-plugins-pictures" data-type="mini" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
+	<div class="box-sidebar">
+        <div class="boxtop"><div></div></div>
+		<div class="boxcontent">
+			<dl id="slideshow" class="ContentList">
+				{% if title %}
+					<dt>
+						<!-- titleContainer -->
+						<div class="TitleContainer">
+							<!-- slideshowFeedTitle -->
+							<span id="slideshowFeedTitle">{{ title }}</span>
+							<!-- /slideshowFeedTitle -->
+							<!-- RightColumnRssIcon -->
+							<!-- /RightColumnRssIcon -->
+						</div>
+						<!--  /titleContainer -->
+					</dt>
+				{% endif %}
+				<dd>
+					<!-- slideshowContainer ContentListDescription -->
+					<div id="slideshowContainer" class="ContentListDescription no-al">
+						<div id="msg_slideshow" class="msg_slideshow">
+							<div id="msg_wrapper" class="msg_wrapper"></div>
+							<div id="msg_controls" class="msg_controls">
+								<a href="#" id="msg_prev" class="msg_prev"></a>
+								<a href="#" id="msg_pause_play" class="msg_pause"></a>
+								<a href="#" id="msg_next" class="msg_next"></a>
+							</div>
+							<div id="msg_thumbs" class="msg_thumbs">
+								<div class="msg_thumb_wrapper">
+									{% for image in posts %}
+										<a href="#"><img src="{{ image.thumbnails.s288.url }}" alt="{{ image.thumbnails.s288.url }}" /></a>
+										
+										{% if forloop.last %}
+											</div>
+										{% else %}
+											{% if forloop.counter|divisibleby:"6" %}
+												</div>
+												<div class="msg_thumb_wrapper" style="display: none;">
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+								<span class="msg_loading"></span>
+							</div>
+						</div>
+					</div>
+					<!-- /slideshowContainer /ContentListDescription -->
+					<div class="RssLink">
+						<a href="{{ url }}" target="_blank">RSS</a>
+					</div>
+				</dd>
+			</dl>
+		 </div>
+		<div class="boxbottom"><div></div></div>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+{% if title %}<h2>{{ title }}</h2>{% endif %}
+
+{% for event in posts %}
+	<p><a href="?post={{ event.slug }}&plugin_id={{ plugin_id }}">{{ event.title }}</a></p>
+{% endfor %}

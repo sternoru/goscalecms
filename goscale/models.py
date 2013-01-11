@@ -180,12 +180,13 @@ class GoscaleCMSPlugin(CMSPlugin):
              _get_data_source_url() to get an URL to identify Posts from this Data Source
         """
         #get the raw data
-        data = self._get_data()
         self.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
+        data = self._get_data()
         #iterate through them and for each item
         msg = []
         for entry in data:
             link = self._get_entry_link(entry)
+            print link
             stored_entry, is_new = Post.objects.get_or_create(link=link)
             self._store_post(stored_entry, entry)
             if is_new is True:
@@ -259,6 +260,7 @@ class GoscaleCMSPlugin(CMSPlugin):
 
 def update_posts(**kwargs):
     plugin = kwargs['instance']
+    plugin.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
     plugin.update()
 
 
