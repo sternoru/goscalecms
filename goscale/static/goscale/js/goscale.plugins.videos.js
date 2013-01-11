@@ -1,7 +1,7 @@
 (function($) {
     $.fn.goscalePluginsVideos = function() {
 		var $pluginContainer = $(this),
-			lightbox = $pluginContainer.find('a.video-lb') ? true : false;
+			lightbox = $pluginContainer.find('a.video-lb').length > 0 ? true : false;
 		
 		$pluginContainer.find('.videoListContainer .videos').scrollable({
 			horizontal:true,
