@@ -21,7 +21,7 @@
 {% endaddtoblock %}
 
 {% if posts %}
-	<div class="goscale-plugins-videos">
+	<div class="goscale-plugins-videos{% if lightbox %} lb{% endif %}">
 		{% if title %}<h1>{{ title }}</h1>{% endif %}
 		<div class="topBar">
 			<div class="videoListContainer">
