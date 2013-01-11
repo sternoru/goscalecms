@@ -16,5 +16,10 @@ class FeedPlugin(GoscaleCMSPluginBase):
     name = _("RSS Feed (GoSCale)")
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
+    fieldsets = [
+        [_('Feed options'), {
+            'fields': ['url', 'page_size', 'show_date', 'external_links']
+        }]
+    ]
 
 plugin_pool.register_plugin(FeedPlugin)

@@ -18,5 +18,10 @@ class PicasaPlugin(GoscaleCMSPluginBase):
     name = _("Picasa (GoSCale)")
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
+    fieldsets = [
+        [_('Pictures options'), {
+            'fields': ['url', 'width', 'height', 'thumbnail_width', 'thumbnail_height', 'autoplay']
+        }]
+    ]
 
 plugin_pool.register_plugin(PicasaPlugin)

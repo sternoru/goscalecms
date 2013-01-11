@@ -4,6 +4,7 @@ from django import forms
 from cms.plugin_base import CMSPluginBase
 from goscale.models import GoscaleCMSPlugin, Post
 from goscale import conf
+from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.loader import render_to_string
 from django.template.context import Context
@@ -13,16 +14,31 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     Base class for GoScale plugins
     """
     exclude = ['posts',]
+    parent_fieldset = [_('Default options'), {'fields': ['template', 'title',]}]
     plugin_post_template = conf.GOSCALE_DEFAULT_POST_PLUGIN
     plugin_templates = None
+
+    def __init__(self, *args, **kwargs):
+        if self.fieldsets:
+            if _('Default options') not in self.fieldsets[0]:
+                self.fieldsets.insert(0, self.parent_fieldset)
+        else:
+            fields = self.model.get_fields_list()
+            fields.remove('title')
+            fields.remove('template')
+            self.fieldsets = [
+                self.parent_fieldset,
+                [_('Plugin options'), {'fields': fields}]
+            ]
+        super(GoscaleCMSPluginBase, self).__init__(*args, **kwargs)
 
     def get_form(self, *args, **kwargs):
         form = super(GoscaleCMSPluginBase, self).get_form(*args, **kwargs)
         if self.plugin_templates and len(self.plugin_templates) > 1:
             form.base_fields['template'] = forms.ChoiceField(choices=self.plugin_templates)
-            print form.base_fields['template'].choices
         else:
             self.exclude.append('template')
+            self.fieldsets[0][1]['fields'].remove('template')
         return form
 
     @classmethod

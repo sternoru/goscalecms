@@ -16,4 +16,8 @@ class YouKuPlugin(GoscaleCMSPluginBase):
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
 
+    fieldsets = [
+        [_('Video options'), {'fields': ['playlist', 'lightbox',]}]
+    ]
+
 plugin_pool.register_plugin(YouKuPlugin)
