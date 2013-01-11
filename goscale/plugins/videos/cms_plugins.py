@@ -12,7 +12,7 @@ class YouKuPlugin(GoscaleCMSPluginBase):
     Videos plugin for GoScale
     """
     model = models.YouKu
-    name = _("YouKu Videos (GoSCale)")
+    name = _("YouKu")
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
 

@@ -103,8 +103,8 @@ class GoscaleCMSPlugin(CMSPlugin):
 
     def __unicode__(self):
         title = self.title or self.template.replace('.html', '').capitalize() or str(self.id)
-        if len(title) > 17:
-            title = '%s...' % title[:17]
+        if len(title) > 25:
+            title = '%s...' % title[:25]
         return title
 
     # Override metods

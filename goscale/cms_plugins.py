@@ -13,6 +13,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     """
     Base class for GoScale plugins
     """
+    module = 'GoScale CMS'
     exclude = ['posts',]
     parent_fieldset = [_('Default options'), {'fields': ['template', 'title',]}]
     plugin_post_template = conf.GOSCALE_DEFAULT_POST_PLUGIN

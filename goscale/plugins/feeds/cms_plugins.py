@@ -13,7 +13,7 @@ class FeedPlugin(GoscaleCMSPluginBase):
     Feed plugin for GoScale
     """
     model = models.Feed
-    name = _("RSS Feed (GoSCale)")
+    name = _("RSS Feed")
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
     fieldsets = [

@@ -15,7 +15,7 @@ class PicasaPlugin(GoscaleCMSPluginBase):
     Feed plugin for GoScale
     """
     model = models.Picasa
-    name = _("Picasa (GoSCale)")
+    name = _("Picasa")
     plugin_templates = PLUGIN_TEMPLATES
     render_template = PLUGIN_TEMPLATES[0][0]
     fieldsets = [
