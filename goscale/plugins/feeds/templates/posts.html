@@ -13,16 +13,7 @@
         <div class="goscale-plugins-feeds">
             {% if title %}<h1>{{ title }}{% endif %}</h1>
 			
-			{% if paginator %}
-                <p>paginator: {{ paginator }}</p>
-                <p>pages: {{ paginator.page_range }}</p>
-                <p>count: {{ paginator.count }}</p>
-                <p>num_pages: {{ paginator.num_pages }}</p>
-                <p>page: {{ page }}</p>
-                <p>page.number: {{ page.number }}</p>
-            {% endif %}
-			
-            {% if posts %}
+			{% if posts %}
                 <dl class="ContentList">
                     {% for post in posts %}
                         <dt>
@@ -43,15 +34,30 @@
                             </div>
                         </dd>
                     {% endfor %}
+					
+					{% if paginator %}
+						<div class="pagination no-al">
+							<ul>
+								{% if page.number > 1 %}
+									<li>
+										<a href="?page={{ page.previous_page_number }}">{% trans "Prev" %}</a>
+									</li>
+								{% endif %}
+								{% for page_nb in paginator.page_range %}
+									<li{% if page_nb == page.number %} class="active"{% endif %}>
+										<a href="?page={{ page_nb }}">{{ page_nb }}</a>
+									</li>
+								{% endfor %}
+								{% if page.number < paginator.num_pages %}
+									<li>
+										<a href="?page={{ page.next_page_number }}">{% trans "Next" %}</a>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+					{% endif %}
                 </dl>
             {% endif %}
-
-            <!--div class="Paging">
-                <div class="PagingItem"><a href="?page=2">Prev</a></div>
-                <div class="PagingItem"><a href="?page=1">1</a></div>
-                <div class="PagingItem"><a href="?page=2">2</a></div>
-                <div class="PagingItemActive">3</div>
-            </div-->
         </div>
     {% endif %}
 {% endblock %}
