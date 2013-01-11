@@ -7,7 +7,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup(
     name = "goscalecms",
-    version = "0.1",
+    version = "0.2",
     packages = find_packages(),
     author = "Evgeny Demchenko",
     author_email = "little_pea@list.ru",
