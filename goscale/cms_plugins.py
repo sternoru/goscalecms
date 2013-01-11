@@ -39,7 +39,8 @@ class GoscaleCMSPluginBase(CMSPluginBase):
             form.base_fields['template'] = forms.ChoiceField(choices=self.plugin_templates)
         else:
             self.exclude.append('template')
-            self.fieldsets[0][1]['fields'].remove('template')
+            if 'template' in self.fieldsets[0][1]['fields']:
+                self.fieldsets[0][1]['fields'].remove('template')
         return form
 
     @classmethod
