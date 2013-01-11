@@ -19,7 +19,7 @@ class CalendarPlugin(GoscaleCMSPluginBase):
     plugin_post_template = 'event.html'
     fieldsets = [
         [_('Calendar options'), {
-            'fields': ['url', 'show_datepicker', 'show_past']
+            'fields': ['url', 'page_size', 'show_datepicker', 'show_past']
         }]
     ]
 
