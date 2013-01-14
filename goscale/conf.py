@@ -6,7 +6,25 @@ gettext_noop = lambda s: s
 
 DEFAULT_LANGUAGE = getattr(settings, 'DEFAULT_LANGUAGE', 'en')
 
+""" Goscale Plugin settings """
+
 GOSCALE_DEFAULT_POST_PLUGIN = getattr(settings, 'GOSCALE_DEFAULT_POST_PLUGIN', 'post.html')
+
+# Settings defined inside of the plugins
+# goscale.plugins.videos.cms_plugins.GOSCALE_VIDEOS_PLUGIN_TEMPLATES
+# goscale.plugins.videos.cms_plugins.GOSCALE_VIDEOS_CUSTOM_PLUGIN_TEMPLATES
+# goscale.plugins.calendar.cms_plugins.GOSCALE_CALENDAR_PLUGIN_TEMPLATES
+# goscale.plugins.calendar.cms_plugins.GOSCALE_CALENDAR_CUSTOM_PLUGIN_TEMPLATES
+# goscale.plugins.feeds.cms_plugins.GOSCALE_FEEDS_PLUGIN_TEMPLATES
+# goscale.plugins.feeds.cms_plugins.GOSCALE_FEEDS_CUSTOM_PLUGIN_TEMPLATES
+# goscale.plugins.forms.cms_plugins.GOSCALE_FORMS_PLUGIN_TEMPLATES
+# goscale.plugins.forms.cms_plugins.GOSCALE_FORMS_CUSTOM_PLUGIN_TEMPLATES
+# goscale.plugins.pictures.cms_plugins.GOSCALE_PICTURES_PLUGIN_TEMPLATES
+# goscale.plugins.pictures.cms_plugins.GOSCALE_PICTURES_CUSTOM_PLUGIN_TEMPLATES
+
+
+
+""" Goscale technical settings """
 
 #set this if you want to use django's cache in production
 GOSCALE_CACHE_DURATION = getattr(

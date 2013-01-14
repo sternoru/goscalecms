@@ -2,12 +2,11 @@ import simplejson
 
 from django import forms
 from cms.plugin_base import CMSPluginBase
-from goscale.models import GoscaleCMSPlugin, Post
+from goscale.models import Post
 from goscale import conf
 from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.loader import render_to_string
-from django.template.context import Context
 
 class GoscaleCMSPluginBase(CMSPluginBase):
     """

@@ -1,13 +1,15 @@
 from goscale.cms_plugins import GoscaleCMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 import models
 
-PLUGIN_TEMPLATES = (
+GOSCALE_CALENDAR_PLUGIN_TEMPLATES = getattr(settings, 'GOSCALE_CALENDAR_PLUGIN_TEMPLATES', (
     ('events.html', _('Events list')),
     ('events_mini.html', _('Events mini list (sidebar)')),
     ('datepicker.html', _('Date picker widget')),
-)
+)) + getattr(settings, 'GOSCALE_CALENDAR_CUSTOM_PLUGIN_TEMPLATES', ())
+
 
 class CalendarPlugin(GoscaleCMSPluginBase):
     """
@@ -15,8 +17,8 @@ class CalendarPlugin(GoscaleCMSPluginBase):
     """
     model = models.Calendar
     name = _("Calendar")
-    plugin_templates = PLUGIN_TEMPLATES
-    render_template = PLUGIN_TEMPLATES[0][0]
+    plugin_templates = GOSCALE_CALENDAR_PLUGIN_TEMPLATES
+    render_template = GOSCALE_CALENDAR_PLUGIN_TEMPLATES[0][0]
     plugin_post_template = 'event.html'
     fieldsets = [
         [_('Calendar options'), {

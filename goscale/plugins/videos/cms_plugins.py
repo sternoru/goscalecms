@@ -1,11 +1,12 @@
 from goscale.cms_plugins import GoscaleCMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 import models
 
-PLUGIN_TEMPLATES = (
+GOSCALE_VIDEOS_PLUGIN_TEMPLATES = getattr(settings, 'GOSCALE_VIDEOS_PLUGIN_TEMPLATES', (
     ('videos.html', _('Videos inline')),
-)
+)) + getattr(settings, 'GOSCALE_VIDEOS_CUSTOM_PLUGIN_TEMPLATES', ())
 
 class YouKuPlugin(GoscaleCMSPluginBase):
     """
@@ -13,8 +14,8 @@ class YouKuPlugin(GoscaleCMSPluginBase):
     """
     model = models.YouKu
     name = _("YouKu")
-    plugin_templates = PLUGIN_TEMPLATES
-    render_template = PLUGIN_TEMPLATES[0][0]
+    plugin_templates = GOSCALE_VIDEOS_PLUGIN_TEMPLATES
+    render_template = GOSCALE_VIDEOS_PLUGIN_TEMPLATES[0][0]
 
     fieldsets = [
         [_('Video options'), {'fields': ['playlist', 'lightbox',]}]
