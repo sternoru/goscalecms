@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from classytags.arguments import Argument, MultiValueArgument, MultiKeywordArgument
+from classytags.core import Options
+from classytags.helpers import InclusionTag
 from django import template
 from cms.templatetags import cms_tags
 from cms.models import CMSPlugin
@@ -8,6 +10,29 @@ from goscale import cms_plugins
 
 register = template.Library()
 
+
+class GoscalePaginator(InclusionTag):
+    name = 'goscale_paginator'
+    template = 'paginator.html'
+    options = Options(
+        MultiKeywordArgument('params', required=False)
+    )
+
+    def get_template(self, context, **kwargs):
+        """
+        Returns the template to be used for the current context and arguments.
+        """
+        if 'template' in kwargs['params']:
+            self.template = kwargs['params']['template']
+        return super(GoscalePaginator, self).get_template(context, **kwargs)
+
+    def get_context(self, context, params):
+        return {
+            'paginator': context['paginator'],
+            'page': context['page']
+        }
+
+register.tag(GoscalePaginator)
 
 class GoscalePlaceholder(cms_tags.Placeholder):
     """

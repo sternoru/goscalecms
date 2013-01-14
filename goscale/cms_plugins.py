@@ -79,7 +79,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
                 # If page is out of range (e.g. 9999), deliver last page of results.
                 page = paginator.page(paginator.num_pages)
             extra_context['paginator'] = paginator
-            extra_context['page'] = page
+            extra_context['page'] = extra_context['posts'] = page
         # return updated context
         context.update(extra_context)
         return context
