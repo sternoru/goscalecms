@@ -34,9 +34,9 @@
 		};
 		
 		var dayClick = function(date) {
-			var dateLink = $('#important-days #start-date');
-			dateLink.href = dateLink.href.replace('start=startDate', date);
-			dateLink.trigger('click');
+			var $dateLink = $('#important-days #start-date');
+			$dateLink.attr('href', $dateLink.attr('href').replace('start=startDate', date));
+			$dateLink.click();
 		};
 		
 		$("#datepicker").datepicker({
