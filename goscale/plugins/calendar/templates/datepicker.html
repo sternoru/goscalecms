@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load goscale_tags %}
 
-<div class="box-sidebar">
+<div class="box-sidebar" xmlns="http://www.w3.org/1999/html">
 	<div class="boxtop"><div></div></div>
 	<div class="boxcontent">
 		<div id="calendar">
@@ -16,6 +16,6 @@
 		{% for day in posts %}
 			<span class="day" data-date="{{ day.when }}"></span>
 		{% endfor %}
-		<a id="start-date" href="{% goscale_plugin_filters start="startDate" %}"/>
+		<a id="start-date" href="{% goscale_plugin_filters start='startDate' %}"></a>
 	</div>
 {% endif %}
