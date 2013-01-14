@@ -3,6 +3,7 @@ import os
 import simplejson
 import datetime
 import urllib2
+from dateutil import parser
 from gdata.calendar import client
 from goscale import models as goscale_models
 from goscale import utils
@@ -24,7 +25,7 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
         verbose_name=_('Events per page'), help_text=_('set 0 for unlimited.'))
     show_past = models.BooleanField(default=False, verbose_name=_('Show past events'),
         help_text=_('If set past events will be shown.'))
-    id = None
+    order = 'updated'
 
     def _get_data(self):
         cal_client = client.CalendarClient()
@@ -58,11 +59,18 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
             attributes[key.strip().lower().replace(' ', '_')] = val.strip()
         stored_entry.title = entry.title.text
         stored_entry.link = self._get_entry_link(entry)
-        stored_entry.updated = datetime.datetime.strptime(entry.updated.text, '%Y-%m-%dT%H:%M:%S.%fZ')
+        try:
+            stored_entry.updated = parser.parse(attributes['when'].split('to')[0]) # parse event start date
+        except ValueError:
+            raise
+            stored_entry.updated = datetime.datetime.strptime(entry.updated.text, '%Y-%m-%dT%H:%M:%S.%fZ')
         stored_entry.published = datetime.datetime.strptime(entry.published.text, '%Y-%m-%dT%H:%M:%S.%fZ')
         stored_entry.author = entry.author[0].name.text
         stored_entry.attributes = simplejson.dumps(attributes)
         stored_entry.description = attributes.get('event_description')
         return super(Calendar, self)._store_post(stored_entry)
+
+    def _parse_datetime(self, when):
+        return datetime.datetime.strptime(when, '%Y-%m-%dT%H:%M:%S.%fZ')
 
 signals.post_save.connect(goscale_models.update_posts, sender=Calendar)
