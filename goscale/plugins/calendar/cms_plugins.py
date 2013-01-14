@@ -24,4 +24,9 @@ class CalendarPlugin(GoscaleCMSPluginBase):
         }]
     ]
 
+    def _extra_context(self, context, instance):
+        if instance.show_past:
+            return {'past_events': instance.get_past_events()}
+        return super(CalendarPlugin, self)._extra_context(context, instance)
+
 plugin_pool.register_plugin(CalendarPlugin)

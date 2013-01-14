@@ -26,13 +26,18 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
     show_past = models.BooleanField(default=False, verbose_name=_('Show past events'),
         help_text=_('If set past events will be shown.'))
     order = 'updated'
+    query = None
+
+    def get_past_events(self):
+        query = self.query or self.posts.all()
+        return self._format(query.filter(updated__lt=datetime.datetime.now()).order_by('-updated')[:self.page_size])
 
     def _get_query(self, order=None, filters=None):
         order = self._get_order(order)
         self.query = self.posts.all()
         start = datetime.datetime.now()
-        if filters and 'start_from' in filters:
-            start = self._parse_datetime(filters['start_from'])
+        if filters and 'start' in filters:
+            start = self._parse_datetime(filters['start'])
         self.query = self.query.filter(updated__gte=start)
         return self.query.order_by(order)
 
