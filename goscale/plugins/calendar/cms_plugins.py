@@ -6,6 +6,7 @@ import models
 PLUGIN_TEMPLATES = (
     ('events.html', _('Events list')),
     ('events_mini.html', _('Events mini list (sidebar)')),
+    ('datepicker.html', _('Date picker widget')),
 )
 
 class CalendarPlugin(GoscaleCMSPluginBase):
