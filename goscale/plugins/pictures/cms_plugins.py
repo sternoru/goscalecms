@@ -9,6 +9,7 @@ GOSCALE_PICTURES_PLUGIN_TEMPLATES = getattr(settings, 'GOSCALE_PICTURES_PLUGIN_T
     ('slideshow.html', _('Slideshow')),
     ('slideshow_with_thumbnails.html', _('Slideshow with thumbnails')),
     ('slideshow_mini.html', _('Mini slideshow (sidebar)')),
+    ('carousel_mini.html', _('Mini carousel (sidebar)')),
 )) + getattr(settings, 'GOSCALE_PICTURES_CUSTOM_PLUGIN_TEMPLATES', ())
 
 

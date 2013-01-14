@@ -19,7 +19,8 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
     """
     url = models.CharField(max_length=250, verbose_name=_('Picasa user or album link'),
         help_text=_('user: https://plus.google.com/photos/114610201247248895941/<br/> \
-            album: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137'))
+            album: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137<br/> \
+            picasaweb album (RSS link): https://picasaweb.google.com/data/feed/base/user/sterno.bloggerCMS/albumid/5352591675044168945?alt=rss&kind=photo&hl=en_US'))
     width = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Container width'),
         help_text=_('Width of a slideshow container or a lightbox.'))
     height = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Container height'),
@@ -39,17 +40,30 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
             url = self.url
         id = None
         try:
-            # check for album
-            id = re.search('(\/photos\/)(\d+)(\/albums\/)(\d+)', url).group(4)
+            # check for album (picasaweb style)
+            match = re.search('(\/user\/)([\d\w.]+)(\/albumid\/)(\d+)', url)
+            id = match.group(4)
             self.album = id
+            self.user = match.group(2)
+            return id
+        except AttributeError:
+            pass
+        try:
+            # check for album (google+ style)
+            match = re.search('(\/photos\/)([\d\w.]+)(\/albums\/)(\d+)', url)
+            id = match.group(4)
+            self.album = id
+            self.user = match.group(2)
+            return id
         except AttributeError:
             pass
         try:
             # check for user
-            id = re.search('(\/photos\/)(\d+)(\/)', url).group(2)
+            id = re.search('(\/photos\/)([\d\w.]+)(\/)', url).group(2)
             self.user = id
             if not self.album:
                 self.type = 'albums'
+            return id
         except AttributeError:
             raise goscale_models.WrongAttribute(attribute='url')
         return id

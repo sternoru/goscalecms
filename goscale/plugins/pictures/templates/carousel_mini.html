@@ -1,0 +1,24 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+{% addtoblock "css" %}
+
+{% endaddtoblock %}
+
+{% addtoblock "js" %}
+
+{% endaddtoblock %}
+
+
+
+<div>
+	{% if title %}<p>{{ title }}</p>{% endif %}
+	{% for image in posts %}
+    <p>
+		<a href="#"><img src="{{ image.thumbnails.s288.url }}" alt="{{ image.thumbnails.s288.url }}" /></a>
+    </p>
+    <p>
+        {{ image.summary|safe }}
+    </p>
+	{% endfor %}
+</div>
