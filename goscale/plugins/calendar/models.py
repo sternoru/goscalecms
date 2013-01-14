@@ -27,6 +27,15 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
         help_text=_('If set past events will be shown.'))
     order = 'updated'
 
+    def _get_query(self, order=None, filters=None):
+        order = self._get_order(order)
+        self.query = self.posts.all()
+        start = datetime.datetime.now()
+        if filters and 'start_from' in filters:
+            start = self._parse_datetime(filters['start_from'])
+        self.query = self.query.filter(updated__gte=start)
+        return self.query.order_by(order)
+
     def _get_data(self):
         cal_client = client.CalendarClient()
         feed = cal_client.get_calendar_event_feed(uri=self.url+'?hl=en')

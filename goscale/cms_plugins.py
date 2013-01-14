@@ -54,9 +54,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         # use template from the instance if provided
         if instance and instance.template:
             self.render_template = instance.template
-        # get plugin posts
         extra_context['plugin_id'] = instance.id
-        extra_context['posts'] = instance.get_posts()
         # get filters and single post if requested
         if 'request' in context:
             request = context['request']
@@ -74,6 +72,8 @@ class GoscaleCMSPluginBase(CMSPluginBase):
                 [key, value] = param.split('=')
                 filters[key] = value
         extra_context['filters'] = filters
+        # get plugin posts
+        extra_context['posts'] = instance.get_posts(filters=filters)
         # get plugin attributes
         extra_context.update(instance.get_fields_dict())
         # add debug for development
@@ -95,4 +95,17 @@ class GoscaleCMSPluginBase(CMSPluginBase):
             extra_context['page'] = extra_context['posts'] = page
         # return updated context
         context.update(extra_context)
+        context.update(self._extra_context(context, instance))
         return context
+
+    def _extra_context(self, context, instance):
+        """ Adds extra context for rendering
+
+        Args:
+         * context - original context prepared by default render method
+
+        Override it if you want to add anything to the context before rendering.
+
+        Returns a dictionary with additional context values.
+        """
+        return {}

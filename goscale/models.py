@@ -143,18 +143,18 @@ class GoscaleCMSPlugin(CMSPlugin):
                 ])
         ).hexdigest()
 
-    def get_posts(self, offset=0, limit=1000, order=None):
+    def get_posts(self, offset=0, limit=1000, order=None, filters=None):
         """ This method returns list of Posts for this Data Source starting at a given offset and not more than limit
         It will call content-specific methods:
              _format() to format output from the DataStore
         """
         order = self._get_order(order)
-        cache_key = self.get_cache_key(offset, limit, order)
+        cache_key = self.get_cache_key(offset, limit, order, filters)
         content = cache.get(cache_key)
         if content:
             return content
         self.update() #TODO: update somewhere else
-        query = self._get_query(order=order)
+        query = self._get_query(order=order, filters=filters)
         posts = query[int(offset):int(offset)+int(limit)]
         posts = self._format(posts)
         cache_duration = conf.GOSCALE_CACHE_DURATION if posts else 1
@@ -252,7 +252,7 @@ class GoscaleCMSPlugin(CMSPlugin):
         except AttributeError:
             return conf.GOSCALE_DEFAULT_CONTENT_ORDER
 
-    def _get_query(self, order=None):
+    def _get_query(self, order=None, filters=None):
         """ This method is just to evade code duplication in count() and get_content, since they do basically the same thing"""
         order = self._get_order(order)
         return self.posts.all().order_by(order)
