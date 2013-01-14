@@ -57,19 +57,32 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         # get plugin posts
         extra_context['plugin_id'] = instance.id
         extra_context['posts'] = instance.get_posts()
-        # get single post if requested
-        slug = context['request'].GET.get('post') if 'request' in context else None
+        # get filters and single post if requested
+        if 'request' in context:
+            request = context['request']
+            slug = request.GET.get('post')
+            plugin_filters = request.GET.get('plugin_%s_filters' % instance.id)
+        else:
+            slug = plugin_filters = None
         if slug:
+            # get single post
             extra_context['post'] = instance.get_post(slug)
+        filters = {}
+        if plugin_filters:
+            # get plugin filters
+            for param in plugin_filters.split('|'):
+                [key, value] = param.split('=')
+                filters[key] = value
+        extra_context['filters'] = filters
         # get plugin attributes
         extra_context.update(instance.get_fields_dict())
         # add debug for development
         extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
         # setup a paginator
-        limit = int(context['request'].GET.get('limit', instance.__dict__.get('page_size', 0)))
+        limit = int(filters.get('limit', instance.__dict__.get('page_size', 0)))
         if limit:
             paginator = Paginator(extra_context['posts'], limit)
-            current_page = context['request'].GET.get('page', 1)
+            current_page = filters.get('page', 1)
             try:
                 page = paginator.page(current_page)
             except PageNotAnInteger:

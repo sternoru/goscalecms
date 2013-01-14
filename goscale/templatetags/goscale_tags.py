@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+import simplejson
+import urllib
 from classytags.arguments import Argument, MultiValueArgument, MultiKeywordArgument
 from classytags.core import Options
-from classytags.helpers import InclusionTag
+from classytags.helpers import InclusionTag, AsTag
 from django import template
 from cms.templatetags import cms_tags
 from cms.models import CMSPlugin
@@ -11,7 +13,7 @@ from goscale import cms_plugins
 register = template.Library()
 
 
-class GoscalePaginator(InclusionTag):
+class Paginator(InclusionTag):
     name = 'goscale_paginator'
     template = 'paginator.html'
     options = Options(
@@ -24,15 +26,54 @@ class GoscalePaginator(InclusionTag):
         """
         if 'template' in kwargs['params']:
             self.template = kwargs['params']['template']
-        return super(GoscalePaginator, self).get_template(context, **kwargs)
+        return super(Paginator, self).get_template(context, **kwargs)
 
     def get_context(self, context, params):
+        return context
         return {
             'paginator': context['paginator'],
             'page': context['page']
         }
 
-register.tag(GoscalePaginator)
+register.tag(Paginator)
+
+
+class PluginFilters(AsTag):
+    name = 'goscale_plugin_filters'
+    options = Options(
+        MultiKeywordArgument('params', required=False),
+        'as',
+        Argument('varname', resolve=False, required=False),
+    )
+
+    def get_value(self, context, params):
+        filters = []
+        plugin_filters = 'plugin_%s_filters' % context['plugin_id']
+        for key, val in params.iteritems():
+            filters.append('='.join([key, str(val)]))
+        qs = ['='.join([plugin_filters, '|'.join(filters)])]
+        for key, value in context['request'].GET.iteritems():
+            if key.startswith('_') or key == plugin_filters:
+                continue
+            qs.append('='.join([key, value]))
+        return '?' + '&'.join(qs)
+
+register.tag(PluginFilters)
+
+
+class PluginPost(AsTag):
+    name = 'goscale_plugin_post'
+    options = Options(
+        Argument('post'),
+        'as',
+        Argument('varname', resolve=False, required=False),
+    )
+
+    def get_value(self, context, post):
+        return '?post=%s&plugin_id=%s' % (post['slug'], context['plugin_id'])
+
+register.tag(PluginPost)
+
 
 class GoscalePlaceholder(cms_tags.Placeholder):
     """
