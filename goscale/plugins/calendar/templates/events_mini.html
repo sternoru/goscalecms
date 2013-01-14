@@ -1,8 +1,45 @@
+{% extends "events.html" %}
 {% load i18n %}
 {% load sekizai_tags %}
 
-{% if title %}<h2>{{ title }}</h2>{% endif %}
-
-{% for event in posts %}
-	<p><a href="?post={{ event.slug }}&plugin_id={{ plugin_id }}">{{ event.title }}</a></p>
-{% endfor %}
+{% block events_content %}
+	{% if posts %}
+		<div class="goscale-plugins-calendar">
+			<div class="box-sidebar">
+				<div class="boxtop"><div></div></div>
+				<div class="boxcontent">
+					<dl id="shortnews" class="ContentList">
+						{% if title %}
+							<dt>
+								<div class="TitleContainer">
+									<span id="shortnewsFeedTitle">{{ title }}</span>
+								</div>
+							</dt>
+						{% endif %}
+						<dd>
+							<div id="shortnewsContainer" class="ContentListDescription">
+								{% for event in posts %}
+									<div id="shortNewsContent">
+										<div class="snTitle">
+											<a href="?post={{ event.slug }}&plugin_id={{ plugin_id }}">{{ event.title|safe }}</a>
+										</div>
+										<div class="EntryDate">{{ event.when }}</div>
+										<div class="snDescription">
+											{% if event.where %}
+												<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}
+											{% endif %}
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+							<div class="RssLink">
+								<a href="{{ url }}" target="_blank">{% trans "RSS" %}</a>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<div class="boxbottom"><div></div></div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

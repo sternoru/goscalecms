@@ -1,11 +1,71 @@
 {% load i18n %}
 {% load sekizai_tags %}
 
-{% if title %}<h1>{{ title }}</h1>{% endif %}
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jqueryUI/jquery-ui-1.9.2.custom.min.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.calendar.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
 
-{% for event in posts %}
-    <p><a href="?post={{ event.slug }}&plugin_id={{ plugin_id }}">{{ event.title|safe }}</a></p>
-    <p>when: {{ event.when }}</p>
-    <p>where: {{ event.where }}</p>
-    <p>description: {{ event.description }}</p>
-{% endfor %}
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js"></script>
+{% endaddtoblock %}
+
+{% block events_content %}
+	{% if post %}
+		{% include "event.html" %}
+	{% else %}
+		<div class="goscale-plugins-calendar">
+			{% if title %}<h1>{{ title }}</h1>{% endif %}
+			
+			{% if posts %}
+				<dl class="ContentList">
+					{% for event in posts %}
+						<dt>
+							<a href="?post={{ event.slug }}&plugin_id={{ plugin_id }}">{{ event.title|safe }} ({{ event.when }})</a>
+						</dt>
+						<dd>
+							<div class="ContentListDescription">
+								<div>
+									{% if event.description == null %}
+										{% trans "There is no description for this event" %}
+									{% else %}
+										{{ event.description|safe }}
+									{% endif %}
+								</div>
+								{% if event.where %}
+									<div class="location-details">
+										<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}<span class="mapLinkPlaceholder" title="{{ event.where }}"> | <span class="ContentDetailLink"><span class="ContentDetailLinkLabel">{% trans "View map" %}</span></span></span>
+									</div>
+								{% endif %}
+							</div>
+						</dd>
+					{% endfor %}
+					
+					{% if paginator %}
+						<div class="pagination no-al">
+							<ul>
+								{% if page.number > 1 %}
+									<li>
+										<a href="?page={{ page.previous_page_number }}">{% trans "Prev" %}</a>
+									</li>
+								{% endif %}
+								{% for page_nb in paginator.page_range %}
+									<li{% if page_nb == page.number %} class="active"{% endif %}>
+										<a href="?page={{ page_nb }}">{{ page_nb }}</a>
+									</li>
+								{% endfor %}
+								{% if page.number < paginator.num_pages %}
+									<li>
+										<a href="?page={{ page.next_page_number }}">{% trans "Next" %}</a>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+					{% endif %}
+				</dl>
+			{% endif %}
+		</div>
+	{% endif %}
+{% endblock %}

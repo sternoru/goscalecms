@@ -1,6 +1,22 @@
 {% load i18n %}
 
-    <h1>{{ post.title|safe }}</h1>
-    <p>when: {{ post.when }}</p>
-    <p>where: {{ post.where }}</p>
-    <p>description: {{ post.description }}</p>
+<dl class="ContentList">
+	<dt>
+		<span>
+			{{ post.title|safe }}
+		</span>
+		<div class="EntryDate">{{ post.when }}</div>
+	</dt>
+	<dd>
+		<div class="ContentListDescription">
+			<div>
+				{{ post.description|safe }}
+			</div>
+			{% if post.where %}
+				<div class="location-details">
+					<span class="LocationLabel">{% trans "Location" %}: </span>{{ post.where }}<span class="mapLinkPlaceholder" title="{{ post.where }}"> | <span class="ContentDetailLink"><span class="ContentDetailLinkLabel">{% trans "View map" %}</span></span></span>
+				</div>
+			{% endif %}
+		</div>
+	</dd>
+</dl>

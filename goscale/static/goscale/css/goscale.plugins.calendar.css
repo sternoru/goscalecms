@@ -1,0 +1,21 @@
+/* content style */
+h1 {
+	margin: 20px auto 0 auto;
+}
+
+.goscale-plugins-calendar {
+	
+}
+	.location-details {
+		display: inline-block;
+		height: 30px;
+		padding: 10px 23px 0 0;
+		background: url('../img/link_arrow.gif') right 10px no-repeat;
+		overflow: visible;
+	}
+
+
+/* datepicker style */
+#important-days {
+	display: none;
+}
