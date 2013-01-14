@@ -1,0 +1,8 @@
+{% load i18n %}
+{% load sekizai_tags %}
+
+
+{% if posts %}
+        {{ posts.0.link }}
+        {{ posts.0.description|safe }}
+{% endif %}

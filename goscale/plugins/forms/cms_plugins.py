@@ -5,6 +5,7 @@ import models
 
 PLUGIN_TEMPLATES = (
     ('form.html', _('Form')),
+    ('form_popup.html', _('Form in a lightbox')),
 )
 
 class FormPlugin(GoscaleCMSPluginBase):
