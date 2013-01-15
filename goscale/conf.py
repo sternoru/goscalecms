@@ -26,6 +26,9 @@ GOSCALE_DEFAULT_POST_PLUGIN = getattr(settings, 'GOSCALE_DEFAULT_POST_PLUGIN', '
 
 """ Goscale technical settings """
 
+# how often posts should be updated from the source
+GOSCALE_POSTS_UPDATE_FREQUENCY = getattr(settings, 'GOSCALE_POSTS_UPDATE_FREQUENCY', 60*30) # 30 minutes
+
 #set this if you want to use django's cache in production
 GOSCALE_CACHE_DURATION = getattr(
     settings,

@@ -13,8 +13,7 @@ from django.core.cache import cache
 import unidecode
 
 from django.template import defaultfilters
-from goscale import conf
-
+from goscale import conf, utils
 
 
 class Post(models.Model):
@@ -93,9 +92,10 @@ class GoscaleCMSPlugin(CMSPlugin):
     posts = models.ManyToManyField(Post, verbose_name=_('Posts'))
     template = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Template'))
     title = models.CharField(max_length=255, null=True, blank=True, verbose_name=_('Title'))
+    updated = models.DateTimeField(blank=True, null=True, db_index=True, verbose_name=_('Last updated'))
 
     # Private Attributes
-    _dummy_datetime = datetime.datetime.now()
+    _dummy_datetime = utils.get_datetime_now()
     _fields = []
 
     class Meta:
@@ -125,7 +125,10 @@ class GoscaleCMSPlugin(CMSPlugin):
     def get_fields_dict(self):
         fields_dict = {}
         for field in self.__class__.get_fields_list():
-            fields_dict[field] = self.__getattribute__(field)
+            value = self.__getattribute__(field)
+            if field == 'updated':
+                value = str(value)
+            fields_dict[field] = value
         return fields_dict
 
     def get_cache_key(self, offset=0, limit=0, order=None, post_slug=''):
@@ -133,8 +136,6 @@ class GoscaleCMSPlugin(CMSPlugin):
         """
         return hashlib.sha1(
             '.'.join([
-                self.__module__,
-                self.__class__.__name__,
                 str(self._get_data_source_url()),
                 str(offset),
                 str(limit),
@@ -151,9 +152,16 @@ class GoscaleCMSPlugin(CMSPlugin):
         order = self._get_order(order)
         cache_key = self.get_cache_key(offset, limit, order, filters)
         content = cache.get(cache_key)
-        if content:
-            return content
-        self.update() #TODO: update somewhere else
+#        if content:
+#            return content
+        try:
+            if self.up_to_date():
+                pass # not time to update yet
+            else:
+                self.update()
+        except:
+            raise
+            pass # query the database for now and update later
         query = self._get_query(order=order, filters=filters)
         posts = query[int(offset):int(offset)+int(limit)]
         posts = self._format(posts)
@@ -173,6 +181,16 @@ class GoscaleCMSPlugin(CMSPlugin):
             cache.set(cache_key, content, cache_duration)
         return content
 
+    def up_to_date(self):
+        """ Returns True if plugin posts are up to date
+
+        Determined by self.updated and conf.GOSCALE_POSTS_UPDATE_FREQUENCY
+        """
+#        return False
+        if not self.updated:
+            return False
+        return (utils.get_datetime_now() - self.updated).seconds < conf.GOSCALE_POSTS_UPDATE_FREQUENCY
+
     def update(self):
         """This method should be called to update associated Posts
         It will call content-specific methods:
@@ -181,13 +199,12 @@ class GoscaleCMSPlugin(CMSPlugin):
              _get_data_source_url() to get an URL to identify Posts from this Data Source
         """
         #get the raw data
-        self.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
+#        self.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
         data = self._get_data()
         #iterate through them and for each item
         msg = []
         for entry in data:
             link = self._get_entry_link(entry)
-            print link
             stored_entry, is_new = Post.objects.get_or_create(link=link)
             self._store_post(stored_entry, entry)
             if is_new is True:
@@ -196,6 +213,8 @@ class GoscaleCMSPlugin(CMSPlugin):
                 msg.append('Post "%s" added.' % link)
             else:
                 msg.append('Post "%s" already saved.' % link)
+        self.updated = utils.get_datetime_now()
+        self.save(no_signals=True)
         return '<br />'.join(msg)
 
     # Private methods
@@ -219,7 +238,7 @@ class GoscaleCMSPlugin(CMSPlugin):
         """ This method is to store posts which have no publish date.
         Please note that post retrieved later will have an earlier publication date - just as it is in RSS feeds.
         """
-        self._dummy_datetime -= datetime.datetime.resolution
+#        self._dummy_datetime -= datetime.datetime.resolution
         return self._dummy_datetime
 
     def _get_data(self):

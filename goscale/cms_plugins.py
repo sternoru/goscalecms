@@ -13,7 +13,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     Base class for GoScale plugins
     """
     module = 'GoScale CMS'
-    exclude = ['posts',]
+    exclude = ['posts', 'updated']
     parent_fieldset = [_('Default options'), {'fields': ['template', 'title',]}]
     plugin_post_template = conf.GOSCALE_DEFAULT_POST_PLUGIN
     plugin_templates = None
@@ -59,8 +59,9 @@ class GoscaleCMSPluginBase(CMSPluginBase):
             request = context['request']
             slug = request.GET.get('post')
             plugin_filters = request.GET.get('plugin_%s_filters' % instance.id)
+            global_plugin_filters = request.GET.get('plugin_filters')
         else:
-            slug = plugin_filters = None
+            slug = plugin_filters = global_plugin_filters = None
         if slug:
             # get single post
             extra_context['post'] = instance.get_post(slug)
@@ -68,6 +69,11 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         if plugin_filters:
             # get plugin filters
             for param in plugin_filters.split('|'):
+                [key, value] = param.split('=')
+                filters[key] = value
+        if global_plugin_filters:
+            # get plugin filters
+            for param in global_plugin_filters.split('|'):
                 [key, value] = param.split('=')
                 filters[key] = value
         extra_context['filters'] = filters

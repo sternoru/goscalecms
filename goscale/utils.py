@@ -5,8 +5,8 @@ import urllib
 import urllib2
 import re
 import os
+import pytz
 
-from goscale import models
 from goscale import conf
 #from goscale import decorators
 #from dynamicsettings import settings
@@ -274,6 +274,20 @@ def process_feed_tz_delta(date_string):
         tz_delta = ((int(tz_string[-4:-2]) * 3600) + (int(tz_string[-2:]) * 60)) * factor
         return tz_delta
     return 0
+
+def get_datetime_now():
+    """ Returns now() in UTC timezone
+
+    More info: http://pytz.sourceforge.net/
+    """
+    return datetime.datetime.now(tz=pytz.utc)
+
+def get_utc(dt):
+    """ Converts datetime to UTC timezone
+
+    More info: http://pytz.sourceforge.net/
+    """
+    return dt.replace(tzinfo=pytz.utc)
 
 def get_datetime_by_parsed(pDate, tz_delta=0):
     if not pDate:

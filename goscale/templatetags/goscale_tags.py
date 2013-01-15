@@ -48,14 +48,20 @@ class PluginFilters(AsTag):
 
     def get_value(self, context, params):
         filters = []
-        plugin_filters = 'plugin_%s_filters' % context['plugin_id']
+        is_global = params.pop('global') if 'global' in params else ''
+        is_exclusive = params.pop('exclusive') if 'exclusive' in params else ''
+        if is_global.lower() in ['true', 'yes']:
+            plugin_filters = 'plugin_filters'
+        else:
+            plugin_filters = 'plugin_%s_filters' % context['plugin_id']
         for key, val in params.iteritems():
             filters.append('='.join([key, str(val)]))
         qs = ['='.join([plugin_filters, '|'.join(filters)])]
-        for key, value in context['request'].GET.iteritems():
-            if key.startswith('_') or key == plugin_filters:
-                continue
-            qs.append('='.join([key, value]))
+        if is_exclusive.lower() not in ['true', 'yes']:
+            for key, value in context['request'].GET.iteritems():
+                if key.startswith('_') or key == plugin_filters:
+                    continue
+                qs.append('='.join([key, value]))
         return '?' + '&'.join(qs)
 
 register.tag(PluginFilters)
