@@ -37,7 +37,7 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
         self.query = self.posts.all()
         start = datetime.datetime.now()
         if filters and 'start' in filters:
-            start = self._parse_datetime(filters['start'])
+            start = parser.parse(filters['start'])
         self.query = self.query.filter(updated__gte=start)
         return self.query.order_by(order)
 
