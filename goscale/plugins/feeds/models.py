@@ -1,3 +1,4 @@
+import urllib
 import re
 import feedparser
 import urllib2
@@ -23,6 +24,8 @@ class FeedBase(goscale_models.GoscaleCMSPlugin):
         help_text=_('If checked the date will be shown along with the post content.'))
     external_links = models.BooleanField(default=False, verbose_name=_('Open external links'),
         help_text=_('If checked posts will link to the original source, otherwise will open internally.'))
+    disqus = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('DICQUS shortname'),
+        help_text=_('Use it if you want to enable disqus.com comments.'))
 
     class Meta:
         abstract = True
@@ -35,6 +38,11 @@ class FeedBase(goscale_models.GoscaleCMSPlugin):
         #TBD get hash and compare to cache value
         feed = feedparser.parse(res.read())
         return feed.entries
+
+    def _get_title(self, entry):
+        """ Returns a title for an entry
+        """
+        return entry.get('title')
 
     def _store_post(self, stored_entry, entry):
         stored_entry.content_type = 'text/html'
@@ -49,7 +57,7 @@ class FeedBase(goscale_models.GoscaleCMSPlugin):
 
         stored_entry.updated = utils.get_datetime_by_parsed(entry.get('updated_parsed') or entry.get('published_parsed'), updated_tz_delta)
         stored_entry.published = utils.get_datetime_by_parsed(entry.get('published_parsed') or entry.get('updated_parsed'), published_tz_delta)
-        stored_entry.title = entry.get('title')
+        stored_entry.title = self._get_title(entry)
         content = entry.get('summary')
         if not content:
             content_list = entry.get('content')
@@ -106,7 +114,13 @@ class Blogger(BlogBase):
         if self.label:
             # append labels to url to get http://[blogname].blogspot.com/feeds/posts/default/-/[label]
             url = '%(url)s/-/%(label)s' % {'url': url, 'label': self.label}
-        return url
+        return url.replace(' ', '%20')
+
+    def _get_title(self, entry):
+        title = entry.get('title')
+        if title.lower() == 'no title':
+            return None
+        return title
 
 Blogger._meta.get_field('url').help_text = 'ex: http://blogger-cms.blogspot.com/<br/>ex: blogger-cms'
 Blogger._meta.get_field('url').verbose_name = _('Blog Name/URL')

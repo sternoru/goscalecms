@@ -124,10 +124,12 @@ class GoscalePlaceholder(cms_tags.Placeholder):
                         if slug:
                             if plugin_id:
                                 plugin = CMSPlugin.objects.get(pk=plugin_id)
+                                instance = plugin.get_plugin_instance()[0]
                                 plugin = plugin.get_plugin_class()
                             else:
+                                instance = None
                                 plugin = cms_plugins.GoscaleCMSPluginBase
-                            return plugin.render_post(slug=slug)
+                            return plugin.render_post(slug=slug, instance=instance)
 #                            post = models.Post.objects.get(slug=slug)
 #                            raise ValueError
 #                            return post.json()

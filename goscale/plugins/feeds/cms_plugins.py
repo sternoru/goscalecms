@@ -20,7 +20,7 @@ class FeedPlugin(GoscaleCMSPluginBase):
     render_template = GOSCALE_FEEDS_PLUGIN_TEMPLATES[0][0]
     fieldsets = [
         [_('Feed options'), {
-            'fields': ['url', 'page_size', 'show_date', 'external_links']
+            'fields': ['url', 'page_size', 'show_date', 'external_links', 'disqus']
         }]
     ]
 
@@ -35,7 +35,7 @@ class BloggerPlugin(FeedPlugin):
     name = _("Blogger")
     fieldsets = [
         [_('Feed options'), {
-            'fields': ['url', 'label', 'page_size', 'show_date', 'external_links']
+            'fields': ['url', 'page_size', 'label', 'show_date', 'external_links', 'disqus']
         }]
     ]
 

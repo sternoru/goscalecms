@@ -43,10 +43,13 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         return form
 
     @classmethod
-    def render_post(cls, post=None, slug=None):
+    def render_post(cls, post=None, slug=None, instance=None):
         if not post:
             post = Post.objects.get(slug=slug)
-        return render_to_string(cls.plugin_post_template, {'post': post.dict()})
+        context = {'post': post.dict()}
+        if instance:
+            context.update(instance.get_fields_dict())
+        return render_to_string(cls.plugin_post_template, context)
 
     def render(self, context, instance, placeholder):
         extra_context = {}
