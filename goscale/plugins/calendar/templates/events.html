@@ -46,7 +46,7 @@
 					
 					{% goscale_paginator %}
 					
-					{% if show_past %}
+					{% if show_past and past_events %}
 						<h1>{% trans "Past events" %}</h1>
 						{% for event in past_events %}
 							<dt>

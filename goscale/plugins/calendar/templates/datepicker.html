@@ -12,10 +12,9 @@
 </div>
 
 {% if posts %}
-	<div id="important-days" data-lang="{{ lang }}">
+	<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' %}">
 		{% for day in posts %}
 			<span class="day" data-date="{{ day.when }}"></span>
 		{% endfor %}
-		<a id="start-date" href="{% goscale_plugin_filters start='startDate' %}"></a>
 	</div>
 {% endif %}

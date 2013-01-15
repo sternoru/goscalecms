@@ -6,7 +6,7 @@
 			impDays = [],
 			lang = $('#important-days').data('lang'),
 			url = window.location.href,
-			startDate = url.indexOf('start=') ? url.substr(url.indexOf('start=') + 6, 10) : false;
+			startDate = url.indexOf('start=') > -1 ? url.substr((url.indexOf('start=') + 6), 10) : false;
 		
 		if(!Array.prototype.indexOf) {
 			Array.prototype.indexOf = function(needle) {
@@ -34,9 +34,7 @@
 		};
 		
 		var dayClick = function(date) {
-			var $dateLink = $('#important-days #start-date');
-			$dateLink.attr('href', $dateLink.attr('href').replace('start=startDate', date));
-			$dateLink.click();
+			window.location.href = $('#important-days').data('url').replace('startDate', date);
 		};
 		
 		$("#datepicker").datepicker({
