@@ -26,7 +26,7 @@
 								{% endif %}
                             </span>
                             {% if show_date %}
-								<div class="EntryDate">{{ post.published }}</div>
+								<div class="EntryDate">{{ post.published|timesince }} {% trans "ago" %}</div>
 							{% endif %}
                         </dt>
                         <dd>

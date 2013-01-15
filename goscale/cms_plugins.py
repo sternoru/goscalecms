@@ -46,7 +46,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     def render_post(cls, post=None, slug=None):
         if not post:
             post = Post.objects.get(slug=slug)
-        return render_to_string(cls.plugin_post_template, {'post': post.json()})
+        return render_to_string(cls.plugin_post_template, {'post': post.dict()})
 
     def render(self, context, instance, placeholder):
         extra_context = {}
@@ -82,7 +82,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         # get plugin attributes
         extra_context.update(instance.get_fields_dict())
         # add debug for development
-        extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
+#        extra_context['debug'] = simplejson.dumps(extra_context, indent=4)
         # setup a paginator
         limit = int(filters.get('limit', instance.__dict__.get('page_size', 0)))
         if limit:

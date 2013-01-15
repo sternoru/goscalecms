@@ -59,15 +59,17 @@ class Post(models.Model):
             self.categories = ','.join(['[%s]' % tag.strip(' ') for tag in self.categories.split(',')])
         return
 
-    def json(self):
+    def dict(self):
+        """ Returns dictionary of post fields and attributes
+        """
         post_dict = {
             'id': self.id,
             'link': self.link,
             'permalink': self.permalink,
             'content_type': self.content_type,
             'slug': self.slug,
-            'updated': self.updated.strftime(conf.GOSCALE_ATOM_DATETIME_FORMAT),
-            'published': self.published.strftime(conf.GOSCALE_ATOM_DATETIME_FORMAT),
+            'updated': self.updated, #.strftime(conf.GOSCALE_ATOM_DATETIME_FORMAT),
+            'published': self.published, #.strftime(conf.GOSCALE_ATOM_DATETIME_FORMAT),
             'title': self.title,
             'description': self.description,
             'author': self.author,
@@ -78,6 +80,16 @@ class Post(models.Model):
             attributes = simplejson.loads(self.attributes)
             post_dict.update(attributes)
         return post_dict
+
+    def json(self, dict=None, indent=None):
+        """ Returns post JSON representation
+        """
+        if not dict:
+            dict = self.dict()
+        for key, value in dict.iteritems():
+            if type(value) == datetime.datetime:
+                dict[key] = value.strftime(conf.GOSCALE_ATOM_DATETIME_FORMAT)
+        return simplejson.dumps(dict, indent=indent)
 
     def __unicode__(self):
         return 'post object: %s' % self.title or self.id
@@ -249,20 +261,6 @@ class GoscaleCMSPlugin(CMSPlugin):
         split to entries and return array """
         return []
 
-    def _store_post(self, stored_entry, entry=None):
-        """ This method formats entry returned by _get_data() and puts to DB
-        create textDesc, title, and MIME """
-        #        stored_entry.content_type = utils.get_source_setting(ds.type, 'type')
-        if stored_entry.published is None:
-            stored_entry.published = self._get_dummy_datetime()
-        if stored_entry.updated is None:
-            stored_entry.updated = self._get_dummy_datetime()
-        #        print 'Post: %s' % stored_entry.title
-        #        print 'Attributes: %s' % stored_entry.attributes
-        stored_entry.save()
-        self.posts.add(stored_entry)
-        return None
-
     def _get_order(self, order=None):
         if order:
             return order
@@ -280,11 +278,25 @@ class GoscaleCMSPlugin(CMSPlugin):
         """ This method is called by get_content() method"""
         if posts.__class__ == Post:
             # format a single post
-            return posts.json()
+            return posts.dict()
         formated_posts = []
         for post in posts:
-            formated_posts.append(post.json())
+            formated_posts.append(post.dict())
         return formated_posts
+
+    def _store_post(self, stored_entry, entry=None):
+        """ This method formats entry returned by _get_data() and puts to DB
+        create textDesc, title, and MIME """
+        #        stored_entry.content_type = utils.get_source_setting(ds.type, 'type')
+        if stored_entry.published is None:
+            stored_entry.published = self._get_dummy_datetime()
+        if stored_entry.updated is None:
+            stored_entry.updated = self._get_dummy_datetime()
+        #        print 'Post: %s' % stored_entry.title
+        #        print 'Attributes: %s' % stored_entry.attributes
+        stored_entry.save()
+        self.posts.add(stored_entry)
+        return None
 
 
 def update_posts(**kwargs):

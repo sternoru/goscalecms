@@ -5,7 +5,7 @@
 		<span>
 			{{ post.title }}
 		</span>
-		<div class="EntryDate">{{ post.published }}</div>
+		<div class="EntryDate">{{ post.published|timesince }} {% trans "ago" %}</div>
 	</dt>
 	<dd>
 		<div class="ContentListDescription">

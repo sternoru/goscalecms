@@ -292,7 +292,8 @@ def get_utc(dt):
 def get_datetime_by_parsed(pDate, tz_delta=0):
     if not pDate:
         return None
-    return datetime.datetime(pDate[0], pDate[1],pDate[2], pDate[3], pDate[4], pDate[5]) + datetime.timedelta(seconds=tz_delta)
+    dt = datetime.datetime(pDate[0], pDate[1],pDate[2], pDate[3], pDate[4], pDate[5]) + datetime.timedelta(seconds=tz_delta)
+    return get_utc(dt)
 
 ##@decorators.cache_func
 #def get_params(data_source_dict, data_source_obj):
