@@ -10,7 +10,11 @@
 	<dd>
 		<div class="ContentListDescription">
 			<div>
-				{{ post.description|safe }}
+				{% if post.description == null %}
+					{% trans "There is no description for this event" %}
+				{% else %}
+					{{ post.description|safe }}
+				{% endif %}
 			</div>
 			{% if post.where %}
 				<div class="location-details">

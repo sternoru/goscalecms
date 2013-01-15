@@ -65,4 +65,98 @@ h1 {
 }
 
 
-/* mini */
+/* carousel */
+#carouselModuleContainer {
+	width: 400px;
+	height: 250px;
+}
+#carouselContainer{
+	width: 400px;
+	height: 250px;
+}
+#carouselContainer .CarouselTitle {
+	font-family: Georgia;
+	padding: 15px 0;
+	text-align: center;
+	font-size: 24px;
+	color: #2B2B2B;
+}
+#carouselContainer #imageTitle {
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	top:155px;
+	left: 0;
+	text-align: center;
+}
+#carouselContainer #imageTitle A:LINK, #imageTitle A:VISITED, #imageTitle A:ACTIVE {
+	color: #737373;
+	margin-left:10px;
+	font-weight: bold;
+}
+#carouselContainer #carousel {
+	width: 380px;
+	height: 165px;
+	margin: 0 0 0 10px;
+	position: absolute;
+}
+#carouselContainer #arrowLeft, #arrowRight {
+	width: 27px;
+	height: 27px;
+	position: absolute;
+	top: 80px;
+	z-index: 5;
+	cursor: pointer;
+}
+#carouselContainer #arrowLeft {
+	left: 0;
+	background: url('../img/left.png') center center no-repeat;
+}
+#carouselContainer #arrowRight {
+	left: 355px;
+	background: url('../img/right.png') center center no-repeat;
+}
+#carouselContainer .Image {
+	border: 5px solid #4FC4DC;
+	width: 70px;
+}
+
+#carouselContainer .Image0 {
+	width: 90px;
+	position: absolute;
+	top: 60px;
+	left: 10px;
+	z-index: 1;
+}
+#carouselContainer .Image1 {
+	width: 150px;
+	position: absolute;
+	top: 25px;
+	left: 30px;
+	z-index: 2;
+}
+#carouselContainer .Image2 {
+	width: 190px;
+	position: absolute;
+	top: 0;
+	left: 90px;
+	z-index: 3;
+	cursor: pointer;
+}
+#carouselContainer .Image3 {
+	width: 150px;
+	position: absolute;
+	top: 25px;
+	left: 190px;
+	z-index: 2;
+}
+#carouselContainer .Image4 {
+	width: 90px;
+	position: absolute;
+	top: 60px;
+	left: 275px;
+	z-index: 1;
+}
+#carousel-images {
+	display: none;
+}
