@@ -19,7 +19,7 @@
 	{% else %}
 		<div class="goscale-plugins-calendar">
 			{% if title %}<h1>{{ title }}</h1>{% endif %}
-			
+
 			{% if posts %}
 				<dl class="ContentList">
 					{% for event in posts %}
@@ -45,7 +45,7 @@
 					{% endfor %}
 					
 					{% goscale_paginator %}
-					
+
 					{% if show_past and past_events %}
 						<h1>{% trans "Past events" %}</h1>
 						{% for event in past_events %}

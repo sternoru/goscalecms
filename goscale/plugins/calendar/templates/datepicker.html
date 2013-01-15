@@ -1,6 +1,9 @@
+{% extends "events.html" %}
 {% load i18n %}
+{% load sekizai_tags %}
 {% load goscale_tags %}
 
+{% block events_content %}
 <div class="box-sidebar" xmlns="http://www.w3.org/1999/html">
 	<div class="boxtop"><div></div></div>
 	<div class="boxcontent">
@@ -12,9 +15,10 @@
 </div>
 
 {% if posts %}
-	<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' %}">
+	<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' global='true' exclusive='true' %}">
 		{% for day in posts %}
 			<span class="day" data-date="{{ day.when }}"></span>
 		{% endfor %}
 	</div>
 {% endif %}
+{% endblock %}
