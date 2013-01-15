@@ -21,7 +21,7 @@
 		
 		$('#important-days span.day').each(function() {
 			var tmp = $(this).data('date').split(' ');
-			impDays.push([tmp[3], months[lang].indexOf(tmp[1]), tmp[2].replace(',', '')]);
+			impDays.push([tmp[3], months[lang].indexOf(tmp[1]) + 1, tmp[2].replace(',', '')]);
 		});
 		
 		var importantDays = function(date) {
