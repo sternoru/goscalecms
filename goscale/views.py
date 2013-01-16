@@ -9,7 +9,10 @@ def form(request):
     """ Ajax handler for Google Form submition
     """
     if request.method == 'POST':
-        submit_url = 'http://spreadsheets.google.com/formResponse?key='+request.POST['key']+'&hl='+request.POST['lang']
+        submit_url = '%s&hl=%s' % (
+            request.POST['url'],
+            request.LANGUAGE_CODE
+        )
         params = urllib.urlencode(request.POST)
         f = urllib2.urlopen(submit_url, params)
         text = f.read()
