@@ -17,6 +17,7 @@
 			{% if posts %}
                 <dl class="ContentList">
                     {% for post in posts %}
+                        {% if post.title %}
                         <dt>
                             <span>
                                 {% if external_links %}
@@ -26,9 +27,10 @@
 								{% endif %}
                             </span>
                             {% if show_date %}
-								<div class="EntryDate">{{ post.published }}</div>
+								<div class="EntryDate">{{ post.published|timesince }} {% trans "ago" %}</div>
 							{% endif %}
                         </dt>
+                        {% endif %}
                         <dd>
                             <div class="ContentListDescription">
                                 {{ post.description|safe }}

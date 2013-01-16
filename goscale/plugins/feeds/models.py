@@ -1,3 +1,4 @@
+import urllib
 import re
 import feedparser
 import urllib2
@@ -11,9 +12,9 @@ from django.db.models import signals
 from django.utils.translation import ugettext as _
 
 
-class Feed(goscale_models.GoscaleCMSPlugin):
+class FeedBase(goscale_models.GoscaleCMSPlugin):
     """
-    RSS Feed posts
+    Feed Base Class
     """
     url = models.URLField(max_length=250, verbose_name=_('Feed URL'),
         help_text='ex: http://feeds.bbci.co.uk/news/technology/rss.xml')
@@ -23,6 +24,11 @@ class Feed(goscale_models.GoscaleCMSPlugin):
         help_text=_('If checked the date will be shown along with the post content.'))
     external_links = models.BooleanField(default=False, verbose_name=_('Open external links'),
         help_text=_('If checked posts will link to the original source, otherwise will open internally.'))
+    disqus = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('DICQUS shortname'),
+        help_text=_('Use it if you want to enable disqus.com comments.'))
+
+    class Meta:
+        abstract = True
 
     def _get_data(self):
         url = self._get_data_source_url()
@@ -32,6 +38,11 @@ class Feed(goscale_models.GoscaleCMSPlugin):
         #TBD get hash and compare to cache value
         feed = feedparser.parse(res.read())
         return feed.entries
+
+    def _get_title(self, entry):
+        """ Returns a title for an entry
+        """
+        return entry.get('title')
 
     def _store_post(self, stored_entry, entry):
         stored_entry.content_type = 'text/html'
@@ -46,7 +57,7 @@ class Feed(goscale_models.GoscaleCMSPlugin):
 
         stored_entry.updated = utils.get_datetime_by_parsed(entry.get('updated_parsed') or entry.get('published_parsed'), updated_tz_delta)
         stored_entry.published = utils.get_datetime_by_parsed(entry.get('published_parsed') or entry.get('updated_parsed'), published_tz_delta)
-        stored_entry.title = entry.get('title')
+        stored_entry.title = self._get_title(entry)
         content = entry.get('summary')
         if not content:
             content_list = entry.get('content')
@@ -62,6 +73,84 @@ class Feed(goscale_models.GoscaleCMSPlugin):
         if author_details:
             stored_entry.attributes = simplejson.dumps(dict(author_details=author_details))
             #stored_entry.author
-        return super(Feed, self)._store_post(stored_entry)
+        return super(FeedBase, self)._store_post(stored_entry)
+
+
+class Feed(FeedBase):
+    """
+    RSS Feed posts
+    """
+    pass
 
 signals.post_save.connect(goscale_models.update_posts, sender=Feed)
+
+
+class BlogBase(FeedBase):
+    """
+    Base for blog posts
+    """
+    label = models.CharField(max_length=50, blank=True, null=True, verbose_name=_('Label/Tag'),
+        help_text='ex: features')
+
+    class Meta:
+        abstract = True
+
+
+class Blogger(BlogBase):
+    """
+    Blogger posts
+    """
+
+    def _regex_id(self):
+        try:
+            blogname = re.match(r'(http://)?([\w_-]+)(.blogspot.com)?(.*)', self.url).group(2)
+        except AttributeError:
+            raise goscale_models.WrongAttribute(attribute='url')
+        return blogname
+
+    def _get_data_source_url(self):
+        # blog has the following possibile aspects: [blogname], [blogname.blogspot.com], [http://blogname.blogspot.com/]
+        url = 'http://%s.blogspot.com/feeds/posts/default' % self._regex_id()
+        if self.label:
+            # append labels to url to get http://[blogname].blogspot.com/feeds/posts/default/-/[label]
+            url = '%(url)s/-/%(label)s' % {'url': url, 'label': self.label}
+        return url.replace(' ', '%20')
+
+    def _get_title(self, entry):
+        title = entry.get('title')
+        if title.lower() == 'no title':
+            return None
+        return title
+
+Blogger._meta.get_field('url').help_text = 'ex: http://blogger-cms.blogspot.com/<br/>ex: blogger-cms'
+Blogger._meta.get_field('url').verbose_name = _('Blog Name/URL')
+Blogger._meta.get_field('label').help_text = 'ex: Features'
+
+signals.post_save.connect(goscale_models.update_posts, sender=Blogger)
+
+
+class Tumblr(BlogBase):
+    """
+    Tumblr posts
+    """
+
+    def _regex_id(self):
+        try:
+            blogname = re.match(r'(http://)?([\w_-]+)(.tumblr.com)?(.*)', self.url).group(2)
+        except AttributeError:
+            raise goscale_models.WrongAttribute(attribute='url')
+        return blogname
+
+    def _get_data_source_url(self):
+        # blog has the following possibile aspects: [blogname], [blogname.blogspot.com], [http://blogname.blogspot.com/]
+        url = 'http://%s.tumblr.com' % self._regex_id()
+        if self.label:
+            # append labels to url to get http://[blogname].blogspot.com/feeds/posts/default/-/[label]
+            url = '%(url)s/tagged/%(label)s' % {'url': url, 'label': self.label}
+        return '%s/rss' % url
+
+Tumblr._meta.get_field('url').help_text = 'ex: http://staff.tumblr.com/<br/>ex: staff'
+Tumblr._meta.get_field('url').verbose_name = _('Blog Name/URL')
+Tumblr._meta.get_field('label').help_text = 'ex: features'
+
+signals.post_save.connect(goscale_models.update_posts, sender=Tumblr)

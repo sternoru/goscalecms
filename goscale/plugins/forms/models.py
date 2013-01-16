@@ -19,7 +19,7 @@ class Form(goscale_models.GoscaleCMSPlugin):
 
     def _regex_id(self):
         try:
-            return self.url.split('?formkey=')[1]
+            return self.url.split('key=')[1]
         except:
             raise goscale_models.WrongAttribute(attribute='url')
 
