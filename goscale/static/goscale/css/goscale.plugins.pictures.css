@@ -157,6 +157,6 @@ h1 {
 	left: 275px;
 	z-index: 1;
 }
-#carousel-images {
+#carousel-images, #carousel-image-link {
 	display: none;
 }

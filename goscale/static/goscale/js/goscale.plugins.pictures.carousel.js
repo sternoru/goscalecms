@@ -67,12 +67,13 @@
 
 		function showTitle() {
 			carouselCur = parseInt($('.Image2')[0].id.replace('image', ''));
-			$('#imageTitle').html(['<a href="', $(carouselItems[carouselCur]).data('link'), '">', $(carouselItems[carouselCur]).data('title'), '</a>'].join(''));
-			$('#imageTitle a').fancybox();
+			$('#carousel-image-link').html(['<a href="', $(carouselItems[carouselCur]).data('link'), '">', $(carouselItems[carouselCur]).data('imageTitle'), '</a>'].join(''));
+			$('#imageTitle').html($(carouselItems[carouselCur]).data('title'));
+			$('#carousel-image-link a').fancybox();
 		}
 
 		function openWebsite() {
-			$('#imageTitle a').click();
+			$('#carousel-image-link a').click();
 		}
 	};
 	$('.goscale-plugins-pictures').goscalePluginsPictures();

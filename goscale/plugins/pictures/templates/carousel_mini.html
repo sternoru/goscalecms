@@ -30,9 +30,10 @@
 			</div>
 			<div id="carousel-images">
 				{% for image in posts %}
-					<img src="{{ image.thumbnails.s144.url }}" data-title="{{ image.summary|striptags }}" data-link="{{ image.thumbnails.s800.url }}" />
+					<img src="{{ image.thumbnails.s144.url }}" data-title="{{ image.summary }}" data-imageTitle="{{ image.summary|striptags }}" data-link="{{ image.thumbnails.s800.url }}" />
 				{% endfor %}
 			</div>
+			<div id="carousel-image-link"></div>
 		 </div>
 		<div class="boxbottom"><div></div></div>
 	</div>
