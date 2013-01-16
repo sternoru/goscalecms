@@ -19,3 +19,14 @@ h1 {
 #important-days {
 	display: none;
 }
+.error {
+	display: none;
+	color: red;
+}
+.map-lb-container {
+	display: none;
+}
+#map {
+	width: 800px;
+	height: 600px;
+}
