@@ -11,7 +11,7 @@
 				{% endif %}
 				{% for page_nb in page_range %}
 					{% if page_nb == "..." %}
-						<li>...</li>
+						<li><a>...</a></li>
 					{% else %}
 						<li{% if page_nb == page.number %} class="active"{% endif %}>
 							<a href="{% goscale_plugin_filters page=page_nb %}">{{ page_nb }}</a>
