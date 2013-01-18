@@ -29,11 +29,24 @@ class Paginator(InclusionTag):
         return super(Paginator, self).get_template(context, **kwargs)
 
     def get_context(self, context, params):
+        paginator = context['paginator']
+        page = context['page']
+        page_range = []
+        if len(paginator.page_range) > 6:
+            page_range.extend(paginator.page_range[:5])
+            if page.number > 5:
+                if page.number > 7:
+                    page_range.append('...')
+                if page.number == 6:
+                    page_range.extend(paginator.page_range[(page.number-1):(page.number+1)])
+                else:
+                    page_range.extend(paginator.page_range[(page.number-2):(page.number+1)])
+            if len(paginator.page_range) - page.number > 2:
+                page_range.append('...')
+            if len(paginator.page_range) - page.number > 1:
+                page_range.append(paginator.page_range[-1])
+        context['page_range'] = page_range
         return context
-        return {
-            'paginator': context['paginator'],
-            'page': context['page']
-        }
 
 register.tag(Paginator)
 

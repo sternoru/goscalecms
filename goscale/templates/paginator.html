@@ -1,6 +1,9 @@
 {% load i18n goscale_tags %}
 
 {% if paginator %}
+
+        {{ page_range }}
+
 <div class="pagination no-al">
     <ul>
         {% if page.number > 1 %}
