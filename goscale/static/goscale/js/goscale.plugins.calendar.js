@@ -1,5 +1,5 @@
 (function($) {
-	var calDatePicker = $('#sidebar #calendar #datepicker').length > 0 ? true : false,
+	var calDatePicker = $('#calendar #datepicker').length > 0 ? true : false,
 		calContent = $('.goscale-plugins-calendar').length > 0 ? true : false;
 	
     $.fn.goscalePluginsCalendar = function() {
