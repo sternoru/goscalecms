@@ -45,6 +45,8 @@ class Paginator(InclusionTag):
                 page_range.append('...')
             if len(paginator.page_range) - page.number > 1:
                 page_range.append(paginator.page_range[-1])
+        else:
+            page_range = paginator.page_range
         context['page_range'] = page_range
         return context
 
