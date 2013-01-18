@@ -1,8 +1,14 @@
 {% load i18n %}
 {% load sekizai_tags %}
+{% load goscale_tags %}
 
+{% addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
+{% endaddtoblock %}
 
-{% if posts %}
-        {{ posts.0.link }}
-        {{ posts.0.description|safe }}
-{% endif %}
+{% block posts_content %}
+	{% if posts %}
+		{{ posts.0.link }}
+		{{ posts.0.description|safe }}
+	{% endif %}
+{% endblock %}

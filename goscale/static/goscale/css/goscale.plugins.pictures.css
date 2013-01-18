@@ -117,7 +117,7 @@ h1 {
 	background: url('../img/right.png') center center no-repeat;
 }
 #carouselContainer .Image {
-	border: 5px solid #4FC4DC;
+	border: 5px solid #333;
 	width: 70px;
 }
 
