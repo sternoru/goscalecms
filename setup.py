@@ -18,6 +18,7 @@ setup(
     install_requires = [
         "pytz",
         "unidecode",
+        "BeautifulSoup",
         "feedparser",
         "gdata",
         "Django >= 1.1.1",

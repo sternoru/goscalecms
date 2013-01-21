@@ -2,6 +2,8 @@ import re
 import simplejson
 import datetime
 import urllib2
+
+from BeautifulSoup import BeautifulSoup
 from goscale import models as goscale_models
 from goscale import utils
 from goscale import conf
@@ -34,10 +36,16 @@ class Form(goscale_models.GoscaleCMSPlugin):
         return [res.read()]
 
     def _store_post(self, stored_entry, entry):
+        # parse form html
+#        description = entry[entry.find('<form'):entry.find('</form>')+7]
+        soup = BeautifulSoup(entry)
+        form = soup.find('form')
+        description = form.renderContents()
+        # fill in the fields
         stored_entry.content_type = 'text/html'
         stored_entry.link = self._get_entry_link(entry)
         stored_entry.title = 'Form %d' % self.id
-        stored_entry.description = entry[entry.find('<form'):entry.find('</form>')+7]
+        stored_entry.description = description
         print stored_entry.description
         return super(Form, self)._store_post(stored_entry)
 
