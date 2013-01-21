@@ -14,7 +14,7 @@ But it's more than just content. GoScale plugins add some fancy functionality to
 
 It's perfect for quickly building Mashups and Media heavy sites.
 
-GoScale CMS is a product of Sterno.Ru.
+GoScale CMS is a product of [Sterno.Ru](http://sterno.ru/en/).
 
 ## Quick start
 
