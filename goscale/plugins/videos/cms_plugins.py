@@ -5,7 +5,7 @@ from django.conf import settings
 import models
 
 GOSCALE_VIDEOS_PLUGIN_TEMPLATES = getattr(settings, 'GOSCALE_VIDEOS_PLUGIN_TEMPLATES', (
-    ('videos.html', _('Videos inline')),
+    ('videos.html', _('Videos')),
 )) + getattr(settings, 'GOSCALE_VIDEOS_CUSTOM_PLUGIN_TEMPLATES', ())
 
 class YouKuPlugin(GoscaleCMSPluginBase):

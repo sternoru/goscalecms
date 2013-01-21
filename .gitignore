@@ -2,6 +2,7 @@
 *.pyc
 .project*
 venv
-build*
+*build*
 dist*
 *egg-info*
+*.sh
