@@ -8,7 +8,7 @@
 					en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 				},
 				impDays = [],
-				lang = $('#important-days').data('lang'),
+				lang = 'en',//$('#important-days').data('lang'),
 				url = window.location.href,
 				startDate = url.indexOf('start=') > -1 ? url.substr((url.indexOf('start=') + 6), 10) : false;
 			
