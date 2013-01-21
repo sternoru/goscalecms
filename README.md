@@ -16,9 +16,9 @@ It's perfect for quickly building Mashups and Media heavy sites.
 
 GoScale CMS is a product of [Sterno.Ru](http://sterno.ru/en/).
 
-Website: (http://goscalecms.com)
+Website: [goscalecms.com](http://goscalecms.com)
 
-Documentation: (https://goscalecms.readthedocs.org)
+Documentation: [goscalecms.readthedocs.org](https://goscalecms.readthedocs.org)
 
 ## Quick start
 
