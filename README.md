@@ -1,5 +1,8 @@
 # GoScale CMS
 
+Website: http://goscalecms.com
+Documentation: docs/
+
 [GoScale CMS](http://goscalecms.com) is an extension of [Django CMS](http://django-cms.org).
 
 It's a set of unique plugins and useful tools for Django CMS that makes it very powerful by seamlessly integrating content from 3rd party websites like:
