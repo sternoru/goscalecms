@@ -1,0 +1,12 @@
+#google-form {
+	
+}
+	#google-form .ss-form-heading, #google-form .ss-footer {
+		display: none;
+	}
+	#google-form .ss-resp-card {
+		font-weight: bold;
+	}
+		#google-form .ss-resp-card .ss-confirmation, #google-form .ss-resp-card .ss-break {
+			display: none;
+		}
