@@ -1,7 +1,7 @@
 # GoScale CMS
 
 Website: http://goscalecms.com
-Documentation: docs/
+Documentation: https://goscalecms.readthedocs.org
 
 [GoScale CMS](http://goscalecms.com) is an extension of [Django CMS](http://django-cms.org).
 
