@@ -54,23 +54,41 @@
 					$link = $span.parent().find('a.link');
 				
 				if(typeof($link.attr('href')) == "undefined") {
-					var geo = new google.maps.Geocoder();
+					$('.location-details .ContentDetailLinkLabel').each(function() {
+						$(this).attr('href', '');
+					});
 					
+					var geo = new google.maps.Geocoder();
 					geo.geocode({
 							address: $span.data('where')
 						},
 						function(results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
-								$('#map').gmap().bind('init', function(ev, map) {
-									$('#map').gmap('addMarker', {'position': results[0].geometry.location, 'bounds': true}).click(function() {
-										var content = [
-											$span.data('title'),
-											' (', $span.data('when'), ')<br />',
-											'Location : ', $span.data('where')
-										].join('');
-										$('#map').gmap('openInfoWindow', {'content': content}, this);
+								var myLatlng = results[0].geometry.location,
+									mapOptions = {
+									  zoom: 6,
+									  center: myLatlng,
+									  mapTypeId: google.maps.MapTypeId.ROADMAP
+									},
+									map = new google.maps.Map(document.getElementById('map'), mapOptions),
+									content = [
+										'<b>', $span.data('title'), '</b><br /><br />',
+										$span.data('when'), '<br />',
+										$span.data('where')
+									].join(''),
+									infowindow = new google.maps.InfoWindow({
+										content: content
+									}),
+									marker = new google.maps.Marker({
+										position: myLatlng,
+										map: map,
+										title: $span.data('title')
 									});
+									
+								google.maps.event.addListener(marker, 'click', function() {
+								  infowindow.open(map,marker);
 								});
+								
 								$link.attr('href', '#map').fancybox().trigger('click');
 							}
 							else {
