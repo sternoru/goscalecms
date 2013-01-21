@@ -10,13 +10,9 @@
 		</dt>
 		<dd>
 			<div class="ContentListDescription">
-				<div>
-					{% if post.description == null %}
-						{% trans "There is no description for this event" %}
-					{% else %}
-						{{ post.description|safe }}
-					{% endif %}
-				</div>
+                {% if event.description %}
+                    <div>{{ event.description|safe }}</div>
+                {% endif %}
 				{% if post.where %}
 					<div class="location-details">
 						<span class="LocationLabel">{% trans "Location" %}: </span>{{ post.where }}<span class="mapLinkPlaceholder" title="{{ post.where }}"> | <span class="ContentDetailLink"><span class="ContentDetailLinkLabel">{% trans "View map" %}</span></span></span>

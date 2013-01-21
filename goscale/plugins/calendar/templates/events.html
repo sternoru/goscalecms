@@ -32,13 +32,9 @@
 						</dt>
 						<dd>
 							<div class="ContentListDescription">
-								<div>
-									{% if event.description == null %}
-										{% trans "There is no description for this event" %}
-									{% else %}
-										{{ event.description|safe }}
-									{% endif %}
-								</div>
+                                {% if event.description %}
+                                    <div>{{ event.description|safe }}</div>
+                                {% endif %}
 								{% if event.where %}
 									<div class="location-details">
 										<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}<span class="mapLinkPlaceholder"> | <span class="error">{% trans "Sorry, this location cannot be found" %}</span><span class="ContentDetailLink"><span class="ContentDetailLinkLabel" data-title="{{ event.title|safe }}" data-where="{{ event.where }}" data-when="{{ event.when }}">{% trans "View map" %}</span><a class="link"></a></span></span>

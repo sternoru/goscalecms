@@ -37,7 +37,6 @@ class Form(goscale_models.GoscaleCMSPlugin):
 
     def _store_post(self, stored_entry, entry):
         # parse form html
-#        description = entry[entry.find('<form'):entry.find('</form>')+7]
         soup = BeautifulSoup(entry)
         form = soup.find('form')
         description = form.renderContents()
@@ -46,7 +45,6 @@ class Form(goscale_models.GoscaleCMSPlugin):
         stored_entry.link = self._get_entry_link(entry)
         stored_entry.title = 'Form %d' % self.id
         stored_entry.description = description
-        print stored_entry.description
         return super(Form, self)._store_post(stored_entry)
 
 #signals.post_save.connect(goscale_models.update_posts, sender=Form)
