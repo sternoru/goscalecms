@@ -15,7 +15,7 @@
                 {% endif %}
 				{% if post.where %}
 					<div class="location-details">
-						<span class="LocationLabel">{% trans "Location" %}: </span>{{ post.where }}<span class="mapLinkPlaceholder" title="{{ post.where }}"> | <span class="ContentDetailLink"><span class="ContentDetailLinkLabel">{% trans "View map" %}</span></span></span>
+						<span class="LocationLabel">{% trans "Location" %}: </span>{{ post.where }}<span class="mapLinkPlaceholder"> | <span class="error">{% trans "Sorry, this location cannot be found" %}</span><span class="ContentDetailLink"><span class="ContentDetailLinkLabel" data-title="{{ post.title|safe }}" data-where="{{ post.where }}" data-when="{{ post.when }}">{% trans "View map" %}</span><a class="link"></a></span></span>
 					</div>
 				{% endif %}
 			</div>
