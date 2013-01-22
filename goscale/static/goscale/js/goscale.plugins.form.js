@@ -2,6 +2,10 @@
 	$.fn.goscalePluginsForm = function() {
 		var token = $('#google-form form#ss-form input[name="csrfmiddlewaretoken"]')[0],
 			url = $('#google-form form#ss-form input[name="url"]')[0];
+	
+		if($('#form-button').length > 0) {
+			$('#form-button a').fancybox();
+		}
 		
 		var handleForm = function() {
 			$('#google-form #ss-form').submit(function(e) {
