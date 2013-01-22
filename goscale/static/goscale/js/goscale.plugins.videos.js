@@ -36,7 +36,7 @@
 		});
 		
 		if(lightbox) {
-			$pluginContainer.find('a.video-lb').fancybox();
+			setTimeout("$('.goscale-plugins-videos').find('a.video-lb').fancybox();", 500);
 		}
 		else {
 			$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').eq(0).click();
