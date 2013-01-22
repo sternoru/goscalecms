@@ -2,19 +2,10 @@
 {% load sekizai_tags %}
 {% load goscale_tags %}
 
-{% addtoblock "css" %}
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.form.css" />
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
-{% endaddtoblock %}
-
-{% addtoblock "js" %}
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.form.js"></script>
-{% endaddtoblock %}
-
 {% block posts_content %}
-	<div id="google-form">
+	<div class="goscale-plugins-form">
 		{% if posts %}
-			<form action="{{ posts.0.link }}" method="POST" id="ss-form" target="_blank">
+			<form action="{{ posts.0.link }}" method="POST" class="ss-form" target="_blank">
 				{% csrf_token %}
 				<input type="hidden" name="url" value="{{ posts.0.link }}" />
 				{{ posts.0.description|safe }}

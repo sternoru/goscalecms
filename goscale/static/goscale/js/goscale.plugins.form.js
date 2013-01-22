@@ -1,23 +1,26 @@
 (function($) {
 	$.fn.goscalePluginsForm = function() {
-		var token = $('#google-form form#ss-form input[name="csrfmiddlewaretoken"]')[0],
-			url = $('#google-form form#ss-form input[name="url"]')[0];
+		var $formContainer = $(this),
+			token = $formContainer.find('input[name="csrfmiddlewaretoken"]')[0],
+			url = $formContainer.find('input[name="url"]')[0];
 		
-		var handleForm = function() {
-			$('#google-form #ss-form').submit(function(e) {
+		var handleForm = function($container) {
+			$container.find('form.ss-form').submit(function(e) {
 				e.preventDefault();
-				$('#google-form input[type=submit]').attr('disabled', 'true');
-				$.post('/goscale/utils/form/', $('#google-form #ss-form').serialize(), function(res) {
+				var $form = $(this);
+				$form.find('input[type=submit]').attr('disabled', 'true');
+				$.post('/goscale/utils/form/', $form.serialize(), function(res) {
 					if (res != 'error') {
 						$(res).each(function() {
 							if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-form-heading') > -1) {
-								$('#google-form').html(this.innerHTML);
-								$('#google-form form#ss-form').append(token);
-								$('#google-form form#ss-form').append(url);
-								handleForm();
+								$form.html(this.innerHTML);
+								$form.attr('id', '').addClass('ss-form');
+								$form.find('input[type=submit]').before(token);
+								$form.find('input[type=submit]').before(url);
+								handleForm($form);
 							}
 							else if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-confirmation') > -1) {
-								$('#google-form').html(this.innerHTML);
+								$form.html(this.innerHTML);
 							}
 						});
 					}
@@ -28,11 +31,26 @@
 				return false;
 			});
 		};
-		handleForm();
 		
-		if($('#form-button').length > 0) {
-			setTimeout("$('#form-button a').fancybox();", 500);
+		if($formContainer.find('.form-button').length > 0) {
+			$formContainer.find('.form-button a').click(function(e) {
+				if($(this).attr('href') == '#form-lb') {
+					return true;
+				}
+				else {
+					e.preventDefault();
+					$('.form-button a').attr('href', '');
+					$('#form-lb').html($(this).parent().parent().find('.form-lb-container').html());
+					handleForm($('#form-lb'));
+					$(this).attr('href', '#form-lb').fancybox().trigger('click');
+				}
+			});
+		}
+		else {
+			handleForm($formContainer);
 		}
 	};
-	$.fn.goscalePluginsForm();
+	$('.goscale-plugins-form').each(function() {
+		$(this).goscalePluginsForm();
+	});
 })(jQuery);
