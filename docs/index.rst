@@ -37,6 +37,12 @@ GoScale CMS is a product of `Sterno.Ru`_.
 
 .. _`Sterno.Ru`: http://sterno.ru/en/
 
+Website: http://goscalecms.com
+
+GitHub repository: https://github.com/sternoru/goscalecms
+
+Google Group: https://groups.google.com/forum/?fromgroups#!forum/goscale-cms
+
 Installation
 ---------------
 
@@ -51,9 +57,8 @@ Usage
 .. toctree::
    :maxdepth: 2
 
-   settings.rst
    plugins.rst
-   themes.rst
+   settings.rst
 
 Advanced
 ---------------
@@ -61,13 +66,9 @@ Advanced
 .. toctree::
    :maxdepth: 2
 
+   tags.rst
    plugins_frontend.rst
-
-Extending GoScale CMS
----------------
-
-.. toctree::
-   :maxdepth: 2
+   themes.rst
 
 
 Indices and tables

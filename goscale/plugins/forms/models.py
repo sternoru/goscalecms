@@ -40,6 +40,7 @@ class Form(goscale_models.GoscaleCMSPlugin):
         soup = BeautifulSoup(entry)
         form = soup.find('form')
         description = form.renderContents()
+#        print description
         # fill in the fields
         stored_entry.content_type = 'text/html'
         stored_entry.link = self._get_entry_link(entry)

@@ -1,4 +1,4 @@
-Available plugins
+1. Available plugins
 ====================
 
 Contrary to Django CMS, GoScale plugins support multiple templates for one plugin. It's a powerful tool for customization.
@@ -13,7 +13,7 @@ And following system fields that never show up in Django admin:
 * updated - time when content was updated last time
 * posts - collection of posts associated with this plugin
 
-Calendar
+1.1. Calendar
 --------------------
 
 Application: 'goscale.plugins.calendar'
@@ -34,7 +34,7 @@ Single post template: event.html
 
 Additional templates can be added by setting GOSCALE_CALENDAR_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
 
-Feed
+1.2. Feed
 --------------------
 
 Application: 'goscale.plugins.feeds'
@@ -56,7 +56,7 @@ Single post template: post.html (default)
 
 Additional templates can be added by setting GOSCALE_FEEDS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
 
-Blogger and Tumblr
+1.3. Blogger and Tumblr
 --------------------
 
 Application: 'goscale.plugins.feeds'
@@ -78,7 +78,7 @@ Single post template: post.html (default)
 
 Additional templates can be added by setting GOSCALE_FEEDS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
 
-Form
+1.4. Form
 --------------------
 
 Application: 'goscale.plugins.forms'
@@ -94,7 +94,7 @@ Templates:
 
 Additional templates can be added by setting GOSCALE_FORMS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
 
-Picasa
+1.5. Picasa
 --------------------
 
 Application: 'goscale.plugins.pictures'
@@ -118,7 +118,7 @@ Templates:
 
 Additional templates can be added by setting GOSCALE_PICTURES_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
 
-YouKu
+1.6. YouKu
 --------------------
 
 Application: 'goscale.plugins.videos'

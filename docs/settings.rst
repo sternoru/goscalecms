@@ -1,7 +1,7 @@
-Configuration
+2. Configuration
 ====================
 
-Plugins settings
+2.1. Plugins settings
 ---------------------
 
 **GOSCALE_VIDEOS_CUSTOM_PLUGIN_TEMPLATES**
@@ -25,7 +25,7 @@ Additional templates list for goscale.plugins.forms. (default: ())
 Additional templates list for goscale.plugins.pictures. (default: ())
 
 
-Global settings
+2.2. Global settings
 ---------------------
 
 **GOSCALE_DEFAULT_POST_PLUGIN**

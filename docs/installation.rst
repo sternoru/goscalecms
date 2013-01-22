@@ -1,7 +1,7 @@
-Getting started
+1. Getting started
 ==================
 
-Requirements
+1.1. Requirements
 ------------------
 
 Required
@@ -24,7 +24,7 @@ Note:
 
 When installing the GoScale CMS using pip, Django, django-cms, pytz, unidecode, BeautifulSoup, feedparser and gdata will be installed automatically.
 
-Installation
+1.2. Installation
 ------------------
 
 We're assuming you're already running a functional version of Django CMS. If not, follow their tutorial_ first:

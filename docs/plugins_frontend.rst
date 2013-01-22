@@ -1,10 +1,9 @@
-====================
-Plugins front-end
+2. Plugins front-end
 ====================
 
 All the plugins are located in the goscalecms app "goscale" folder, then in "plugins". There is also a second subfolder, "static" containing the media files used by these plugins (js, css and images).
 
-Templates
+2.1. Templates
 --------------------
 
 The "plugins" folder contains all the plugins (each plugin having its own folder at its name).
@@ -32,7 +31,7 @@ Also, if your plugin needs you to add specific css to make its default style and
 In these URLs, replace pluginname by the name of your plugin.
  
  
-Media files
+2.2. Static files
 --------------------
  
 They should all be in the "static" subfolder, in "js" for the javascript files, "css" for the css files and "img" for the images.
