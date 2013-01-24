@@ -15,6 +15,7 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     module = 'GoScale CMS'
     exclude = ['posts', 'updated']
     parent_fieldset = [_('Default options'), {'fields': ['template', 'title',]}]
+    change_form_template = 'admin/plugin_change_form.html'
     plugin_post_template = conf.GOSCALE_DEFAULT_POST_PLUGIN
     plugin_templates = None
 
