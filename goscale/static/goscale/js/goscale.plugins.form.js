@@ -24,7 +24,7 @@
 								].join(''));
 								$form = $parent.find('form#ss-form');
 								$form.attr('id', '').addClass('ss-form');
-								$form.find('input[type=submit]').before(token).before(url).removeAttr('disabled');
+								$form.find('input[type=submit]').addClass('form-button').before(token).before(url).removeAttr('disabled');
 								handleForm($form);
 							}
 							else if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-confirmation') > -1) {
