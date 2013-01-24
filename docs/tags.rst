@@ -124,3 +124,28 @@ Tag: goscale_placeholder
 Keyword arguments:
 
 * render_posts - if 'true' single posts will be rendered into this placeholder overriding any plugins it might have
+
+1.5. GoScale AddtoBlock
+--------------------
+
+Simply an extension of django-sekizai addtoblock_ tag. It acts exactly the same but allows you to use it with AJAX requests.
+
+.. _addtoblock: http://django-sekizai.readthedocs.org/en/latest/usage.html#template-tag-reference
+
+If a CMS plugin where you use it will be rendered inside of an AJAX request it will simply render the contents of addtoblock tag instead of adding them into page context which wouldn't work with ajax anyway.
+
+Usage examples
+^^^^^^^^^^^^^^^^^^^^
+
+Same result as sekizai addtoblock::
+
+    {% goscale_addtoblock js %}
+
+Tag info
+^^^^^^^^^^^^^^^^^^^^
+
+Tag: goscale_addtoblock
+
+Arguments:
+
+* name - name on the block in the base template

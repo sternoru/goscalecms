@@ -7,6 +7,7 @@ from classytags.helpers import InclusionTag, AsTag
 from django import template
 from cms.templatetags import cms_tags
 from cms.models import CMSPlugin
+from sekizai.templatetags import sekizai_tags
 from goscale import models
 from goscale import cms_plugins
 
@@ -157,3 +158,16 @@ class GoscalePlaceholder(cms_tags.Placeholder):
         return super(GoscalePlaceholder, self).render_tag(context, *args, **kwargs)
 
 register.tag(GoscalePlaceholder)
+
+
+class GoscaleAddtoBlock(sekizai_tags.Addtoblock):
+    name = 'goscale_addtoblock'
+
+    def render_tag(self, context, name, nodelist):
+        from django import http
+        request = context.get('request')
+        if request and request.is_ajax():
+            return nodelist.render(context)
+        return super(GoscaleAddtoBlock, self).render_tag(context, name, nodelist)
+
+register.tag(GoscaleAddtoBlock)
