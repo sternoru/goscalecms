@@ -30,3 +30,15 @@ h1 {
 	width: 800px;
 	height: 600px;
 }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+	width: 18px;
+}
+#calendar .ui-datepicker .ui-datepicker-title {
+	margin: 0 20px;
+}
+#calendar .ui-datepicker .ui-datepicker-title span {
+	font-size: 14px;
+}
+#calendar .ui-datepicker .ui-datepicker-title span.ui-datepicker-year {
+	display: inline !important;
+}
