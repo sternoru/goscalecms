@@ -8,7 +8,7 @@
 			<a>{{ title }}</a>
 		</div>
 		<div class="form-lb-container">
-			<h1>{{ title }}</h1>
+			<h1 class="form-title">{{ title }}</h1>
 			<form action="{{ posts.0.link }}" method="POST" class="ss-form" target="_blank">
 				{% csrf_token %}
 				<input type="hidden" name="url" value="{{ posts.0.link }}" />

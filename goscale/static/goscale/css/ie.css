@@ -1,0 +1,18 @@
+.form-buttons {
+	right: 0;
+	height: 100%;
+	width: auto;
+	-ms-transform: none;
+}
+.videoListContainer .videos .VideosList .VideoItem {
+	*display: inline;
+}
+div.pagination ul li {
+	*display: inline;
+}
+#sideBar .box-sidebar .boxcontent .boxbottom {
+	*float: left;
+}
+#form-lb {
+	*width: 530px;
+}

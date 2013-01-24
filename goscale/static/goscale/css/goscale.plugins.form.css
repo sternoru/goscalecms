@@ -16,11 +16,11 @@
 
 /* form button style */
 .form-buttons {
+	display: none;
 	position: fixed;
 	top: 0;
 	right: -50%;
 	width: 100%;
-	margin-top: 43%;
 	-webkit-transform: rotate(270deg);
     -webkit-transform-origin: bottom;
     -moz-transform: rotate(270deg);

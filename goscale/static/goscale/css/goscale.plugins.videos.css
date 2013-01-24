@@ -85,3 +85,7 @@
 .video-lb-container {
 	display: none;
 }
+	.selectedVideoContainer {
+		min-height: 344px;
+		min-width: 425px;
+	}

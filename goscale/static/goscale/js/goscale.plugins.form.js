@@ -5,7 +5,10 @@
 			url = $formContainer.find('input[name="url"]')[0];
 		
 		var handleForm = function($container) {
-			$container.find('form.ss-form').submit(function(e) {
+			if(!$container.is('form')) {
+				var $container = $container.find('form.ss-form');
+			}
+			$container.submit(function(e) {
 				e.preventDefault();
 				var $form = $(this);
 				$form.find('input[type=submit]').attr('disabled', 'true');
@@ -13,10 +16,15 @@
 					if (res != 'error') {
 						$(res).each(function() {
 							if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-form-heading') > -1) {
-								$form.html(this.innerHTML);
+								$parent = $form.parent();
+								var title = $parent.find('h1.form-title').length > 0 ? $parent.find('h1.form-title').text() : false;
+								$parent.html([
+									title ? ['<h1 class="form-title">', title, '</h1>'].join('') : '',
+									this.innerHTML
+								].join(''));
+								$form = $parent.find('form#ss-form');
 								$form.attr('id', '').addClass('ss-form');
-								$form.find('input[type=submit]').before(token);
-								$form.find('input[type=submit]').before(url);
+								$form.find('input[type=submit]').before(token).before(url).removeAttr('disabled');
 								handleForm($form);
 							}
 							else if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-confirmation') > -1) {
@@ -53,4 +61,17 @@
 	$('.goscale-plugins-form').each(function() {
 		$(this).goscalePluginsForm();
 	});
+	
+	if($('.form-buttons').length > 0) {
+		if($('head link[href*="ie.css"]').length == 0) {
+			var formButtonsPos = function() {
+				$('.form-buttons').css('marginTop', ($(window).height() * 43 / 100));
+			};
+			$(window).resize(function() {
+				formButtonsPos();
+			});
+			formButtonsPos();
+		}
+		$('.form-buttons').show();
+	}
 })(jQuery);

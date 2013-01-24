@@ -19,6 +19,9 @@
 				rand = Math.floor((Math.random()*1000)+1);
 			
 			$container.html(['<div id="video', rand, '"></div>'].join(''));
+			var params = {
+				wmode: "transparent"
+			};
 			swfobject.embedSWF($(this).data('url'), ['video', rand].join(''), "425", "344", "9.0.0");
 			var html = [];
 			html.push('<a href="#">', $(this).data('title'), '</a><br />');
