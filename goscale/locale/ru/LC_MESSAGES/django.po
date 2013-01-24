@@ -21,55 +21,55 @@ msgstr ""
 
 #: cms_plugins.py:17 cms_plugins.py:23
 msgid "Default options"
-msgstr ""
+msgstr "Параметры по умолчанию"
 
 #: cms_plugins.py:31
 msgid "Plugin options"
-msgstr ""
+msgstr "Параметры плагина"
 
 #: models.py:104 plugins/feeds/cms_plugins.py:8
 msgid "Posts"
-msgstr ""
+msgstr "Записи"
 
 #: models.py:105
 msgid "Template"
-msgstr ""
+msgstr "Шаблон"
 
 #: models.py:106
 msgid "Title"
-msgstr ""
+msgstr "Заголовок"
 
 #: models.py:107
 msgid "Last updated"
-msgstr ""
+msgstr "Последнее обновление"
 
 #: views.py:20
 msgid "Error: request type has to be POST"
-msgstr ""
+msgstr "Ошибка: тип запроса должен быть POST"
 
 #: plugins/calendar/cms_plugins.py:8
 msgid "Events list"
-msgstr ""
+msgstr "Список событий"
 
 #: plugins/calendar/cms_plugins.py:9
 msgid "Events mini list (sidebar)"
-msgstr ""
+msgstr "Мини-список событий (боковая панель)"
 
 #: plugins/calendar/cms_plugins.py:10
 msgid "Date picker widget"
-msgstr ""
+msgstr "Виджет календарь"
 
 #: plugins/calendar/cms_plugins.py:19
 msgid "Calendar"
-msgstr ""
+msgstr "Календарь"
 
 #: plugins/calendar/cms_plugins.py:24
 msgid "Calendar options"
-msgstr ""
+msgstr "Параметры календаря"
 
 #: plugins/calendar/models.py:21
 msgid "Calendar feed URL"
-msgstr ""
+msgstr "URL фида календаря"
 
 #: plugins/calendar/models.py:22
 #, python-format
@@ -78,173 +78,175 @@ msgid ""
 ">             ex: https://www.google.com/calendar/"
 "feeds/5qc0048gbti1s87faijksu67lc%40group.calendar.google.com/"
 "private-31d8c813eaadb4e9e6a3c73961e404e4/basic"
-msgstr ""
+msgstr "XML ссылка \"Закрытый адрес \" в \"Настройках Календаря \" <br/>"
+"например: https://www.google.com/calendar/feeds/5qc0048gbti1s87faijksu67lc%40group.calendar.google.com/"
+"private-31d8c813eaadb4e9e6a3c73961e404e4/basic"
 
 #: plugins/calendar/models.py:25
 msgid "Events per page"
-msgstr ""
+msgstr "Событий на странице"
 
 #: plugins/calendar/models.py:25 plugins/feeds/models.py:22
 msgid "set 0 for unlimited."
-msgstr ""
+msgstr "0 для неограниченного."
 
 #: plugins/calendar/models.py:26
 msgid "Show past events"
-msgstr ""
+msgstr "Показать прошедшие события"
 
 #: plugins/calendar/models.py:27
 msgid "If set past events will be shown."
-msgstr ""
+msgstr "Если если выбрано прошедшие события будут показаны."
 
 #: plugins/calendar/templates/event.html:18
 #: plugins/calendar/templates/events.html:40
 #: plugins/calendar/templates/events.html:66
 #: plugins/calendar/templates/events_mini.html:30
 msgid "Location"
-msgstr ""
+msgstr "Местонахождение"
 
 #: plugins/calendar/templates/event.html:18
 #: plugins/calendar/templates/events.html:40
 #: plugins/calendar/templates/events.html:66
 msgid "Sorry, this location cannot be found"
-msgstr ""
+msgstr "К сожалению, это место не может быть найдено"
 
 #: plugins/calendar/templates/event.html:18
 #: plugins/calendar/templates/events.html:40
 #: plugins/calendar/templates/events.html:66
 msgid "View map"
-msgstr ""
+msgstr "На карте"
 
 #: plugins/calendar/templates/events.html:50
 msgid "Past events"
-msgstr ""
+msgstr "Прошедшие события"
 
 #: plugins/calendar/templates/events.html:59
 msgid "There is no description for this event"
-msgstr ""
+msgstr "Нет описания для этого события"
 
 #: plugins/calendar/templates/events_mini.html:37
 #: plugins/feeds/templates/posts_small.html:41
 msgid "RSS"
-msgstr ""
+msgstr "RSS"
 
 #: plugins/feeds/cms_plugins.py:9
 msgid "Small posts (sidebar)"
-msgstr ""
+msgstr "Малая лента (боковая панель)"
 
 #: plugins/feeds/cms_plugins.py:18
 msgid "RSS Feed"
-msgstr ""
+msgstr "RSS лента"
 
 #: plugins/feeds/cms_plugins.py:22 plugins/feeds/cms_plugins.py:37
 msgid "Feed options"
-msgstr ""
+msgstr "Параметры ленты"
 
 #: plugins/feeds/cms_plugins.py:35
 msgid "Blogger"
-msgstr ""
+msgstr "Blogger"
 
 #: plugins/feeds/cms_plugins.py:50
 msgid "Tumblr"
-msgstr ""
+msgstr "Tumblr"
 
 #: plugins/feeds/models.py:19
 msgid "Feed URL"
-msgstr ""
+msgstr "URL ленты"
 
 #: plugins/feeds/models.py:22
 msgid "Posts per page"
-msgstr ""
+msgstr "Сообщений на странице"
 
 #: plugins/feeds/models.py:23
 msgid "Show date in posts"
-msgstr ""
+msgstr "Показать даты в сообщениях"
 
 #: plugins/feeds/models.py:24
 msgid "If checked the date will be shown along with the post content."
-msgstr ""
+msgstr "Если выбран, дата будет показана вместе с содержимым сообщения."
 
 #: plugins/feeds/models.py:25
 msgid "Open external links"
-msgstr ""
+msgstr "Внешние ссылки"
 
 #: plugins/feeds/models.py:26
 msgid ""
 "If checked posts will link to the original source, otherwise will open "
 "internally."
-msgstr ""
+msgstr "Если выбрано, сообщения будут ссылаться на первоисточник, в противном случае откроется внутри сайта."
 
 #: plugins/feeds/models.py:27
 msgid "DICQUS shortname"
-msgstr ""
+msgstr "DICQUS shortname"
 
 #: plugins/feeds/models.py:28
 msgid "Use it if you want to enable disqus.com comments."
-msgstr ""
+msgstr "Включите, если хотите подключить комментарии disqus.com."
 
 #: plugins/feeds/models.py:92
 msgid "Label/Tag"
-msgstr ""
+msgstr "Тэг"
 
 #: plugins/feeds/models.py:126 plugins/feeds/models.py:153
 msgid "Blog Name/URL"
-msgstr ""
+msgstr "Название блога / URL"
 
 #: plugins/feeds/templates/post.html:9 plugins/feeds/templates/posts.html:30
 msgid "ago"
-msgstr ""
+msgstr "назад"
 
 #: plugins/forms/cms_plugins.py:8
 msgid "Form"
-msgstr ""
+msgstr "Форма "
 
 #: plugins/forms/cms_plugins.py:9
 msgid "Form in a lightbox"
-msgstr ""
+msgstr "Форма в lightbox"
 
 #: plugins/forms/cms_plugins.py:18
 msgid "Google Form"
-msgstr ""
+msgstr "Google формы"
 
 #: plugins/forms/cms_plugins.py:22
 msgid "Form options"
-msgstr ""
+msgstr "Параметры формы"
 
 #: plugins/forms/models.py:19
 msgid "Google Form URL"
-msgstr ""
+msgstr "URL Google формы"
 
 #: plugins/pictures/cms_plugins.py:8
 msgid "Grid"
-msgstr ""
+msgstr "Сетка"
 
 #: plugins/pictures/cms_plugins.py:9
 msgid "Slideshow"
-msgstr ""
+msgstr "Слайдошоу"
 
 #: plugins/pictures/cms_plugins.py:10
 msgid "Slideshow with thumbnails"
-msgstr ""
+msgstr "Слайдшоу с превьюшками"
 
 #: plugins/pictures/cms_plugins.py:11
 msgid "Mini slideshow (sidebar)"
-msgstr ""
+msgstr "Мини слайдшоу (боковая панель)"
 
 #: plugins/pictures/cms_plugins.py:12
 msgid "Mini carousel (sidebar)"
-msgstr ""
+msgstr "Мини-карусель (боковая панель)"
 
 #: plugins/pictures/cms_plugins.py:21
 msgid "Picasa"
-msgstr ""
+msgstr "Picasa"
 
 #: plugins/pictures/cms_plugins.py:25
 msgid "Pictures options"
-msgstr ""
+msgstr "Параметры для фото"
 
 #: plugins/pictures/models.py:20
 msgid "Picasa user or album link"
-msgstr ""
+msgstr "Ссылка на пользователя Picasa или на альбом"
 
 #: plugins/pictures/models.py:21
 msgid ""
@@ -253,76 +255,77 @@ msgid ""
 "albums/5319044261264143137<br/>             picasaweb album (RSS link): "
 "https://picasaweb.google.com/data/feed/base/user/sterno.bloggerCMS/"
 "albumid/5352591675044168945?alt=rss&kind=photo&hl=en_US"
-msgstr ""
+msgstr "Пользователь: https://plus.google.com/photos/114610201247248895941/ <br/> альбом: https://plus.google.com/photos/114610201247248895941/albums/5319044261264143137 <br/> Picasaweb альбом (RSS): https://picasaweb.google.com/data/feed/base/user/sterno.bloggerCMS/albumid/5352591675044168945?alt=rss&kind=photo&hl=en_US"
 
 #: plugins/pictures/models.py:24
 msgid "Container width"
-msgstr ""
+msgstr "Ширина контейнера"
 
 #: plugins/pictures/models.py:25
 msgid "Width of a slideshow container or a lightbox."
-msgstr ""
+msgstr "Ширина контейнера для слайдшоу или lightbox."
 
 #: plugins/pictures/models.py:26
 msgid "Container height"
-msgstr ""
+msgstr "Высота  контейнера"
 
 #: plugins/pictures/models.py:27
 msgid "Height of a slideshow container or a lightbox."
-msgstr ""
+msgstr "Высота контейнера слайд-шоу или lightbox."
 
 #: plugins/pictures/models.py:28
 msgid "Thumbnail width"
-msgstr ""
+msgstr "Ширина превьюшки"
 
 #: plugins/pictures/models.py:29
 msgid "Width of a thumbnail."
-msgstr ""
+msgstr "Ширина превьюшки."
 
 #: plugins/pictures/models.py:30
 msgid "Thumbnail height"
-msgstr ""
+msgstr "Высота превьюшки"
 
 #: plugins/pictures/models.py:31
 msgid "Height of a thumbnail."
-msgstr ""
+msgstr "Высота превьюшки."
 
 #: plugins/pictures/models.py:32
 msgid "Autoplay"
-msgstr ""
+msgstr "Авто-проигрывание"
 
 #: plugins/pictures/models.py:33
 msgid "If set slideshow will start automatically."
-msgstr ""
+msgstr "Если выбрано, слайдшоу начнется автоматически."
 
 #: plugins/videos/cms_plugins.py:8
 msgid "Videos"
-msgstr ""
+msgstr "Видео"
 
 #: plugins/videos/cms_plugins.py:16
 msgid "YouKu"
-msgstr ""
+msgstr "Youku"
 
 #: plugins/videos/cms_plugins.py:21
 msgid "Video options"
-msgstr ""
+msgstr "Параметры видео"
 
 #: plugins/videos/models.py:17
 msgid "Youku playlist"
-msgstr ""
+msgstr "Youku плейлист"
 
 #: plugins/videos/models.py:19
 msgid "Open videos in a lightbox"
-msgstr ""
+msgstr "Открыть видео в lightbox"
 
 #: plugins/videos/models.py:20
 msgid "If checked videos will open in a lightbox, otherwise inline."
-msgstr ""
+msgstr "Если выбрано, видео откроется в lightbox, в противном случае в тексте."
 
 #: templates/paginator.html:9
 msgid "Prev"
-msgstr ""
+msgstr "Пред"
 
 #: templates/paginator.html:23
 msgid "Next"
-msgstr ""
+msgstr "След"
+
