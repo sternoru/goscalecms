@@ -45,5 +45,4 @@
 			$pluginContainer.find('.videoListContainer .VideoItem .VideoContainer').eq(0).click();
 		}
 	};
-	$('.goscale-plugins-videos').goscalePluginsVideos();
 })(jQuery);

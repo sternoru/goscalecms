@@ -9,9 +9,14 @@
 {% endaddtoblock %}
 
 {% addtoblock "js" %}
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.montage.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js"></script>
+	<script type="text/javascript">
+		head.ready('scripts.js', function() {
+			head.js('{{ STATIC_URL }}goscale/js/jquery.montage.min.js',
+				'{{ STATIC_URL }}goscale/js/jquery.prettyPhoto.js',
+				'{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js'
+			);
+		});
+	</script>
 {% endaddtoblock %}
 
 <div class="goscale-plugins-pictures" data-type="grid" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
