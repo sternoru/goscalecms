@@ -51,3 +51,14 @@ Default number of posts per page. (default: 10)
 **GOSCALE_DEFAULT_CONTENT_ORDER**
 
 Default sorting for posts. (default: '-published')
+
+2.3. Theme settings
+---------------------
+
+**SITE_ALIASES**
+
+Allows to enable multiple hosts for one theme (for example local, dev, staging servers).
+
+**THEME**
+
+Sets currently enabled default theme (if not set by request).

@@ -74,6 +74,12 @@ For more information refer to django-dynamicsites documentation_.
 
 .. _documentation: https://bitbucket.org/uysrc/django-dynamicsites/overview
 
+To enable multiple hosts for one theme (for example local, dev, staging servers) use SITE_ALIASES setting::
+
+    SITE_ALIASES = {
+        'goscalecms.ru': 'goscalecms.com',
+    }
+
 Debugging theme switching
 ---------------------
 
