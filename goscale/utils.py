@@ -574,7 +574,7 @@ def dict2obj(d):
 def forge_request(url):
     """A helper function which forges a request for fetching json from vimeo and youku.
     """
-    return urllib2.Request(url, urllib.urlencode({}), { 'User-Agent' : 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)' })
+    return urllib2.Request(url, None, { 'User-Agent' : 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)' })
 #
 #
 #def get_class_for_path(path):

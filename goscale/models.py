@@ -114,7 +114,8 @@ class GoscaleCMSPlugin(CMSPlugin):
         abstract = True
 
     def __unicode__(self):
-        title = self.title or self.template.replace('.html', '').capitalize() or str(self.id)
+        template = self.template.replace('.html', '').capitalize() if self.template else None
+        title = self.title or template or str(self.id)
         if len(title) > 25:
             title = '%s...' % title[:25]
         return title

@@ -10,7 +10,7 @@ GOSCALE_VIDEOS_PLUGIN_TEMPLATES = getattr(settings, 'GOSCALE_VIDEOS_PLUGIN_TEMPL
 
 class YouKuPlugin(GoscaleCMSPluginBase):
     """
-    Videos plugin for GoScale
+    YouKu videos plugin for GoScale
     """
     model = models.YouKu
     name = _("YouKu")
@@ -22,3 +22,33 @@ class YouKuPlugin(GoscaleCMSPluginBase):
     ]
 
 plugin_pool.register_plugin(YouKuPlugin)
+
+class YoutubePlugin(GoscaleCMSPluginBase):
+    """
+    YouTube videos plugin for GoScale
+    """
+    model = models.Youtube
+    name = _("YouTube")
+    plugin_templates = GOSCALE_VIDEOS_PLUGIN_TEMPLATES
+    render_template = GOSCALE_VIDEOS_PLUGIN_TEMPLATES[0][0]
+
+    fieldsets = [
+        [_('Video options'), {'fields': ['playlist', 'channel', 'lightbox',]}]
+    ]
+
+plugin_pool.register_plugin(YoutubePlugin)
+
+class VimeoPlugin(GoscaleCMSPluginBase):
+    """
+    Vimeo videos plugin for GoScale
+    """
+    model = models.Vimeo
+    name = _("Vimeo")
+    plugin_templates = GOSCALE_VIDEOS_PLUGIN_TEMPLATES
+    render_template = GOSCALE_VIDEOS_PLUGIN_TEMPLATES[0][0]
+
+    fieldsets = [
+        [_('Video options'), {'fields': ['playlist', 'user', 'lightbox',]}]
+    ]
+
+plugin_pool.register_plugin(VimeoPlugin)
