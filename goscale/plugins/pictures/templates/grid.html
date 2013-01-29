@@ -1,25 +1,22 @@
 {% load i18n %}
-{% load sekizai_tags %}
+{% load sekizai_tags goscale_tags %}
 
-{% addtoblock "css" %}
+{% goscale_addtoblock "css" %}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/image.montage.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/pretty.photo.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endaddtoblock %}
 
-{% addtoblock "js" %}
+{% goscale_addtoblock "js" %}
 	<script type="text/javascript">
 		head.ready('scripts.js', function() {
-			head.js('{{ STATIC_URL }}goscale/js/jquery.montage.min.js',
-				'{{ STATIC_URL }}goscale/js/jquery.prettyPhoto.js',
-				'{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js'
-			);
+			head.js('{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js');
 		});
 	</script>
 {% endaddtoblock %}
 
-<div class="goscale-plugins-pictures" data-type="grid" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
+<div class="goscale-plugins-pictures grid" data-type="grid" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %} data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js" data-plugincb="goscalePluginsPicturesGrid">
 	{% if title %}<h1>{{ title }}</h1>{% endif %}
 
 	<div class="am-container loading no-al">

@@ -1,22 +1,20 @@
 {% load i18n %}
-{% load sekizai_tags %}
+{% load sekizai_tags goscale_tags %}
 
-{% addtoblock "css" %}
+{% goscale_addtoblock "css" %}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endaddtoblock %}
 
-{% addtoblock "js" %}
+{% goscale_addtoblock "js" %}
 	<script type="text/javascript">
 		head.ready('scripts.js', function() {
-			head.js('{{ STATIC_URL }}goscale/js/slides.min.jquery.js',
-				'{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.slideshow.js'
-			);
+			head.js('{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.slideshow.js');
 		});
 	</script>
 {% endaddtoblock %}
 
-<div class="goscale-plugins-pictures" data-type="slideshow" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
+<div class="goscale-plugins-pictures slideshow" data-type="slideshow" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %} data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.slideshow.js" data-plugincb="goscalePluginsPicturesSlideshow">
 	{% if title %}<h1>{{ title }}</h1>{% endif %}
 
 	<div class="slides no-al">

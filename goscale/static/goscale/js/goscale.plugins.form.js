@@ -1,3 +1,5 @@
+var plugins = plugins || {};
+
 (function($) {
 	$.fn.goscalePluginsForm = function() {
 		var $formContainer = $(this),
@@ -61,6 +63,10 @@
 	$('.goscale-plugins-form').each(function() {
 		$(this).goscalePluginsForm();
 	});
+	
+	plugins.goscalePluginsForm = function() {
+		$('.goscale-plugins-form.content').goscalePluginsForm();
+	};
 	
 	if($('.form-buttons').length > 0) {
 		if($('head link[href*="ie.css"]').length == 0) {
