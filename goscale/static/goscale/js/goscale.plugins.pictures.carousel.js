@@ -140,7 +140,9 @@ var plugins = plugins || {};
 	};
 	
 	plugins.goscalePluginsPicturesCarousel = function() {
-		$('.goscale-plugins-pictures.carousel').goscalePluginsPicturesCarousel();
+		if($('.goscale-plugins-pictures.carousel').length > 0) {
+			$('.goscale-plugins-pictures.carousel').goscalePluginsPicturesCarousel();
+		}
 	}
 	plugins.goscalePluginsPicturesCarousel();
 })(jQuery);

@@ -2,30 +2,64 @@
 {% load i18n admin_modify adminmedia cms_admin %}
 {% load url from future %}
 {% block extrahead %}{{ block.super }}
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js"/>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/swfobject.js"></script>s
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/tools.scrollable-1.0.5.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>
+	<script type="text/javascript" src="{{ STATIC_COMMON_URL }}js/head.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_COMMON_URL }}js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_COMMON_URL }}js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.form.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.carousel.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.grid.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.slideshow.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.mini.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.thumbnails.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js"></script>
+	<script type="text/javascript">
+		//window.setTimeout("console.log('test'); $('.goscale-plugins-pictures.slideshow').goscalePluginsPicturesSlideshow();", 10000);
+		window.adminPlugin = function() {
+			var $plugin = $(content).find('[data-pluginjs]');
+
+			if($plugin.length > 0) {
+				var file = $plugin.eq(0).data('pluginjs'),
+					callback = $plugin.eq(0).data('plugincb');
+				
+				if($(['head script[src*="', file, '"]'].join('')).length > 0) {
+					plugins[callback]();
+				}
+				else {
+					head.js(file);
+				}
+			}
+		};
+		window.setTimeout('window.adminPlugin();', 500);
+	</script>
 {% endblock %}
  
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}goscale/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/ie.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/image.montage.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/mini.slideshow.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/pretty.photo.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jquery.fancybox-1.3.4.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jquery.galleryview-3.0-dev.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jqueryUI/jquery-ui-1.9.2.custom.min.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.calendar.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.feeds.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.form.css" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link href="{{ STATIC_THEME_URL }}css/themes/{{ theme }}/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="{{ STATIC_COMMON_URL }}css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<link href="{{ STATIC_THEME_URL }}css/style.css" rel="stylesheet" type="text/css">
+	<link href="{{ STATIC_THEME_URL }}css/themes/{{ theme }}/style.css" rel="stylesheet" type="text/css">
+	<link href="{{ STATIC_COMMON_URL }}css/menu-hack.css" rel="stylesheet" type="text/css">
+	<link  href="{{ STATIC_URL }}goscale/css/ie.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jqueryUI/jquery-ui-1.9.2.custom.min.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}goscale/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.calendar.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.feeds.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}goscale/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/image.montage.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/pretty.photo.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/mini.slideshow.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/jquery.galleryview-3.0-dev.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.pictures.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.videos.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endblock %}
 
 {% block top %}{% if preview %}{% render_plugin plugin %}{% endif %}{% endblock %}

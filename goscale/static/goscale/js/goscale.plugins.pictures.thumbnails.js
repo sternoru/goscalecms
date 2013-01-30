@@ -76,7 +76,9 @@ var plugins = plugins || {};
 	};
 	
 	plugins.goscalePluginsPicturesThumbnails = function() {
-		$('.goscale-plugins-pictures.thumbnails').goscalePluginsPicturesThumbnails();
+		if($('.goscale-plugins-pictures.thumbnails').length > 0) {
+			$('.goscale-plugins-pictures.thumbnails').goscalePluginsPicturesThumbnails();
+		}
 	};
 	
 	plugins.goscalePluginsPicturesThumbnails();
