@@ -16,26 +16,28 @@
 {% endaddtoblock %}
 
 <div class="goscale-plugins-pictures carousel" data-type="carousel" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %} data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.carousel.js" data-plugincb="goscalePluginsPicturesCarousel">
-	<div class="box-sidebar">
-		<div class="boxtop"><div></div></div>
-		<div class="boxcontent">
-			<div id="carouselContainer">
-				{% if title %}
-					<div class="CarouselTitle">{{ title }}</div>
-				{% endif %}
-				<div id="carousel">
-					<span id="arrowLeft"></span>
-					<span id="arrowRight"></span>
-					<div id="imageTitle"></div>
+	{% if posts %}
+		<div class="box-sidebar">
+			<div class="boxtop"><div></div></div>
+			<div class="boxcontent">
+				<div id="carouselContainer">
+					{% if title %}
+						<div class="CarouselTitle">{{ title }}</div>
+					{% endif %}
+					<div id="carousel">
+						<span id="arrowLeft"></span>
+						<span id="arrowRight"></span>
+						<div id="imageTitle"></div>
+					</div>
 				</div>
-			</div>
-			<div id="carousel-images">
-				{% for image in posts %}
-					<img src="{{ image.thumbnails.s144.url }}" data-title="{{ image.summary }}" data-imageTitle="{{ image.summary|striptags }}" data-link="{{ image.thumbnails.s800.url }}" />
-				{% endfor %}
-			</div>
-			<div id="carousel-image-link"></div>
-		 </div>
-		<div class="boxbottom"><div></div></div>
-	</div>
+				<div id="carousel-images">
+					{% for image in posts %}
+						<img src="{{ image.thumbnails.s144.url }}" data-title="{{ image.summary }}" data-imageTitle="{{ image.summary|striptags }}" data-link="{{ image.thumbnails.s800.url }}" />
+					{% endfor %}
+				</div>
+				<div id="carousel-image-link"></div>
+			 </div>
+			<div class="boxbottom"><div></div></div>
+		</div>
+	{% endif %}
 </div>

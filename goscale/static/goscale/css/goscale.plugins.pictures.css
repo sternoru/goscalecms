@@ -119,10 +119,12 @@ h1 {
 #carouselContainer .Image {
 	border: 5px solid #333;
 	width: 70px;
+	max-height: 153px;
 }
 
 #carouselContainer .Image0 {
 	width: 90px;
+	max-height: 78px;
 	position: absolute;
 	top: 60px;
 	left: 10px;
@@ -130,6 +132,7 @@ h1 {
 }
 #carouselContainer .Image1 {
 	width: 150px;
+	max-height: 123px;
 	position: absolute;
 	top: 25px;
 	left: 30px;
@@ -137,6 +140,7 @@ h1 {
 }
 #carouselContainer .Image2 {
 	width: 190px;
+	max-height: 153px;
 	position: absolute;
 	top: 0;
 	left: 90px;
@@ -145,6 +149,7 @@ h1 {
 }
 #carouselContainer .Image3 {
 	width: 150px;
+	max-height: 123px;
 	position: absolute;
 	top: 25px;
 	left: 190px;
@@ -152,6 +157,7 @@ h1 {
 }
 #carouselContainer .Image4 {
 	width: 90px;
+	max-height: 78px;
 	position: absolute;
 	top: 60px;
 	left: 275px;
