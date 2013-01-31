@@ -100,27 +100,27 @@ msgstr ""
 #: plugins/calendar/templates/events.html:66
 #: plugins/calendar/templates/events_mini.html:30
 msgid "Location"
-msgstr ""
+msgstr "Lieu"
 
 #: plugins/calendar/templates/event.html:18
 #: plugins/calendar/templates/events.html:40
 #: plugins/calendar/templates/events.html:66
 msgid "Sorry, this location cannot be found"
-msgstr ""
+msgstr "Désolé, ce lieu ne peut pas être trouvé"
 
 #: plugins/calendar/templates/event.html:18
 #: plugins/calendar/templates/events.html:40
 #: plugins/calendar/templates/events.html:66
 msgid "View map"
-msgstr ""
+msgstr "Afficher la carte"
 
 #: plugins/calendar/templates/events.html:50
 msgid "Past events"
-msgstr ""
+msgstr "Evénements passés"
 
 #: plugins/calendar/templates/events.html:59
 msgid "There is no description for this event"
-msgstr ""
+msgstr "Pas de description"
 
 #: plugins/calendar/templates/events_mini.html:37
 #: plugins/feeds/templates/posts_small.html:41
@@ -191,7 +191,7 @@ msgstr ""
 
 #: plugins/feeds/templates/post.html:9 plugins/feeds/templates/posts.html:30
 msgid "ago"
-msgstr ""
+msgstr " "
 
 #: plugins/forms/cms_plugins.py:8
 msgid "Form"
