@@ -191,7 +191,7 @@ msgstr ""
 
 #: plugins/feeds/templates/post.html:9 plugins/feeds/templates/posts.html:30
 msgid "ago"
-msgstr " "
+msgstr "plus tôt"
 
 #: plugins/forms/cms_plugins.py:8
 msgid "Form"
