@@ -1,3 +1,7 @@
 include LICENSE.md
 include README.md
 include MANIFEST.in
+include requirements.txt
+recursive-include goscale *
+recursive-include docs *
+recursive-exclude * *.pyc
