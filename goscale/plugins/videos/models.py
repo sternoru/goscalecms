@@ -1,7 +1,7 @@
 import re
 import feedparser
 import urllib2
-import simplejson
+import json as simplejson
 import datetime
 from goscale import models as goscale_models
 from goscale import utils

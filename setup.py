@@ -1,14 +1,19 @@
 import os
+import imp
 
-from ez_setup import use_setuptools
-use_setuptools()
+try:
+    imp.find_module('setuptools')
+except ImportError:
+    from ez_setup import use_setuptools
+    use_setuptools()
+
 from setuptools import setup, find_packages
 
-README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
+README = open('README.md').read()
 
 setup(
     name = "goscalecms",
-    version = "0.5.dev1",
+    version = "0.5.dev8",
     packages = find_packages(),
     author = "Evgeny Demchenko",
     author_email = "little_pea@list.ru",
@@ -37,6 +42,7 @@ setup(
         "BeautifulSoup",
         "feedparser",
         "gdata",
+        "simplejson",
         "Django >= 1.1.1",
         "django-cms >= 2.2",
     ]
