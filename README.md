@@ -36,6 +36,10 @@ Feel free to file issues on github or write to our [mailing list](https://groups
 
 We're assuming you're already running a functional version of Django CMS. If not, follow their [tutorial](http://docs.django-cms.org/en/2.2/getting_started/tutorial.html) first:
 
+Install "goscalecms" using pip or easy_install::
+
+    pip install goscalecms
+
 Add "goscale" and desired plugins to your INSTALLED_APPS in settings.py like this::
 
       INSTALLED_APPS = (
