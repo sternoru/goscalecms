@@ -19,7 +19,8 @@ var plugins = plugins || {};
 					],
 					callback = function() {
 						$('head script[src*="goscale.plugins.pictures.thumbnails.js"]').attr('rel', 'ready');
-						initPlugin();
+						//initPlugin();
+						window.setTimeout('plugins.goscalePluginsPicturesThumbnails();', 50);
 					},
 					checkFiles = function() {
 						var tmp = [];
