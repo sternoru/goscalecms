@@ -65,12 +65,17 @@ class Speakerdeck(Presentation):
 
     def _regex_id(self):
         try:
+            print self.embed
             id = re.search('(data-id=")([\d\w.]+)(")', self.embed).group(2)
             return id
         except AttributeError:
-            raise goscale_models.WrongAttribute(attribute='embed')
+#            raise goscale_models.WrongAttribute(attribute='embed')
+            return None
 
     def _get_embed_code(self):
+        id = self._regex_id()
+        if not id:
+            return self.embed
         width, height = self._get_size(extra_height=61)
         return '<iframe class="speakerdeck-iframe goscale-presentation" style="width: %spx; height: %spx; \
             border-top-left-radius: 5px; \
@@ -81,7 +86,7 @@ class Speakerdeck(Presentation):
             allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>' %  (
                 width,
                 height,
-                self._regex_id(),
+                id,
                 self.start,
             )
 
@@ -100,15 +105,19 @@ class Slideshare(Presentation):
             id = re.search('(\/embed_code\/)([\d\w.]+)(\?)', self.embed).group(2)
             return id
         except AttributeError:
-            raise goscale_models.WrongAttribute(attribute='embed')
+            return None
+#            raise goscale_models.WrongAttribute(attribute='embed')
 
     def _get_embed_code(self):
+        id = self._regex_id()
+        if not id:
+            return self.embed
         width, height = self._get_size(default_width=599, extra_height=38)
         return '<iframe src="http://www.slideshare.net/slideshow/embed_code/%s?rel=%s&startSlide=%s" width="%s" \
         height="%s" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="\
         border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen \
         mozallowfullscreen> </iframe>' %  (
-                self._regex_id(),
+                id,
                 0 if self.without_related_content else 1,
                 self.start,
                 width,
@@ -144,14 +153,18 @@ class GooglePresentation(Presentation):
             id = re.search('(\/d\/)([\d\w.]+)(\/embed)', self.embed).group(2)
             return id
         except AttributeError:
-            raise goscale_models.WrongAttribute(attribute='embed')
+            return None
+#            raise goscale_models.WrongAttribute(attribute='embed')
 
     def _get_embed_code(self):
+        id = self._regex_id()
+        if not id:
+            return self.embed
         width, height = self._get_size(extra_height=29)
         return '<iframe src="https://docs.google.com/presentation/d/%s/embed?start=%s&loop=%s&delayms=%s" \
             frameborder="0" width="%s" height="%s" allowfullscreen="true" \
             mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>' %  (
-                self._regex_id(),
+                id,
                 'true' if self.autoplay else 'false',
                 'true' if self.loop else 'false',
                 self.delay,
