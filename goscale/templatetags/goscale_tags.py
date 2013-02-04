@@ -164,10 +164,10 @@ class GoscaleAddtoBlock(sekizai_tags.Addtoblock):
     name = 'goscale_addtoblock'
 
     def render_tag(self, *args, **kwargs):
-        from django import http
         context = args[0]
         request = context.get('request')
         if request and (request.is_ajax() or 'ajax' in request.GET):
+            nodelist = kwargs['nodelist']
             return nodelist.render(context)
         return super(GoscaleAddtoBlock, self).render_tag(*args, **kwargs)
 
