@@ -21,6 +21,8 @@ GOSCALE_DEFAULT_POST_PLUGIN = getattr(settings, 'GOSCALE_DEFAULT_POST_PLUGIN', '
 # goscale.plugins.forms.cms_plugins.GOSCALE_FORMS_CUSTOM_PLUGIN_TEMPLATES
 # goscale.plugins.pictures.cms_plugins.GOSCALE_PICTURES_PLUGIN_TEMPLATES
 # goscale.plugins.pictures.cms_plugins.GOSCALE_PICTURES_CUSTOM_PLUGIN_TEMPLATES
+# goscale.plugins.presentations.cms_plugins.GOSCALE_PRESENTATIONS_PLUGIN_TEMPLATES
+# goscale.plugins.presentations.cms_plugins.GOSCALE_PRESENTATIONS_CUSTOM_PLUGIN_TEMPLATES
 
 
 

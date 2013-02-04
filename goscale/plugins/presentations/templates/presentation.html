@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load sekizai_tags %}
+{% load goscale_tags %}
+
+{% block posts_content %}
+	{% if title %}
+		<h1 class="presentation-title">{{ title }}</h1>
+	{% endif %}
+	<div class="goscale-plugins-presentation content">
+        {{ embed|safe }}
+        {% if posts %}
+
+		{% endif %}
+	</div>
+{% endblock %}

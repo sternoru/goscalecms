@@ -133,3 +133,66 @@ Templates:
 * videos.html - Videos
 
 Additional templates can be added by setting GOSCALE_VIDEOS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
+
+1.7. Google Presentation
+--------------------
+
+Application: 'goscale.plugins.presentations'
+
+Configuration options:
+
+* embed - Embed code (From the "</> Embed" link)
+* width - Width of a presentation container
+* height - Height of a presentation container
+* ratio - Aspect ratio (Ratio of width:height used for the presentation if manual size isn't set)
+* embed_as_is - Embed "as is" (If set embed code will not be changed)
+* delay - Delay between slides
+* autoplay - If set presentation will start automatically
+* loop - If set presentation will restart after the last slide
+
+Templates:
+
+* presentation.html - Presentation
+
+Additional templates can be added by setting GOSCALE_PRESENTATIONS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
+
+1.8. Slideshare Presentation
+--------------------
+
+Application: 'goscale.plugins.presentations'
+
+Configuration options:
+
+* embed - Embed code (From the "</> Embed" link)
+* width - Width of a presentation container
+* height - Height of a presentation container
+* ratio - Aspect ratio (Ratio of width:height used for the presentation if manual size isn't set)
+* embed_as_is - Embed "as is" (If set embed code will not be changed)
+* start - Number of the first slide
+* without_related_content - If set related slideshows will not be displayed
+
+Templates:
+
+* presentation.html - Presentation
+
+Additional templates can be added by setting GOSCALE_PRESENTATIONS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py
+
+1.9. Speakerdeck Presentation
+--------------------
+
+Application: 'goscale.plugins.presentations'
+
+Configuration options:
+
+* embed - Embed code (From the "</> Embed" link)
+* width - Width of a presentation container
+* height - Height of a presentation container
+* ratio - Aspect ratio (Ratio of width:height used for the presentation if manual size isn't set)
+* embed_as_is - Embed "as is" (If set embed code will not be changed)
+* start - Number of the first slide
+
+Templates:
+
+* presentation.html - Presentation
+
+Additional templates can be added by setting GOSCALE_PRESENTATIONS_CUSTOM_PLUGIN_TEMPLATES tuple in your settings.py

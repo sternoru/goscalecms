@@ -51,6 +51,7 @@ Add "goscale" and desired plugins to your INSTALLED_APPS setting like this::
           'goscale.plugins.feeds',
           'goscale.plugins.forms',
           'goscale.plugins.calendar',
+          'goscale.plugins.presentations',
       )
 
 urls.py
