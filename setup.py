@@ -42,6 +42,7 @@ setup(
         "BeautifulSoup",
         "feedparser",
         "gdata",
+        "python-dateutil",
         "simplejson",
         "Django >= 1.1.1",
         "django-cms >= 2.2",
