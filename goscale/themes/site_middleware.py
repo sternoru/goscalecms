@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.cache import cache
 from django.contrib.sites.models import Site
-from . import set_themes
+from goscale.themes import set_themes
 
 
 def make_tls_property(default=None):
@@ -133,9 +133,9 @@ class SiteOnFlyDetectionMiddleware:
             return None
 
         # check database
-        if hasattr(self.site, 'theme_set'):
+        if hasattr(self.site, 'themes'):
             try:
-                themes = [theme.name for theme in self.site.theme_set.all()]
+                themes = [theme.name for theme in self.site.themes.all()]
                 THEME.value = themes[0]
                 cache.set(cache_key, THEME.value, 5*60)
             except:

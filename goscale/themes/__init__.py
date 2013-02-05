@@ -3,6 +3,8 @@ import os
 import imp
 import sys
 
+from django.db import utils, connection
+
 def init_themes():
     if not hasattr(settings, 'THEMES_DIR'):
         THEMES_DIR = os.path.join(settings.PROJECT_DIR, 'themes')
@@ -20,27 +22,22 @@ def init_themes():
         setattr(settings, 'DEFAULT_TEMPLATE_DIRS', settings.TEMPLATE_DIRS)
     if not hasattr(settings, 'DEFAULT_STATICFILES_DIRS'):
         setattr(settings, 'DEFAULT_STATICFILES_DIRS', settings.STATICFILES_DIRS)
-    # update SITE_ALIASES
-    SITE_ALIASES = getattr(settings, "SITE_ALIASES", {})
-    for theme_dir in os.listdir(settings.THEMES_DIR):
-        try:
-            theme = Theme.objects.get(name=theme_dir)
-            SITE_ALIASES['%s.127.0.0.1.xip.io' % theme.name] = theme.sites.all()[0].domain
-        except:
-            continue
-    setattr(settings, 'SITE_ALIASES', SITE_ALIASES)
-
 
 def set_themes():
-    if not Site.objects.filter(id=settings.SITE_ID):
+    try:
+        if not Site.objects.filter(id=settings.SITE_ID):
+            return
+    except utils.DatabaseError:
+        print "Themes not set because the database doesn't have any sites."
+        connection._rollback()
         return
 
     site = Site.objects.get(id=settings.SITE_ID)
     themes = None
 
-    if hasattr(site, 'theme_set'):
+    if hasattr(site, 'themes'):
         try:
-            themes = [theme.name for theme in site.theme_set.all()]
+            themes = [theme.name for theme in site.themes.all()]
         except:
             pass
 
@@ -82,15 +79,25 @@ def set_themes():
 
     setattr(settings, 'CMS_TEMPLATES', tuple(theme_templates) + settings.DEFAULT_CMS_TEMPLATES)
     setattr(settings, 'STATICFILES_DIRS', (settings.THEMES_DIR,) + settings.DEFAULT_STATICFILES_DIRS)
+    # update SITE_ALIASES
+    SITE_ALIASES = getattr(settings, "SITE_ALIASES", {})
+    for theme_dir in os.listdir(settings.THEMES_DIR):
+        try:
+            theme = Theme.objects.get(name=theme_dir)
+            SITE_ALIASES['%s.127.0.0.1.xip.io' % theme.name] = theme.sites.all()[0].domain
+        except:
+            continue
+    setattr(settings, 'SITE_ALIASES', SITE_ALIASES)
 
 try:
     from django.conf import settings
     from django.contrib.sites.models import Site
     from cms.conf.patch import post_patch
-    from cms_themes.models import Theme
+    from models import Theme
 
     init_themes()
     set_themes()
 except Exception, ex:
+    raise
     print 'An error occured setting up the themes: %s' % ex
 

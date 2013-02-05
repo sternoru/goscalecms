@@ -8,7 +8,7 @@ from django.db import models
 from django.contrib.sites.models import Site
 from django.db.models.signals import post_save, pre_save, post_delete, m2m_changed
 from django.utils.translation import ugettext, ugettext_lazy as _
-from cms_themes import set_themes
+from goscale.themes import set_themes
 
 class Theme(models.Model):
     sites = models.ManyToManyField(Site, related_name='themes', null=True, blank=True)
@@ -47,7 +47,7 @@ def theme_site_m2m_changes(sender, **kwargs):
     if action in ("post_add", "post_remove", "post_clear"):
         if type(instance) is Theme:
             for site in instance.sites.all():
-                for theme in site.theme_set.all():
+                for theme in site.themes.all():
                     if theme.id != instance.id:
                         site.theme_set.remove(theme)        
         set_themes()
