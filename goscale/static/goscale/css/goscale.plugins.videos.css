@@ -89,3 +89,12 @@
 		min-height: 344px;
 		min-width: 425px;
 	}
+
+
+/* IE fixes */
+body.ie .videoListContainer .videos .VideosList .VideoItem {
+	*display: inline;
+}
+body.ie #sideBar .box-sidebar .boxcontent .boxbottom {
+	*float: left;
+}
