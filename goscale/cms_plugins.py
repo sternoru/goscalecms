@@ -43,6 +43,12 @@ class GoscaleCMSPluginBase(CMSPluginBase):
                 self.fieldsets[0][1]['fields'].remove('template')
         return form
 
+    def save_model(self, request, obj, form, change):
+        plugin = obj
+        plugin.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
+        plugin.update()
+        super(GoscaleCMSPluginBase, self).save_model(request, obj, form, change)
+
     @classmethod
     def render_post(cls, post=None, slug=None, instance=None):
         if not post:

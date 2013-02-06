@@ -301,9 +301,7 @@ class GoscaleCMSPlugin(CMSPlugin):
 
 
 def update_posts(**kwargs):
-    plugin = kwargs['instance']
-    plugin.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
-    plugin.update()
+    pass # TODO: find a better place to update posts
 
 
 class WrongAttribute(Exception):
