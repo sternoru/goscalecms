@@ -13,7 +13,7 @@ README = open('README.md').read()
 
 setup(
     name = "goscalecms",
-    version = "0.5.dev11",
+    version = "0.5.1",
     packages = find_packages(),
     author = "Evgeny Demchenko",
     author_email = "little_pea@list.ru",

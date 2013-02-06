@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-__version__ = '0.4.10'
-VERSION = ('0', '4', '11')
+__version__ = '0.5.1'
+VERSION = ('0', '5', '1')
