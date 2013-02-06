@@ -2,6 +2,14 @@
 {% load sekizai_tags %}
 {% load goscale_tags %}
 
+{% goscale_addtoblock "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.form.css" />
+{% endaddtoblock %}
+
+{% goscale_addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.form.js" data-callback="plugins.goscalePluginsForm"></script>
+{% endaddtoblock %}
+
 {% block posts_content %}
 	{% if title %}
 		<h1 class="form-title">{{ title }}</h1>

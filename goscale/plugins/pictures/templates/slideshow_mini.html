@@ -7,14 +7,10 @@
 {% endaddtoblock %}
 
 {% goscale_addtoblock "js" %}
-	<script type="text/javascript">
-		head.ready('scripts', function() {
-			head.js('{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.mini.js');
-		});
-	</script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.mini.js" data-callback="plugins.goscalePluginsPicturesMini"></script>
 {% endaddtoblock %}
 
-<div class="goscale-plugins-pictures mini" data-type="mini" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %} data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.pictures.mini.js" data-plugincb="goscalePluginsPicturesMini">
+<div class="goscale-plugins-pictures mini" data-type="mini" data-autoplay="{{ autoplay }}"{% if width != null %} data-width="{{ width }}"{% endif %}{% if height != null %} data-height="{{ height }}"{% endif %}{% if thumbnail_width != null %} data-thumbnailWidth="{{ thumbnail_width }}"{% endif %}{% if thumbnail_height != null %} data-thumbnailHeight="{{ thumbnail_height }}"{% endif %}>
 	<div class="box-sidebar">
         <div class="boxtop"><div></div></div>
 		<div class="boxcontent">

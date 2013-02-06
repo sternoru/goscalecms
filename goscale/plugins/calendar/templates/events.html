@@ -9,57 +9,32 @@
 {% endaddtoblock %}
 
 {% goscale_addtoblock "js" %}
-	<script type="text/javascript">
-		head.ready('scripts', function() {
-			head.js('{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js');
-		});
-	</script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js"></script>
 {% endaddtoblock %}
 
 {% block events_content %}
 	{% if post %}
 		{% include "event.html" %}
 	{% else %}
-		<div class="goscale-plugins-calendar" data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js" data-plugincb="goscalePluginsCalendar">
-			{% if title %}<h1>{{ title }}</h1>{% endif %}
+		{% if posts %}
+			<div class="goscale-plugins-calendar">
+				{% if title %}<h1>{{ title }}</h1>{% endif %}
 
-			{% if posts %}
-				<dl class="ContentList">
-					{% for event in posts %}
-						<dt>
-							<a href="{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
-						</dt>
-						<dd>
-							<div class="ContentListDescription">
-                                {% if event.description %}
-                                    <div>{{ event.description|safe }}</div>
-                                {% endif %}
-								{% if event.where %}
-									<div class="location-details">
-										<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}<span class="mapLinkPlaceholder"> | <span class="error">{% trans "Sorry, this location cannot be found" %}</span><span class="ContentDetailLink"><span class="ContentDetailLinkLabel" data-title="{{ event.title|safe }}" data-where="{{ event.where }}" data-when="{{ event.when }}">{% trans "View map" %}</span><a class="link"></a></span></span>
-									</div>
-								{% endif %}
-							</div>
-						</dd>
-					{% endfor %}
-					
-					{% goscale_paginator %}
-
-					{% if show_past and past_events %}
-						<h1>{% trans "Past events" %}</h1>
-						{% for event in past_events %}
+				{% if posts %}
+					<dl class="ContentList">
+						{% for event in posts %}
 							<dt>
 								<a href="{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
 							</dt>
 							<dd>
 								<div class="ContentListDescription">
-									<div>
-										{% if event.description == null %}
-											{% trans "There is no description for this event" %}
-										{% else %}
-											{{ event.description|safe }}
-										{% endif %}
-									</div>
+									{% if event.description %}
+										<div>{{ event.description|safe }}</div>
+									{% endif %}
 									{% if event.where %}
 										<div class="location-details">
 											<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}<span class="mapLinkPlaceholder"> | <span class="error">{% trans "Sorry, this location cannot be found" %}</span><span class="ContentDetailLink"><span class="ContentDetailLinkLabel" data-title="{{ event.title|safe }}" data-where="{{ event.where }}" data-when="{{ event.when }}">{% trans "View map" %}</span><a class="link"></a></span></span>
@@ -68,12 +43,39 @@
 								</div>
 							</dd>
 						{% endfor %}
-					{% endif %}
-				</dl>
-			{% else %}
-				{{ debug }}
-			{% endif %}
-		</div>
+						
+						{% goscale_paginator %}
+
+						{% if show_past and past_events %}
+							<h1>{% trans "Past events" %}</h1>
+							{% for event in past_events %}
+								<dt>
+									<a href="{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
+								</dt>
+								<dd>
+									<div class="ContentListDescription">
+										<div>
+											{% if event.description == null %}
+												{% trans "There is no description for this event" %}
+											{% else %}
+												{{ event.description|safe }}
+											{% endif %}
+										</div>
+										{% if event.where %}
+											<div class="location-details">
+												<span class="LocationLabel">{% trans "Location" %}: </span>{{ event.where }}<span class="mapLinkPlaceholder"> | <span class="error">{% trans "Sorry, this location cannot be found" %}</span><span class="ContentDetailLink"><span class="ContentDetailLinkLabel" data-title="{{ event.title|safe }}" data-where="{{ event.where }}" data-when="{{ event.when }}">{% trans "View map" %}</span><a class="link"></a></span></span>
+											</div>
+										{% endif %}
+									</div>
+								</dd>
+							{% endfor %}
+						{% endif %}
+					</dl>
+				{% else %}
+					{{ debug }}
+				{% endif %}
+			</div>
+		{% endif %}
 	{% endif %}
 {% endblock %}
 

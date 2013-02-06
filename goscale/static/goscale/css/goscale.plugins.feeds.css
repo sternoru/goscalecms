@@ -8,3 +8,12 @@
 		padding: 20px 40px;
 		box-sizing: border-box;
 	}
+
+
+/* IE fixes */
+body.ie div.pagination ul li {
+	*display: inline;
+}
+body.ie #sideBar .box-sidebar .boxcontent .boxbottom {
+	*float: left;
+}

@@ -6,40 +6,46 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.feeds.css" />
 {% endaddtoblock %}
 
+{% goscale_addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.feeds.js"></script>
+{% endaddtoblock %}
+
 {% block posts_content %}
     {% if post %}
         {% include "post.html" %}
     {% else %}
-        <div class="goscale-plugins-feeds">
-            {% if title %}<h1>{{ title }}</h1>{% endif %}
-			
-			{% if posts %}
-                <dl class="ContentList">
-                    {% for post in posts %}
-                        {% if post.title %}
-                        <dt>
-                            <span>
-                                {% if external_links %}
-									<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
-								{% else %}
-									<a href="{% goscale_plugin_post post %}">{{ post.title }}</a>
+		{% if posts %}
+			<div class="goscale-plugins-feeds">
+				{% if title %}<h1>{{ title }}</h1>{% endif %}
+				
+				{% if posts %}
+					<dl class="ContentList">
+						{% for post in posts %}
+							{% if post.title %}
+							<dt>
+								<span>
+									{% if external_links %}
+										<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
+									{% else %}
+										<a href="{% goscale_plugin_post post %}">{{ post.title }}</a>
+									{% endif %}
+								</span>
+								{% if show_date %}
+									<div class="EntryDate">{{ post.published|timesince }} {% trans "ago" %}</div>
 								{% endif %}
-                            </span>
-                            {% if show_date %}
-								<div class="EntryDate">{{ post.published|timesince }} {% trans "ago" %}</div>
+							</dt>
 							{% endif %}
-                        </dt>
-                        {% endif %}
-                        <dd>
-                            <div class="ContentListDescription">
-                                {{ post.description|safe }}
-                            </div>
-                        </dd>
-                    {% endfor %}
-					
-                    {% goscale_paginator %}
-                </dl>
-            {% endif %}
-        </div>
+							<dd>
+								<div class="ContentListDescription">
+									{{ post.description|safe }}
+								</div>
+							</dd>
+						{% endfor %}
+						
+						{% goscale_paginator %}
+					</dl>
+				{% endif %}
+			</div>
+		{% endif %}
     {% endif %}
 {% endblock %}

@@ -6,15 +6,16 @@
 {% endaddtoblock %}
 
 {% goscale_addtoblock "js" %}
-	<script type="text/javascript">
-		head.ready('scripts', function() {
-			head.js('{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js');
-		});
-	</script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/swfobject.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/tools.scrollable-1.0.5.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js" data-callback="plugins.goscalePluginsVideos"></script>
 {% endaddtoblock %}
 
 {% if posts %}
-	<div class="goscale-plugins-videos{% if lightbox %} lb{% endif %}" data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.videos.js" data-plugincb="goscalePluginsVideos">
+	<div class="goscale-plugins-videos{% if lightbox %} lb{% endif %}">
 		{% if title %}<h1>{{ title }}</h1>{% endif %}
 		<div class="topBar">
 			<div class="videoListContainer">

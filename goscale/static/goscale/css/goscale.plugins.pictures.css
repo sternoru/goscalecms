@@ -166,3 +166,9 @@ h1 {
 #carousel-images, #carousel-image-link {
 	display: none;
 }
+
+
+/* IE fix */
+body.ie #sideBar .box-sidebar .boxcontent .boxbottom {
+	*float: left;
+}

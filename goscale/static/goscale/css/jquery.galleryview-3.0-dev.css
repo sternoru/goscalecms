@@ -23,7 +23,7 @@
 /**   PANEL STYLES								**/
 /*************************************************/
 
-.gv_panelWrap { filter: inherit; position: absolute; overflow: hidden; }
+.gv_panelWrap { filter: inherit; position: absolute; overflow: hidden; z-index: 0; }
 
 .gv_panel-loading { background: url(img-loader.gif) 50% 50% no-repeat #aaa; }
 .gv_frame-loading { background: url(img-loader.gif) 50% 50% no-repeat #aaa; }
