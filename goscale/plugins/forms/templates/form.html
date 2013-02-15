@@ -14,7 +14,7 @@
 	{% if title %}
 		<h1 class="form-title">{{ title }}</h1>
 	{% endif %}
-	<div class="goscale-plugins-form content" data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.form.js" data-plugincb="goscalePluginsForm">
+	<div class="goscale-plugins-form content">
 		{% if posts %}
 			<form action="{{ posts.0.link }}" method="POST" class="ss-form" target="_blank">
 				{% csrf_token %}

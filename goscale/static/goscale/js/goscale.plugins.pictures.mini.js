@@ -336,12 +336,7 @@ var plugins = plugins || {};
 		}
 	};
 	
-	if($('.ajax-loaded').length == 0) {
-		$(document).ready(function() {
-			plugins.goscalePluginsPicturesMini();
-		});
-	}
-	else {
-		$('.ajax-loaded').removeClass('ajax-loaded');
-	}
+	$(function() {
+		plugins.goscalePluginsPicturesMini();
+	});
 })(jQuery);

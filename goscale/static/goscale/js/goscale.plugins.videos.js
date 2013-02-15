@@ -35,7 +35,7 @@ var plugins = plugins || {};
 				html.push('Author: <a href="', authorUrl, '" target="_blank">', $(this).data('author'), '</a>');
 			}
 			if($(this).data('rating')) {
-				html.push('<div class="VideoRating">Rating: <img src="/media/images/rating/', $(this).data('rating'), '.gif" /></div>');
+				html.push('<div class="VideoRating">Rating: <span class="rating-icon icon-', $(this).data('rating'), '"></span></div>');
 			}
 			if($(this).data('views')) {
 				html.push('<div>Views: ', $(this).data('views'), '</div>');
@@ -57,12 +57,7 @@ var plugins = plugins || {};
 		}
 	};
 	
-	if($('.ajax-loaded').length == 0) {
-		$(document).ready(function() {
-			plugins.goscalePluginsVideos();
-		});
-	}
-	else {
-		$('.ajax-loaded').removeClass('ajax-loaded');
-	}
+	$(function() {
+		plugins.goscalePluginsVideos();
+	});
 })(jQuery);

@@ -7,15 +7,17 @@
 	<div class="box-sidebar" xmlns="http://www.w3.org/1999/html">
 		<div class="boxtop"><div></div></div>
 		<div class="boxcontent">
-			<div id="calendar">
-				<div id="datepicker"></div>
+			<div class="goscale-plugins-calendar">
+				<div id="calendar">
+					<div id="datepicker"></div>
+				</div>
+				<div class="boxbottom"><div></div></div>
 			</div>
-			<div class="boxbottom"><div></div></div>
 		</div>
 	</div>
 
 	{% if posts %}
-		<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' global='true' exclusive='true' %}" data-pluginjs="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js" data-plugincb="goscalePluginsCalendar">
+		<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' global='true' exclusive='true' %}">
 			{% for day in posts %}
 				<span class="day" data-date="{{ day.when }}"></span>
 			{% endfor %}

@@ -1,12 +1,12 @@
 {% load i18n goscale_tags %}
 
 {% if paginator %}
-	<div class="pagination no-al">
+	<div class="pagination">
 		{% if paginator.num_pages > 1 %}
 			<ul>
 				{% if page.number > 1 %}
 					<li>
-						<a href="{% goscale_plugin_filters page=page.previous_page_number %}">{% trans "Prev" %}</a>
+						<a href="{{ request.path }}{% goscale_plugin_filters page=page.previous_page_number %}">{% trans "Prev" %}</a>
 					</li>
 				{% endif %}
 				{% for page_nb in page_range %}
@@ -14,13 +14,13 @@
 						<li><a>...</a></li>
 					{% else %}
 						<li{% if page_nb == page.number %} class="active"{% endif %}>
-							<a href="{% goscale_plugin_filters page=page_nb %}">{{ page_nb }}</a>
+							<a href="{{ request.path }}{% goscale_plugin_filters page=page_nb %}">{{ page_nb }}</a>
 						</li>
 					{% endif %}
 				{% endfor %}
 				{% if page.number < paginator.num_pages %}
 					<li>
-						<a href="{% goscale_plugin_filters page=page.next_page_number %}">{% trans "Next" %}</a>
+						<a href="{{ request.path }}{% goscale_plugin_filters page=page.next_page_number %}">{% trans "Next" %}</a>
 					</li>
 				{% endif %}
 			</ul>
