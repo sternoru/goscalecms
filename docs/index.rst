@@ -59,6 +59,7 @@ Usage
 
    plugins.rst
    settings.rst
+   management.rst
 
 Advanced
 ---------------

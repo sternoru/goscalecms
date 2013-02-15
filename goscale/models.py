@@ -41,7 +41,7 @@ class Post(models.Model):
             self.slug = slug
             return
         if self.title:
-            self.slug = defaultfilters.slugify(unidecode.unidecode(self.title))
+            self.slug = '%s-%s' % (defaultfilters.slugify(unidecode.unidecode(self.title)), self.id)
         else:
             self.slug = str(self.id)
         return
