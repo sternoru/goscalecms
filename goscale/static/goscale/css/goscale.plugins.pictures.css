@@ -118,50 +118,66 @@ h1 {
 }
 #carouselContainer .Image {
 	border: 5px solid #333;
-	width: 70px;
-	max-height: 153px;
+	overflow: hidden;
 }
-
+#carouselContainer .Image img {
+	position: relative;
+}
 #carouselContainer .Image0 {
 	width: 90px;
-	max-height: 78px;
+	max-height: 68px;
 	position: absolute;
 	top: 60px;
 	left: 10px;
 	z-index: 1;
 }
+#carouselContainer .Image0 img {
+	width: 90px;
+}
 #carouselContainer .Image1 {
 	width: 150px;
-	max-height: 123px;
+	max-height: 113px;
 	position: absolute;
 	top: 25px;
 	left: 30px;
 	z-index: 2;
 }
+#carouselContainer .Image1 img {
+	width: 150px;
+}
 #carouselContainer .Image2 {
 	width: 190px;
-	max-height: 153px;
+	max-height: 143px;
 	position: absolute;
 	top: 0;
 	left: 90px;
 	z-index: 3;
 	cursor: pointer;
 }
+#carouselContainer .Image2 img {
+	width: 190px;
+}
 #carouselContainer .Image3 {
 	width: 150px;
-	max-height: 123px;
+	max-height: 113px;
 	position: absolute;
 	top: 25px;
 	left: 190px;
 	z-index: 2;
 }
+#carouselContainer .Image3 img {
+	width: 150px;
+}
 #carouselContainer .Image4 {
 	width: 90px;
-	max-height: 78px;
+	max-height: 68px;
 	position: absolute;
 	top: 60px;
 	left: 275px;
 	z-index: 1;
+}
+#carouselContainer .Image4 img {
+	width: 90px;
 }
 #carousel-images, #carousel-image-link {
 	display: none;

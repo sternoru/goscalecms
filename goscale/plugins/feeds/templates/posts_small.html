@@ -25,7 +25,7 @@
 											{% if external_links %}
 												<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
 											{% else %}
-												<a href="{% goscale_plugin_post post %}">{{ post.title }}</a>
+												<a href="{{ request.path }}{% goscale_plugin_post post %}">{{ post.title }}</a>
 											{% endif %}
 										</div>
 										{% if show_date %}

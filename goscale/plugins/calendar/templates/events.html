@@ -12,8 +12,7 @@
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.fancybox-1.3.4.pack.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.calendar.js" data-callback="plugins.goscalePluginsCalendar"></script>
 {% endaddtoblock %}
 
 {% block events_content %}
@@ -21,14 +20,14 @@
 		{% include "event.html" %}
 	{% else %}
 		{% if posts %}
-			<div class="goscale-plugins-calendar">
+			<div class="goscale-plugins-calendar content">
 				{% if title %}<h1>{{ title }}</h1>{% endif %}
 
 				{% if posts %}
 					<dl class="ContentList">
 						{% for event in posts %}
 							<dt>
-								<a href="{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
+								<a href="{{ request.path }}{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
 							</dt>
 							<dd>
 								<div class="ContentListDescription">
@@ -50,7 +49,7 @@
 							<h1>{% trans "Past events" %}</h1>
 							{% for event in past_events %}
 								<dt>
-									<a href="{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
+									<a href="{{ request.path }}{% goscale_plugin_post event %}">{{ event.title|safe }} ({{ event.when }})</a>
 								</dt>
 								<dd>
 									<div class="ContentListDescription">

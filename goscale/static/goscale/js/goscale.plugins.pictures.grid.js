@@ -57,12 +57,7 @@ var plugins = plugins || {};
 		}
 	};
 	
-	if($('.ajax-loaded').length == 0) {
-		$(document).ready(function() {
-			plugins.goscalePluginsPicturesGrid();
-		});
-	}
-	else {
-		$('.ajax-loaded').removeClass('ajax-loaded');
-	}
+	$(function() {
+		plugins.goscalePluginsPicturesGrid();
+	});
 })(jQuery);

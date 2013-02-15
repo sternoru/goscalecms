@@ -1,14 +1,15 @@
 var plugins = plugins || {};
 
 (function($) {
-	var calDatePicker = $('#calendar #datepicker').length > 0 ? true : false,
-		calContent = $('.goscale-plugins-calendar').length > 0 ? true : false;
-	
-    $.fn.goscalePluginsCalendar = function() {
+	$.fn.goscalePluginsCalendar = function() {
+		var $container = $(this);
+		
 		if(navigator.appName == 'Microsoft Internet Explorer') {
 			$('body').addClass('ie');
 		}
-		if(calDatePicker) {
+		
+		if($container.find('#datepicker').length > 0 && !$container.hasClass('ready')) {
+			$container.addClass('ready');
 			var months = {
 					en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 				},
@@ -52,9 +53,9 @@ var plugins = plugins || {};
 				defaultDate: startDate ? startDate : null
 			});
 		}
-		
-		if(calContent) {
-			$('.location-details .ContentDetailLinkLabel').click(function() {
+		else if($container.hasClass('content') && !$container.hasClass('ready')) {
+			$container.addClass('ready');
+			$container.find('.location-details .ContentDetailLinkLabel').click(function() {
 				var $span = $(this),
 					$link = $span.parent().find('a.link');
 				
@@ -112,8 +113,22 @@ var plugins = plugins || {};
 	};
 	
 	plugins.goscalePluginsCalendar = function() {
-		$.fn.goscalePluginsCalendar();
+		if($('.goscale-plugins-calendar').length > 0) {
+			$('.goscale-plugins-calendar').each(function() {
+				$(this).goscalePluginsCalendar();
+			});
+		}
 	};
 	
-	plugins.goscalePluginsCalendar();
+	$(function() {
+		if($(['head script[src="http://maps.google.com/maps/api/js?sensor=true&callback=plugins.goscalePluginsCalendar"]'].join('')).length == 0) {
+			var fileref = document.createElement('script');
+			fileref.type = "text/javascript";
+			fileref.src = "http://maps.google.com/maps/api/js?sensor=true&callback=plugins.goscalePluginsCalendar";
+			document.getElementsByTagName("head")[0].appendChild(fileref);
+		}
+		else {
+			plugins.goscalePluginsCalendar();
+		}
+	});
 })(jQuery);

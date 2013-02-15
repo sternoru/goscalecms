@@ -30,12 +30,7 @@ var plugins = plugins || {};
 		}
 	};
 	
-	if($('.ajax-loaded').length == 0) {
-		$(document).ready(function() {
-			plugins.goscalePluginsPicturesSlideshow();
-		});
-	}
-	else {
-		$('.ajax-loaded').removeClass('ajax-loaded');
-	}
+	$(function() {
+		plugins.goscalePluginsPicturesSlideshow();
+	});
 })(jQuery);

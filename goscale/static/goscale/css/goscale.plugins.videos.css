@@ -79,6 +79,47 @@
 		width: 425px;
 		margin: 0 auto;
 	}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon {
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+			width: 60px;
+			height: 12px;
+			background: left top no-repeat;
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-0 {
+			background-image: url('../img/rating/0.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-5 {
+			background-image: url('../img/rating/5.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-10 {
+			background-image: url('../img/rating/10.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-15 {
+			background-image: url('../img/rating/15.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-20 {
+			background-image: url('../img/rating/20.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-25 {
+			background-image: url('../img/rating/25.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-30 {
+			background-image: url('../img/rating/30.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-35 {
+			background-image: url('../img/rating/35.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-40 {
+			background-image: url('../img/rating/40.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-45 {
+			background-image: url('../img/rating/45.gif');
+		}
+		.goscale-plugins-videos .video-content .selectedVideoInformation .VideoRating .rating-icon.icon-50 {
+			background-image: url('../img/rating/50.gif');
+		}
 
 
 /* lightbox style */

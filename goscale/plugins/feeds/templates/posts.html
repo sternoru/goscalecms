@@ -7,7 +7,7 @@
 {% endaddtoblock %}
 
 {% goscale_addtoblock "js" %}
-	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.feeds.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}goscale/js/goscale.plugins.feeds.js" data-callback="plugins.goscalePluginsFeeds"></script>
 {% endaddtoblock %}
 
 {% block posts_content %}
@@ -27,7 +27,7 @@
 									{% if external_links %}
 										<a href="{{ post.link }}" target="_blank">{{ post.title }}</a>
 									{% else %}
-										<a href="{% goscale_plugin_post post %}">{{ post.title }}</a>
+										<a href="{{ request.path }}{% goscale_plugin_post post %}">{{ post.title }}</a>
 									{% endif %}
 								</span>
 								{% if show_date %}
