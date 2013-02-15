@@ -1,6 +1,7 @@
 import simplejson
 
 from django import forms
+from django.conf import settings
 from cms.plugin_base import CMSPluginBase
 from goscale.models import Post
 from goscale import conf
@@ -62,7 +63,10 @@ class GoscaleCMSPluginBase(CMSPluginBase):
     def render_post(cls, post=None, slug=None, instance=None):
         if not post:
             post = Post.objects.get(slug=slug)
-        context = {'post': post.dict()}
+        context = {
+            'post': post.dict(),
+            'STATIC_URL': settings.STATIC_URL, # TODO: figure out how to apply context processors for single posts
+        }
         if instance:
             context.update(instance.get_fields_dict())
         return render_to_string(cls.plugin_post_template, context)

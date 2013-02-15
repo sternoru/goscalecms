@@ -224,9 +224,9 @@ class GoscaleCMSPlugin(CMSPlugin):
             if is_new is True:
             #self._set_dates(stored_entry)
             #                self._store_post(stored_entry, entry)
-                msg.append('Post "%s" added.' % link)
+                msg.append('Post "%s" added.' % stored_entry.link)
             else:
-                msg.append('Post "%s" already saved.' % link)
+                msg.append('Post "%s" already saved.' % stored_entry.link)
         self.updated = utils.get_datetime_now()
         self.save(no_signals=True)
         return '<br />'.join(msg)

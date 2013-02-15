@@ -59,6 +59,7 @@ class YouKu(VideosBase):
 
     def _store_post(self, stored_entry, entry):
         video_id = entry.link.replace('http://www.youku.com/v_show/id_', '').split('_')[0]
+        print entry.summary
         arr = entry.summary.split(' src="')
         if len(arr) == 1:
             thumbnail = None
@@ -144,7 +145,8 @@ class Youtube(VideosBase):
             return []
 
     def _store_post(self, stored_entry, entry):
-        video_id = entry.link[0].href.replace('http://www.youtube.com/watch?v=', '').split('&')[0]
+        video_id = re.search('(youtube.com/watch\?v=)+([\w\d_-]+)', entry.link[0].href).group(2)
+#        video_id = .replace('http://www.youtube.com/watch?v=', '').split('&')[0]
         if entry.rating and entry.rating.average:
             entry_rating = int(round(float(entry.rating.average)*10))
             if entry_rating%5 > 2:
@@ -164,7 +166,7 @@ class Youtube(VideosBase):
         stored_entry.attributes = simplejson.dumps({
             'id': video_id,
             'author_url': 'http://youtube.com/profile?user=%s' % entry.author[0].name.text,
-            'thumbnail': 'http://i.ytimg.com/vi/%s/2.jpg' % video_id,
+            'thumbnail': 'http://i.ytimg.com/vi/%s/1.jpg' % video_id,
             'video_url': 'http://www.youtube.com/v/%s&hl=en&fs=1' % video_id,
             'rating': video_rating,
             'view_count': video_view_count
