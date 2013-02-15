@@ -4,7 +4,6 @@ import simplejson
 import datetime
 import urllib2
 from dateutil import parser
-from gdata.calendar import client
 from goscale import models as goscale_models
 from goscale import utils
 from goscale import conf
@@ -41,6 +40,7 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
         return query.order_by(order)
 
     def _get_data(self):
+        from gdata.calendar import client
         cal_client = client.CalendarClient()
         feed = cal_client.get_calendar_event_feed(uri=self.url+'?hl=en')
         events = []

@@ -27,6 +27,9 @@ GOSCALE_DEFAULT_POST_PLUGIN = getattr(settings, 'GOSCALE_DEFAULT_POST_PLUGIN', '
 
 
 """ Goscale technical settings """
+# Should GoScale update posts right after saving the plugin
+GOSCALE_UPDATE_FROM_ADMIN = getattr(settings, 'GOSCALE_UPDATE_FROM_ADMIN', False)
+CELERY_IMPORTS = getattr(settings, 'CELERY_IMPORTS', ())
 
 # how often posts should be updated from the source
 GOSCALE_POSTS_UPDATE_FREQUENCY = getattr(settings, 'GOSCALE_POSTS_UPDATE_FREQUENCY', 60*30) # 30 minutes

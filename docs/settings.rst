@@ -36,6 +36,10 @@ Default template  to use for a single post. (default: 'post.html')
 
 How often to update posts for plugins. (default: 60*30, 30 minutes)
 
+**GOSCALE_UPDATE_FROM_ADMIN**
+
+Should GoScale update posts right after saving the plugin in Django admin. (default: False)
+
 **GOSCALE_CACHE_DURATION**
 
 Cache duration for plugins content. (default: CMS_CACHE_DURATIONS['content'], the same as content cache duration in Django CMS)

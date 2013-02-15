@@ -1,4 +1,4 @@
-Themes support
+3. Themes support
 ====================
 
 It's possible to enable different themes for different sites using 'goscale.themes' app.
@@ -14,7 +14,7 @@ Currently it's possible to theme:
 * Templates
 * Theme settings (if theme_settings.py is present)
 
-Installation
+3.1. Installation
 ---------------------
 
 To use themes add 'goscale.themes' to INSTALLED_APPS::
@@ -39,7 +39,7 @@ Add 'SiteOnFlyDetectionMiddleware' middleware before any other::
         ...
     )
 
-Usage
+3.2. Usage
 ---------------------
 
 Create a new Theme in django admin and upload a theme tarball (tar.gz) file or put your theme files into 'themes' directory in your project and input the theme name.
@@ -52,7 +52,7 @@ For more information refer to django-cms-themes website_.
 
 .. _website: http://www.djangocmsthemes.com/
 
-Using theme files in templates
+3.3. Using theme files in templates
 ---------------------
 
 For theme static files::
@@ -63,7 +63,7 @@ For current theme name::
 
     {{ GOSCALE_THEME }}
 
-Theme switching on request
+3.4. Theme switching on request
 ---------------------
 
 The beauty of goscale.themes app is that you can serve multiple themes and sites from the same django project instance. It's enabled by SiteOnFlyDetectionMiddleware from django-dynamicsites.
@@ -80,7 +80,7 @@ To enable multiple hosts for one theme (for example local, dev, staging servers)
         'goscalecms.ru': 'goscalecms.com',
     }
 
-Debugging theme switching
+3.5. Debugging theme switching
 ---------------------
 
 The pattern for theme switching locally is::

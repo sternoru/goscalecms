@@ -24,6 +24,36 @@ from django.utils import importlib
 from django.core import exceptions
 from django.contrib.sites import models as site_models
 from django.conf import settings
+from cms.models import CMSPlugin
+
+
+def get_plugins():
+    """
+    Returns all GoScale plugins
+
+    It ignored all other django-cms plugins
+    """
+    plugins = []
+    for plugin in CMSPlugin.objects.all():
+        if plugin:
+            cl = plugin.get_plugin_class().model
+            if 'posts' in cl._meta.get_all_field_names():
+                instance = plugin.get_plugin_instance()[0]
+                plugins.append(instance)
+    return plugins
+
+def update_plugin(plugin_id):
+    """
+    Updates a single plugin by ID
+
+    Returns a plugin instance and posts count
+    """
+    try:
+        instance = CMSPlugin.objects.get(id=plugin_id).get_plugin_instance()[0]
+        instance.update()
+    except:
+        return None, 0
+    return instance, instance.posts.count()
 #
 #
 #def get_site(request):

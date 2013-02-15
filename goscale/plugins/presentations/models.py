@@ -65,7 +65,6 @@ class Speakerdeck(Presentation):
 
     def _regex_id(self):
         try:
-            print self.embed
             id = re.search('(data-id=")([\d\w.]+)(")', self.embed).group(2)
             return id
         except AttributeError:

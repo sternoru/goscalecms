@@ -60,6 +60,7 @@ Usage
    plugins.rst
    settings.rst
    management.rst
+   celery.rst
 
 Advanced
 ---------------

@@ -4,9 +4,10 @@ import datetime
 import hashlib
 
 from django.utils import simplejson
+from django.utils.encoding import smart_unicode
 
-from cms.models.pluginmodel import CMSPlugin
 from django.db import models
+from cms.models import CMSPlugin
 from django.utils.translation import ugettext as _
 from django.core.cache import cache
 
@@ -41,7 +42,7 @@ class Post(models.Model):
             self.slug = slug
             return
         if self.title:
-            self.slug = '%s-%s' % (defaultfilters.slugify(unidecode.unidecode(self.title)), self.id)
+            self.slug = '%s-%d' % (defaultfilters.slugify(unidecode.unidecode(self.title)), self.id)
         else:
             self.slug = str(self.id)
         return
@@ -118,7 +119,7 @@ class GoscaleCMSPlugin(CMSPlugin):
         title = self.title or template or str(self.id)
         if len(title) > 25:
             title = '%s...' % title[:25]
-        return title
+        return smart_unicode(title)
 
     # Override metods
     def copy_relations(self, oldinstance):

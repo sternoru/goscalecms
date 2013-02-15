@@ -4,6 +4,7 @@ import imp
 import sys
 
 from django.db import utils, connection
+from cms.models import Page
 
 def init_themes():
     if not hasattr(settings, 'THEMES_DIR'):

@@ -44,9 +44,18 @@ class GoscaleCMSPluginBase(CMSPluginBase):
         return form
 
     def save_model(self, request, obj, form, change):
-        plugin = obj
-        plugin.posts.all().delete() # TODO: handle in update_posts if source changes without deleting every time
-        plugin.update()
+        if conf.GOSCALE_UPDATE_FROM_ADMIN:
+            use_celery = False
+            if 'goscale.tasks' in conf.CELERY_IMPORTS:
+                try:
+                    from celery.execute import send_task
+                    use_celery = True
+                except ImportError:
+                    pass
+            if use_celery:
+                send_task('goscale.tasks.update_goscale_plugin_posts', [obj.id])
+            else:
+                obj.update()
         super(GoscaleCMSPluginBase, self).save_model(request, obj, form, change)
 
     @classmethod
