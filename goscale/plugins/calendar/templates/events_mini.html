@@ -22,7 +22,7 @@
 								{% for event in posts %}
 									<div id="shortNewsContent">
 										<div class="snTitle">
-											<a href="{% goscale_plugin_post event %}">{{ event.title|safe }}</a>
+											<a href="{{ request.path }}{% goscale_plugin_post event %}">{{ event.title|safe }}</a>
 										</div>
 										<div class="EntryDate">{{ event.when }}</div>
 										<div class="snDescription">

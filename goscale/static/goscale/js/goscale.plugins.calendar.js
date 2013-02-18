@@ -44,7 +44,11 @@ var plugins = plugins || {};
 			};
 			
 			var dayClick = function(date) {
-				window.location.href = $('#important-days').data('url').replace('startDate', date);
+				var newHref = $('#important-days').data('url').replace('startDate', date);
+				if(window.location.href.indexOf('#!path=') > -1) {
+					newHref = ['#!path=', newHref].join('');
+				}
+				window.location.href = newHref;
 			};
 			
 			$("#datepicker").datepicker({

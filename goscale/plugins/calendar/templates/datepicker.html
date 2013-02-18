@@ -17,7 +17,7 @@
 	</div>
 
 	{% if posts %}
-		<div id="important-days" data-lang="{{ lang }}" data-url="{% goscale_plugin_filters start='startDate' global='true' exclusive='true' %}">
+		<div id="important-days" data-lang="{{ lang }}" data-url="{{ request.path }}{% goscale_plugin_filters start='startDate' global='true' exclusive='true' %}">
 			{% for day in posts %}
 				<span class="day" data-date="{{ day.when }}"></span>
 			{% endfor %}
