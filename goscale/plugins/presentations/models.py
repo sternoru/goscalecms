@@ -27,7 +27,7 @@ class Presentation(goscale_models.GoscaleCMSPlugin):
         help_text=_('Width of a presentation container.'))
     height = models.SmallIntegerField(null=True, blank=True, verbose_name=_('Height'),
         help_text=_('Height of a presentation container.'))
-    ratio = models.CharField(null=True, blank=True, max_length=50,
+    ratio = models.CharField(max_length=50,
         default=RATIO_CHOICES[0][0], choices=RATIO_CHOICES, verbose_name=_('Aspect ratio'),
         help_text=_('Ratio of width:height used for the presentation if manual size isn\'t set.'))
     embed_as_is = models.BooleanField(default=False, verbose_name=_('Embed "as is"'),
