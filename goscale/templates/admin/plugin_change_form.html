@@ -62,4 +62,13 @@
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_THEME_URL }}css/plugins-override.css" />
 {% endblock %}
 
-{% block top %}{% if preview %}{% render_plugin plugin %}{% endif %}{% endblock %}
+{% block top %}{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    {% if preview %}
+        <p>&nbsp;</p>
+        <h2>{% trans "Preview" %}</h2>
+        {% render_plugin plugin %}
+    {% endif %}
+{% endblock %}
