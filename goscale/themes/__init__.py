@@ -54,7 +54,9 @@ def set_themes():
                 if 'templates' in os.listdir(theme_full_path):
                     # handle templates
                     template_path = os.path.join(theme_full_path, 'templates')
-                    setattr(settings, 'TEMPLATE_DIRS', (template_path,) + settings.DEFAULT_TEMPLATE_DIRS)
+                    if template_path not in settings.TEMPLATE_DIRS:
+                        TEMPLATE_DIRS = (template_path,) + settings.TEMPLATE_DIRS
+                        setattr(settings, 'TEMPLATE_DIRS', TEMPLATE_DIRS)
                     for template in os.listdir(template_path):
                         if '.' not in template:
                             continue # skip directories
