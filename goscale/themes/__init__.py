@@ -95,7 +95,10 @@ def set_themes():
 try:
     from django.conf import settings
     from django.contrib.sites.models import Site
-    from cms.conf.patch import post_patch
+    try:
+        from cms.conf.patch import post_patch
+    except ImportError:
+        pass # patch deprecated in django-cms>=2.4
     from goscale.themes.models import Theme
 
     init_themes()

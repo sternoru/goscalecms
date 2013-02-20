@@ -59,7 +59,7 @@ class YouKu(VideosBase):
 
     def _store_post(self, stored_entry, entry):
         video_id = entry.link.replace('http://www.youku.com/v_show/id_', '').split('_')[0]
-        print entry.summary
+#        print entry.summary
         arr = entry.summary.split(' src="')
         if len(arr) == 1:
             thumbnail = None
