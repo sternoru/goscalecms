@@ -1,6 +1,9 @@
 .goscale-plugins-form {
 	
 }
+	#form-lb {
+		padding: 0 20px 20px 20px;
+	}
 	.goscale-plugins-form .ss-form-heading, .goscale-plugins-form .ss-footer,
 	#form-lb .ss-form-heading, #form-lb .ss-footer {
 		display: none;
