@@ -44,7 +44,7 @@ setup(
         "gdata",
         "python-dateutil",
         "simplejson",
-        "Django >= 1.1.1",
-        "django-cms >= 2.2",
+        "django>=1.4,<1.5",
+        "django-cms>=2.3",
     ]
 )
