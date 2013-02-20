@@ -320,8 +320,8 @@ msgstr ""
 
 #: templates/paginator.html:9
 msgid "Prev"
-msgstr ""
+msgstr "Préc."
 
 #: templates/paginator.html:23
 msgid "Next"
-msgstr ""
+msgstr "Suiv."
