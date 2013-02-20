@@ -6,4 +6,4 @@ gdata
 python-dateutil
 simplejson
 django>=1.4,<1.5
-django-cms>=2.3
+git+https://github.com/littlepea/django-cms.git#egg=2.4.0.beta
