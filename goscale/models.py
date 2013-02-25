@@ -302,6 +302,7 @@ class GoscaleCMSPlugin(CMSPlugin):
 
 
 def update_posts(**kwargs):
+    raise DeprecationWarning('update_posts is deprecated')
     pass # TODO: find a better place to update posts
 
 

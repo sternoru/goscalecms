@@ -32,6 +32,10 @@ def set_themes():
         print "Themes not set because the database doesn't have any sites."
         connection._rollback()
         return
+    except ImportError, e:
+        print "Themes not set because not all modules are ready: %s." % str(e)
+        connection._rollback()
+        return
 
     site = Site.objects.get(id=settings.SITE_ID)
     themes = None

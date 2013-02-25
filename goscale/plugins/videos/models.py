@@ -255,4 +255,4 @@ class Vimeo(VideosBase):
 Vimeo._meta.get_field('playlist').help_text = 'ex: http://vimeo.com/channels/6513'
 Vimeo._meta.get_field('playlist').verbose_name = _('Vimeo channel')
 
-signals.post_save.connect(goscale_models.update_posts, sender=Vimeo)
+#signals.post_save.connect(goscale_models.update_posts, sender=Vimeo)

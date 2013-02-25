@@ -2,8 +2,8 @@ import re
 import simplejson
 import datetime
 import urllib2
+import BeautifulSoup
 
-from BeautifulSoup import BeautifulSoup
 from goscale import models as goscale_models
 from goscale import utils
 from goscale import conf
@@ -21,12 +21,20 @@ class Form(goscale_models.GoscaleCMSPlugin):
 
     def _regex_id(self):
         try:
-            return self.url.split('key=')[1]
-        except:
+            if 'key=' in self.url:
+                pattern = '(key=)([\d\w-]+)(#)?'
+                form_url = 'https://docs.google.com/spreadsheet/formResponse?formkey=%s'
+            else:
+                pattern = '(\/d\/)([\d\w-]+)(\/)?'
+                form_url = 'https://docs.google.com/forms/d/%s/formResponse'
+            key = re.search(pattern, self.url).group(2)
+            return key, form_url
+        except AttributeError:
             raise goscale_models.WrongAttribute(attribute='url')
 
-    def _get_entry_link(self, entry):
-        return 'https://docs.google.com/spreadsheet/formResponse?formkey=%s' % self._regex_id()
+    def _get_entry_link(self, entry=None):
+        key, form_url = self._regex_id()
+        return form_url % key
 
     def _get_data(self):
         if not self.url:
@@ -37,10 +45,15 @@ class Form(goscale_models.GoscaleCMSPlugin):
 
     def _store_post(self, stored_entry, entry):
         # parse form html
-        soup = BeautifulSoup(entry)
-        form = soup.find('form')
-        description = form.renderContents()
-#        print description
+#        try:
+#            soup = BeautifulSoup.ICantBelieveItsBeautifulSoup(entry)
+#        except (TypeError, AttributeError):
+#            soup = BeautifulSoup.BeautifulSoup.ICantBelieveItsBeautifulSoup(entry)
+#        form = soup.find('form')
+#        print entry
+#        print form
+#        description = form.renderContents()
+        description = entry[entry.find('<form'):entry.find('</form')+7]
         # fill in the fields
         stored_entry.content_type = 'text/html'
         stored_entry.link = self._get_entry_link(entry)
