@@ -8,15 +8,17 @@ from django import template
 from cms.templatetags import cms_tags
 from cms.models import CMSPlugin
 from sekizai.templatetags import sekizai_tags
-from goscale import models
 from goscale import cms_plugins
+from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 register = template.Library()
 
 
-class Paginator(InclusionTag):
-    name = 'goscale_paginator'
-    template = 'paginator.html'
+class GoscaleTemplateInclusionTag(InclusionTag):
+    """
+    Base InclusionTag supporting dynamic template and other keyword arguments
+    """
     options = Options(
         MultiKeywordArgument('params', required=False)
     )
@@ -27,7 +29,13 @@ class Paginator(InclusionTag):
         """
         if 'template' in kwargs['params']:
             self.template = kwargs['params']['template']
-        return super(Paginator, self).get_template(context, **kwargs)
+        return super(GoscaleTemplateInclusionTag, self).get_template(context, **kwargs)
+
+
+
+class Paginator(GoscaleTemplateInclusionTag):
+    name = 'goscale_paginator'
+    template = 'paginator.html'
 
     def get_context(self, context, params):
         paginator = context['paginator']
@@ -54,6 +62,55 @@ class Paginator(InclusionTag):
         return context
 
 register.tag(Paginator)
+
+
+class Login(GoscaleTemplateInclusionTag):
+    name = 'goscale_login'
+    template = 'user/login.html'
+
+    def get_context(self, context, params):
+        try:
+            from allauth.account.forms import LoginForm
+            from allauth.account.utils import get_default_redirect
+            from allauth.utils import passthrough_login_redirect_url
+        except ImportError:
+            # allauth not installed
+            return context
+        request = context['request']
+        form_class = LoginForm
+        redirect_field_name = "next"
+        url_required = False
+        success_url = get_default_redirect(request, redirect_field_name)
+        if request.method == "POST" and not url_required:
+            form = form_class(request.POST)
+            if form.is_valid():
+                return form.login(request, redirect_url=success_url)
+        else:
+            form = form_class()
+
+        ctx = {
+            "login_form": form,
+            "signup_url": passthrough_login_redirect_url(request,
+                reverse("goscale_account_signup")),
+            "site": Site.objects.get_current(),
+            "url_required": url_required,
+            "redirect_field_name": redirect_field_name,
+            "redirect_field_value": request.REQUEST.get(redirect_field_name),
+        }
+        context.update(ctx)
+        return context
+
+register.tag(Login)
+
+
+class User(GoscaleTemplateInclusionTag):
+    name = 'goscale_user'
+    template = 'user/user.html'
+
+    def get_context(self, context, params):
+        return context
+
+register.tag(User)
 
 
 class PluginFilters(AsTag):

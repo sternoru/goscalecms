@@ -149,3 +149,57 @@ Tag: goscale_addtoblock
 Arguments:
 
 * name - name on the block in the base template
+
+1.6. User
+--------------------
+
+Renders a user bar for Login and Registration links and User Info.
+
+Usage examples
+^^^^^^^^^^^^^^^^^^^^
+
+Simple case::
+
+    {% goscale_user %}
+
+Custom template::
+
+    {% goscale_user template="userbar.html" %}
+
+Tag info
+^^^^^^^^^^^^^^^^^^^^
+
+Tag: goscale_user
+
+Template: user/user.html
+
+Keyword arguments:
+
+* template - if you want to use a custom template instead of user.html provide your template file.
+
+1.7. Login
+--------------------
+
+Renders a Login Form  to use outside of the /accounts/login/ page.
+
+Usage examples
+^^^^^^^^^^^^^^^^^^^^
+
+Simple case::
+
+    {% goscale_login %}
+
+Custom template::
+
+    {% goscale_login template="custom_login.html" %}
+
+Tag info
+^^^^^^^^^^^^^^^^^^^^
+
+Tag: goscale_login
+
+Template: user/login.html
+
+Keyword arguments:
+
+* template - if you want to use a custom template instead of login.html provide your template file.

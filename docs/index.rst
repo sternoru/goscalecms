@@ -71,6 +71,7 @@ Advanced
    tags.rst
    plugins_frontend.rst
    themes.rst
+   auth.rst
 
 
 Indices and tables

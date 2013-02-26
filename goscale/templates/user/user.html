@@ -1,0 +1,13 @@
+{% load url from future %}
+{% load i18n %}
+{% load account %}
+
+{% if request.user.is_authenticated %}
+    <span id="goscale-user">
+        {% user_display user %} | <a href="{% url 'account_logout' %}" rel="next">{% trans "Logout" %}</a>
+    </span>
+{% else %}
+    <span class="goscale-social">
+        <a href="{% url 'goscale_account_signup' %}" rel="next">{% trans "Log in" %} / {% trans "Register" %}</a>
+    </span>
+{% endif %}
