@@ -3,7 +3,7 @@ from django.conf import settings
 import views
 
 urlpatterns = patterns('',
-    url(r'^utils/form/$', views.form),
+    url(r'^utils/form/$', views.form, name="goscale_form_handler"),
 )
 
 if 'allauth.account' in settings.INSTALLED_APPS:

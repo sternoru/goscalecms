@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load sekizai_tags %}
 {% load goscale_tags %}
+{% load url from future %}
 
 {% goscale_addtoblock "css" %}
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}goscale/css/goscale.plugins.form.css" />
@@ -14,7 +15,7 @@
 	{% if title %}
 		<h1 class="form-title">{{ title }}</h1>
 	{% endif %}
-	<div class="goscale-plugins-form content">
+	<div class="goscale-plugins-form content" data-ajax-handler="{% url 'goscale_form_handler' %}">
 		{% if posts %}
 			<form action="{{ posts.0.link }}" method="POST" class="ss-form" target="_blank">
 				{% csrf_token %}
