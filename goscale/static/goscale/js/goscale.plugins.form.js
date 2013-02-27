@@ -8,6 +8,7 @@ var plugins = plugins || {};
 		var $formContainer = $(this),
 			token = $formContainer.find('input[name="csrfmiddlewaretoken"]')[0],
 			url = $formContainer.find('input[name="url"]')[0],
+			handler = $formContainer.data('ajax-handler'),
 			handleForm = function($container) {
 				$container.addClass('ready');
 				if(!$container.is('form')) {
@@ -17,7 +18,7 @@ var plugins = plugins || {};
 					e.preventDefault();
 					var $form = $(this);
 					$form.find('input[type=submit]').attr('disabled', 'true');
-					$.post('/goscale/utils/form/', $form.serialize(), function(res) {
+					$.post(handler, $form.serialize(), function(res) {
 						if (res != 'error') {
 							$(res).each(function() {
 								if(typeof(this.innerHTML) != "undefined" && this.innerHTML.indexOf('ss-form-heading') > -1) {
