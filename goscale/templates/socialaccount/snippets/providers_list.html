@@ -1,0 +1,20 @@
+{% load socialaccount %}
+
+{% for provider in socialaccount.providers %}
+	{% if provider.id == "openid" %}
+		{% for brand in provider.get_brands %}
+			{% if brand.name != "Hyves" %}
+				<li>
+					<a title="{{brand.name}}" class="socialaccount_provider {{provider.id}} {{brand.id}}" href="{% provider_login_url provider.id openid=brand.openid_url %}">
+						<img src="{{ STATIC_URL }}goscale/img/providers/{{brand.name}}.png" alt="{{ brand.name }}" />
+					</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+	<li>
+		<a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" href="{% provider_login_url provider.id %}">
+			<img src="{{ STATIC_URL }}goscale/img/providers/{{provider.name}}.png" alt="{{provider.name}}" />
+		</a>
+	</li>
+{% endfor %}
