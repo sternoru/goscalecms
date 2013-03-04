@@ -10,6 +10,7 @@
 	<div class="register-content">
 		{% if user.is_authenticated %}
 			{% include "account/snippets/already_logged_in.html" %}
+            <a href="{% url 'account_logout' %}" rel="next">{% trans "Logout" %}</a>
 		{% else %}
 			<div class="span5">
 				{% goscale_login %}
@@ -19,7 +20,7 @@
 				<h1>{% trans "Register" %}</h1>
 				<!--<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>-->
 				
-				<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+				<form class="signup" id="signup_form" method="post" action="{% url 'goscale_account_signup' %}">
 					{% csrf_token %}
 					{{ form.as_p }}
 					{% if redirect_field_value %}
@@ -30,5 +31,5 @@
 			</div>
 		{% endif %}
 	</div>
-	<div class="clear"></div>
+	<div class="clearfix"></div>
 {% endblock %}

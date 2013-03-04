@@ -11,6 +11,7 @@ from sekizai.templatetags import sekizai_tags
 from goscale import cms_plugins
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from django.shortcuts import redirect
 
 register = template.Library()
 
@@ -84,7 +85,7 @@ class Login(GoscaleTemplateInclusionTag):
         if request.method == "POST" and not url_required:
             form = form_class(request.POST)
             if form.is_valid():
-                return form.login(request, redirect_url=success_url)
+                form.login(request, redirect_url=success_url)
         else:
             form = form_class()
 

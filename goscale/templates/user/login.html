@@ -18,7 +18,7 @@
 	{% include "socialaccount/snippets/login_extra.html" %}
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login" method="POST" action="{% url 'goscale_account_signup' %}">
 	{% csrf_token %}
 	{{ login_form.as_p }}
 	{% if redirect_field_value %}
