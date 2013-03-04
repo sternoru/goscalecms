@@ -9,7 +9,7 @@ def form(request):
     """ Ajax handler for Google Form submition
     """
     if request.method == 'POST':
-        url = request.GET['url']
+        url = request.POST['url']
         submit_url = '%s%shl=%s' % (
             url,
             '&' if '?' in url else '?',
