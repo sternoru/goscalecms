@@ -86,6 +86,7 @@ Application: 'goscale.plugins.forms'
 Configuration options:
 
 * url - Google Form URL
+* form_class - Additional class attribute to add to the form element
 
 Templates:
 
