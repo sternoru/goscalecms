@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 
-class Command(BaseCommand):
+
+class UpdateSlugs(BaseCommand):
     help = "Update slugs for all posts."
 
     def handle(self, *args, **options):

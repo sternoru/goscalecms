@@ -20,7 +20,7 @@ class FormPlugin(GoscaleCMSPluginBase):
     render_template = GOSCALE_FORMS_PLUGIN_TEMPLATES[0][0]
     fieldsets = [
         [_('Form options'), {
-            'fields': ['url']
+            'fields': ['url', 'form_class']
         }]
     ]
 

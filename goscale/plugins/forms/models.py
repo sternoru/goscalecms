@@ -18,6 +18,8 @@ class Form(goscale_models.GoscaleCMSPlugin):
     """
     url = models.URLField(max_length=250, verbose_name=_('Google Form URL'),
         help_text='ex: https://docs.google.com/spreadsheet/viewform?formkey=cDZ5QkRvZDg5d2Z1Y0l0anEyUVNuZEE6MA')
+    form_class = models.CharField(max_length=50, verbose_name=_('Form class'), null=True, blank=True,
+        help_text=_('Additional class attribute to add to the form element.'))
 
     def _regex_id(self):
         try:
@@ -53,7 +55,15 @@ class Form(goscale_models.GoscaleCMSPlugin):
 #        print entry
 #        print form
 #        description = form.renderContents()
-        description = entry[entry.find('<form'):entry.find('</form')+7]
+        description = entry[entry.find('<form'):entry.find('</form')+7].replace(
+            'Never submit passwords through Google Forms.',
+            ''
+        )
+        if self.form_class: # apply a custom class to a form
+            description = description.replace(
+                'ss-form',
+                'ss-form %s' % self.form_class
+            )
         # fill in the fields
         stored_entry.content_type = 'text/html'
         stored_entry.link = self._get_entry_link(entry)

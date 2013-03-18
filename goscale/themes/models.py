@@ -12,6 +12,9 @@ from cms.models import Page
 from goscale.themes import set_themes
 
 class Theme(models.Model):
+    """
+    Goscale CMS theme
+    """
     sites = models.ManyToManyField(Site, related_name='themes', null=True, blank=True)
     name = models.CharField(max_length=255, blank=True, help_text=_(
         'Only set name if no theme file provided (should be consistent with directory name).'
@@ -25,6 +28,21 @@ class Theme(models.Model):
             f.extractall(settings.THEMES_DIR)
 
         super(Theme, self).save(*args, **kwargs)
+
+    def get_sites(self):
+        """
+        Returns all sites using this theme
+        """
+        return self.sites.all()
+
+    def get_site(self):
+        """
+        Returns first site using this theme
+        """
+        try:
+            return self.get_sites()[0]
+        except IndexError:
+            return None
                 
     
     class Meta:

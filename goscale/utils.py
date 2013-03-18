@@ -27,19 +27,30 @@ from django.conf import settings
 from cms.models import CMSPlugin
 
 
-def get_plugins():
+def get_plugins(sites=None):
     """
     Returns all GoScale plugins
 
     It ignored all other django-cms plugins
     """
     plugins = []
+    # collect GoScale plugins
     for plugin in CMSPlugin.objects.all():
         if plugin:
             cl = plugin.get_plugin_class().model
             if 'posts' in cl._meta.get_all_field_names():
                 instance = plugin.get_plugin_instance()[0]
                 plugins.append(instance)
+    # Filter by sites
+    if sites and len(sites) > 0:
+        onsite = []
+        for plugin in plugins:
+            try:
+                if plugin.page.site in sites:
+                    onsite.append(plugin)
+            except AttributeError:
+                continue
+        return onsite
     return plugins
 
 def update_plugin(plugin_id):
