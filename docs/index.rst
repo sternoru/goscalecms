@@ -47,6 +47,7 @@ Credits
 * Developed and maintained under supervision of `Evgeny Demchenko <https://github.com/littlepea>`_
 
 Developed with
+^^^^^^^^^^^^^^
 
 .. image:: http://www.jetbrains.com/img/logos/pycharm_logo.gif
     :width: 150 px
