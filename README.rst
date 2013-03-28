@@ -39,9 +39,7 @@ Credits
 Developed with
 ^^^^^^^^^^^^^^
 
-.. image:: http://www.jetbrains.com/img/logos/pycharm_logo.gif
-   :width: 150pt
-
+.. image:: goscale/static/goscale/img/pycharm_logo142x29.gif
 
 Quick start
 -----------
