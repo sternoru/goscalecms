@@ -33,15 +33,23 @@ But it's more than just content. GoScale plugins add some fancy functionality to
 
 It's perfect for quickly building Mashups and Media heavy sites.
 
-GoScale CMS is a product of `Sterno.Ru`_.
-
-.. _`Sterno.Ru`: http://sterno.ru/en/
-
 Website: http://goscalecms.com
 
 GitHub repository: https://github.com/sternoru/goscalecms
 
 Google Group: https://groups.google.com/forum/?fromgroups#!forum/goscale-cms
+
+Credits
+-------
+
+* This is a set of tools and plugins for `Django CMS <http://django-cms.org>`_
+* Product of `Sterno.Ru <http://sterno.ru/en/>`_.
+* Developed and maintained under supervision of `Evgeny Demchenko <https://github.com/littlepea>`_
+
+Developed with
+
+.. image:: http://www.jetbrains.com/img/logos/pycharm_logo.gif
+    :width: 150 px
 
 Installation
 ---------------
