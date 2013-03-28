@@ -9,7 +9,7 @@ except ImportError:
 
 from setuptools import setup, find_packages
 
-README = open('README.md').read()
+README = open('README.rst').read()
 
 setup(
     name = "goscalecms",
