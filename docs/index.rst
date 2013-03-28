@@ -50,7 +50,7 @@ Developed with
 ^^^^^^^^^^^^^^
 
 .. image:: http://www.jetbrains.com/img/logos/pycharm_logo.gif
-    :width: 150 px
+    :width: 185 px
 
 Installation
 ---------------
