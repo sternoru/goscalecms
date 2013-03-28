@@ -17,7 +17,7 @@ setup(
     packages = find_packages(),
     author = "Evgeny Demchenko",
     author_email = "little_pea@list.ru",
-    description = "GoScale CMS",
+    description = "GoScale CMS is an extension of Django CMS. It's a set of unique plugins and useful tools for Django CMS that makes it very powerful by seamlessly integrating content from 3rd party websites to make mashups.",
     long_description = README,
     license = "BSD",
     keywords = "goscale cms django themes content management system mashup google ajax",

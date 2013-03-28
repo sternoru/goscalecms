@@ -1,5 +1,5 @@
-include LICENSE.md
-include README.md
+include LICENSE
+include README.rst
 include MANIFEST.in
 include requirements.txt
 recursive-include goscale *
