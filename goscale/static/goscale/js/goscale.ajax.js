@@ -11,6 +11,6 @@ $(function(){
     	};
 		var newConfig = ajaxConfig || {};
 		var config = $.extend(defaultConfig, newConfig);
-		$('a').filter(":not('.no-al a, a.no-al')").ajaxlinks(config);
+		$('a').ajaxlinks(config);
 	}
 });
