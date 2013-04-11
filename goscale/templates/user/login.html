@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+
+<h1>{% trans "Log in" %}</h1>
+
+{% if redirect_url %}
+    <p>{% blocktrans with redirect_url as url %}
+        You've successfully logged in. You're being redirected back to the website.<br/>
+        If you're not redirected within 10 seconds, please, <a href="{{ url }}">click here</a>.
+        {% endblocktrans %}</p>
+    <meta http-equiv="REFRESH" content="0;url={{ redirect_url }}"/>
+    <script type="text/javascript">window.location.href  = '{{ redirect_url }}';</script>
+{% else %}
+    {% if socialaccount.providers  %}
+        <p>
+            {% blocktrans with site.name as site_name %}Please log in with one
+            of your existing third party accounts. Or use the form
+            below:{% endblocktrans %}
+        </p>
+        <div class="socialaccount_ballot">
+            <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/providers_list.html" %}
+            </ul>
+        </div>
+        {% include "socialaccount/snippets/login_extra.html" %}
+    {% endif %}
+
+    <form class="login" method="POST" action="{% url 'goscale_account_signup' %}">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button class="primaryAction btn" type="submit">{% trans "Log in" %}</button>
+        <a class="forgot-pass button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    </form>
+{% endif %}

@@ -1,0 +1,35 @@
+{% extends "account/base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load goscale_tags %}
+
+{% block head_title %}{% trans "Log in" %} / {% trans "Register" %}{% endblock %}
+
+{% block content %}
+	<div class="register-content">
+		{% if user.is_authenticated %}
+			{% include "account/snippets/already_logged_in.html" %}
+            <a href="{% url 'account_logout' %}" rel="next">{% trans "Logout" %}</a>
+		{% else %}
+			<div class="span5">
+				{% goscale_login %}
+			</div>
+			<div class="span1"></div>
+			<div class="span5">
+				<h1>{% trans "Register" %}</h1>
+				<!--<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>-->
+				
+				<form class="signup" id="signup_form" method="post" action="{% url 'goscale_account_signup' %}">
+					{% csrf_token %}
+					{{ form.as_p }}
+					{% if redirect_field_value %}
+					<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+					{% endif %}
+					<button type="submit" class="btn">{% trans "Register" %}</button>
+				</form>
+			</div>
+		{% endif %}
+	</div>
+	<div class="clearfix"></div>
+{% endblock %}

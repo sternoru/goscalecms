@@ -82,10 +82,12 @@ class Login(GoscaleTemplateInclusionTag):
         redirect_field_name = "next"
         url_required = False
         success_url = get_default_redirect(request, redirect_field_name)
+        redirect_url = None
         if request.method == "POST" and not url_required:
             form = form_class(request.POST)
             if form.is_valid():
                 form.login(request, redirect_url=success_url)
+                redirect_url = success_url
         else:
             form = form_class()
 
@@ -97,6 +99,7 @@ class Login(GoscaleTemplateInclusionTag):
             "url_required": url_required,
             "redirect_field_name": redirect_field_name,
             "redirect_field_value": request.REQUEST.get(redirect_field_name),
+            "redirect_url": redirect_url,
         }
         context.update(ctx)
         return context
