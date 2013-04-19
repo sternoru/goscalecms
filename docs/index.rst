@@ -58,6 +58,7 @@ Installation
 .. toctree::
    :maxdepth: 2
 
+   tutorial.rst
    installation.rst
 
 Usage

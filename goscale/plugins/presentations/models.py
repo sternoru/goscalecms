@@ -63,6 +63,10 @@ class Speakerdeck(Presentation):
     start = models.SmallIntegerField(default=1, verbose_name=_('Start slide'),
         help_text=_('Number of the first slide.'))
 
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Speakerdeck, self).copy_relations(oldinstance)
+
     def _regex_id(self):
         try:
             id = re.search('(data-id=")([\d\w.]+)(")', self.embed).group(2)
@@ -98,6 +102,10 @@ class Slideshare(Presentation):
         help_text=_('Number of the first slide.'))
     without_related_content = models.BooleanField(default=True, verbose_name=_('Without related content'),
         help_text=_('If set related slideshows will not be displayed.'))
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Slideshare, self).copy_relations(oldinstance)
 
     def _regex_id(self):
         try:
@@ -146,6 +154,10 @@ class GooglePresentation(Presentation):
         help_text=_('If set presentation will start automatically.'))
     loop = models.BooleanField(default=False, verbose_name=_('Loop'),
         help_text=_('If set presentation will restart after the last slide.'))
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(GooglePresentation, self).copy_relations(oldinstance)
 
     def _regex_id(self):
         try:

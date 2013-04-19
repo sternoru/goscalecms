@@ -21,6 +21,10 @@ class Form(goscale_models.GoscaleCMSPlugin):
     form_class = models.CharField(max_length=50, verbose_name=_('Form class'), null=True, blank=True,
         help_text=_('Additional class attribute to add to the form element.'))
 
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Form, self).copy_relations(oldinstance)
+
     def _regex_id(self):
         try:
             if 'key=' in self.url:

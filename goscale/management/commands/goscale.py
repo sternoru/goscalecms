@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from cms.management.commands.subcommands.base import SubcommandsCommand
+from goscale.management.commands.subcommands.debug import Debug
+from goscale.management.commands.subcommands.dump import Dump
+from goscale.management.commands.subcommands.load import Load
 from goscale.management.commands.subcommands.update_posts import UpdatePosts
 from goscale.management.commands.subcommands.update_slugs import UpdateSlugs
 from django.core.management.base import BaseCommand
@@ -20,6 +23,9 @@ class Command(SubcommandsCommand):
     command_name = 'goscale'
 
     subcommands = {
+        'debug': Debug,
+        'dump': Dump,
+        'load': Load,
         'update_posts': UpdatePosts,
         'update_slugs': UpdateSlugs,
     }

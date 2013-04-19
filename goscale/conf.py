@@ -72,6 +72,34 @@ GOSCALE_JSON_INDENT = getattr(settings, 'GOSCALE_JSON_INDENT', 4 if settings.DEB
 # if you decide to use a different model you can overwrite this setting
 GOSCALE_DEFAULT_CONTENT_ORDER = getattr(settings, 'GOSCALE_DEFAULT_CONTENT_ORDER', '-published')
 
+""" Bootstrap settings """
+
+GOSCALE_BOOTSTRAP_THEMES = getattr(settings, 'GOSCALE_BOOTSTRAP_THEMES', [
+    'default',
+    'amelia',
+    'cerulean',
+    'cosmo',
+    'cyborg',
+    'journal',
+    'readable',
+    'simplex',
+    'slate',
+    'spacelab',
+    'spruce',
+    'superhero',
+    'united',
+])
+
+GOSCALE_BOOTSTRAP_THEME = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', GOSCALE_BOOTSTRAP_THEMES[0])
+
+""" Ajaxlinks settings """
+GOSCALE_AJAXLINKS = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', False)
+GOSCALE_AJAXLINKS_EXCEPTIONS = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', [
+    '/accounts/',
+    '/goscale/signup/',
+    '/__debug__/',
+])
+
 # ------------------------------------------ 
 """
 GoScale Don't Change settings

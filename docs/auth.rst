@@ -1,7 +1,7 @@
 4. Authorization and registration
 ====================
 
-You can use any auth app for django but if you want a quick and easy setup with GoScale you're in luck - we support django-allauth_ ! Which is one of the most convenient apps to handle all of your user account needs.
+You can use any auth app for django but if you want a quick and easy setup with GoScale you're in luck - we support django-allauth_ (only version 0.9 at the moment)! Which is one of the most convenient apps to handle all of your user account needs.
 We also added a few template tags and utils for it to make it easier to use.
 
 .. _django-allauth: https://github.com/pennersr/django-allauth
@@ -13,8 +13,9 @@ Just follow the tutorial from django-allauth_ README. Here's a brief summary:
 
 Install django the requirements::
 
-    pip install django-allauth django-avatar
-    ./manage.py syncdb avatar
+    pip install django-allauth==0.9.0 django-avatar
+    ./manage.py syncdb
+    ./manage.py migrate
 
 settings.py::
 
@@ -39,6 +40,7 @@ settings.py::
 
     INSTALLED_APPS = (
         ...
+        'avatar',
         'allauth',
         'allauth.account',
         'allauth.socialaccount',

@@ -7,12 +7,14 @@ from django.db import utils, connection
 from cms.models import Page
 
 def init_themes():
+    if not hasattr(settings, 'THEME'):
+        setattr(settings, 'THEME', None)
     if not hasattr(settings, 'THEMES_DIR'):
-        THEMES_DIR = os.path.join(settings.PROJECT_DIR, 'themes')
+        THEMES_DIR = os.path.join(settings.PROJECT_PATH, 'themes')
         if not os.path.exists(THEMES_DIR):
             os.makedirs(THEMES_DIR)
         settings.STATICFILES_DIRS = (
-            ('themes', os.path.join(settings.PROJECT_DIR, "themes")),
+            ('themes', os.path.join(settings.PROJECT_PATH, "themes")),
         ) + settings.STATICFILES_DIRS
         setattr(settings, 'THEMES_DIR', THEMES_DIR)
     if not hasattr(settings, 'DEFAULT_CMS_TEMPLATES'):
@@ -28,7 +30,7 @@ def set_themes():
     try:
         if not Site.objects.filter(id=settings.SITE_ID):
             return
-    except utils.DatabaseError:
+    except utils.DatabaseError, e:
         print "Themes not set because the database doesn't have any sites."
         connection._rollback()
         return
@@ -44,6 +46,7 @@ def set_themes():
         try:
             themes = [theme.name for theme in site.themes.all()]
         except:
+            raise
             pass
 
     if not themes:

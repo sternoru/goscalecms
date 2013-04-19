@@ -1,38 +1,8 @@
-2. Getting started
-==================
+1. Quick Start Tutorial
+=======================
 
-2.1. Requirements
+1.1. Installation
 ------------------
-
-Required
-^^^^^^^^^^^^^^^^^^
-
-* django-cms 2.2 or higher
-* pytz
-* unidecode
-* BeautifulSoup
-* feedparser
-* gdata
-
-Recommended
-^^^^^^^^^^^^^^^^^^
-
-* django-filer with its django CMS plugins, file and image management application to use instead of some core plugins
-* django-cms-themes
-
-Note:
-
-When installing the GoScale CMS using pip, Django, django-cms, pytz, unidecode, BeautifulSoup, feedparser and gdata will be installed automatically.
-
-2.2. Installation
-------------------
-
-We're assuming you're already running a functional version of Django CMS. If not, follow their tutorial_ first:
-
-.. _tutorial: http://docs.django-cms.org/en/2.2/getting_started/tutorial.html
-
-Python package
-^^^^^^^^^^^^^^^^^^
 
 Install using pip or easy_install::
 
@@ -41,10 +11,23 @@ Install using pip or easy_install::
 settings.py
 ^^^^^^^^^^^^^^^^^^
 
-Add "goscale" and desired plugins to your INSTALLED_APPS setting like this::
+Add "goscale" and desired plugins to your INSTALLED_APPS setting like this (also add "cms" and django-cms plugins if you haven't yet::
 
       INSTALLED_APPS = (
           ...
+          # django-cms related apps:
+          'cms',
+          'mptt',
+          'menus',
+          'sekizai',
+          'cms.plugins.text',
+          'cms.plugins.snippet',
+          'cms.plugins.file',
+          'cms.plugins.image',
+          'cms.plugins.teaser',
+          'cms.plugins.video',
+
+          # goscalecms related apps:
           'goscale',
           'goscale.plugins.videos',
           'goscale.plugins.pictures',
@@ -57,7 +40,7 @@ Add "goscale" and desired plugins to your INSTALLED_APPS setting like this::
 urls.py
 ^^^^^^^^^^^^^^^^^^
 
-Add GoScale URL patterns::
+Add GoScale and django-cms URL patterns::
 
       urlpatterns = patterns('',
           url(r'^admin/', include(admin.site.urls)),

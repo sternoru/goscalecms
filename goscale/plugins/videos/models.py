@@ -27,6 +27,10 @@ class YouKu(VideosBase):
     """
     YouKu Videos
     """
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(YouKu, self).copy_relations(oldinstance)
+
     def _regex_id(self, link=None):
         link = link or self.playlist
         try:
@@ -97,6 +101,10 @@ class Youtube(VideosBase):
     """
     channel = models.CharField(max_length=250, blank=True, null=True, verbose_name=_('Youtube channel'),
         help_text='ex: https://www.youtube.com/user/GoogleDevelopers')
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Youtube, self).copy_relations(oldinstance)
 
     def _regex_id(self, url=None):
         id = None
@@ -185,6 +193,10 @@ class Vimeo(VideosBase):
     """
     user = models.CharField(max_length=250, blank=True, null=True, verbose_name=_('Vimeo user'),
         help_text='ex: http://vimeo.com/amandanedermeijer')
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Vimeo, self).copy_relations(oldinstance)
 
     def _regex_id(self, url=None):
         id = None

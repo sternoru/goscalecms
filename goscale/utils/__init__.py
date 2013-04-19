@@ -41,7 +41,7 @@ def get_plugins(sites=None):
             if 'posts' in cl._meta.get_all_field_names():
                 instance = plugin.get_plugin_instance()[0]
                 plugins.append(instance)
-    # Filter by sites
+        # Filter by sites
     if sites and len(sites) > 0:
         onsite = []
         for plugin in plugins:
@@ -616,147 +616,147 @@ def forge_request(url):
     """A helper function which forges a request for fetching json from vimeo and youku.
     """
     return urllib2.Request(url, None, { 'User-Agent' : 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)' })
-#
-#
-#def get_class_for_path(path):
-#    i = path.rfind('.')
-#    module, attr = path[:i], path[i+1:]
-#    try:
-#        mod = importlib.import_module(module)
-#    except ImportError, e:
-#        raise exceptions.ImproperlyConfigured('Error loading class %s: "%s"' % (module, e))
-#    try:
-#        module_class = getattr(mod, attr)
-#    except AttributeError:
-#        raise exceptions.ImproperlyConfigured('Module "%s" does not define a class named "%s"' % (module, attr))
-#    return module_class
-#
-#def queue2tree(comments_queue, comments_tree):
-#    while len(comments_queue)!=0:
-#        comment = comments_queue.popleft()
-#        if not recursively_parse_comment_tree(comment, comments_tree):
-#            comments_queue.append(comment)
-#
-#
-#def recursively_parse_comment_tree(comment, nested_comment_tree):
-#    # if the comment does not have a parent comment, then append the node directly to the tree.
-#    if not comment.parent_comment:
-#        nested_comment_tree.append({
-#            'comment': comment.dict(),
-#            'children': []
-#        })
-#        return True
-#    # else the comment has a parent.
-#    for comment_node in nested_comment_tree:
-#        # go through every node in the tree, if the comment's parent is there, then append the noce to the children of such commet.
-#        # if not, check the children of this comment.
-#        # whenever found one, this function will return True.
-#        # if a true is cought inside of the for loop, exit the loop and return directly.
-#        if comment.parent_comment.id == comment_node['comment']['id']:
-#            comment_node['children'].append({
-#                'comment': comment.dict(),
-#                'children': []
-#            })
-#            return True
-#        if recursively_parse_comment_tree(comment, comment_node['children']):
-#            return True
-#    return False
-#
-#def comment_is_prepend():
-#    default_ordering = settings.GOSCALE_DEFAULT_COMMENTS_SORTING_ORDER
-#    if default_ordering[:1] == '-':
-#        return 'true'
-#    return 'false'
-#
-#def nested_remove_comment(comment):
-#    parent_comment = comment.parent_comment
-#    if not parent_comment:
-#        return remove_comment(comment)
-#    if not parent_comment.is_removed:
-#        return remove_comment(comment)
-#    parent_sublings = models.Comment.objects.filter(parent_comment = parent_comment)
-#    if len(parent_sublings)!=1:
-#        # in this case, there are more children in this parent_comment, then just delete the comment.
-#        return remove_comment(comment)
-#    else:
-#        # in this case, such parent has only one child and this child is being removed.
-#        # check nested_removed_comment(parent_comment)
-#        id_to_remove = nested_remove_comment(parent_comment)
-#    return str(id_to_remove)
-#
-#def remove_comment(comment):
-#    id_to_remove = comment.id
-#    comment.delete()
-#    return str(id_to_remove)
-#
-#def add_label_filter(query, label):
-#    if label:
-#        label = '[%s]' % label
-#        query = query.filter(categories__contains=label)
-#    return query
-#
-#def weighted_rating(rating, votes, minimum_votes=settings.GOSCALE_RATING_MINIMUM_VOTES, mean_value=settings.GOSCALE_RATING_MEAN_VALUE):
-#    """Bayesian estimate
-#    rating- average for the picture
-#    votes - number of votes for the picture
-#    m - minimum votes required to be listed
-#    mean_value - the mean vote across the whole report
-#    """
-#    if votes==0:
-#        return 0.0
-#    return (float(votes) / (float(votes) + float(minimum_votes))) * float(rating) + (float(minimum_votes) / (float(votes) + float(minimum_votes))) * float(mean_value)
-#
-#def send_comment_replied_email(request, parent_comment, comment):
-#    site = get_site(request)
-#    user = parent_comment.user
-#    content_dict = {
-#        'site': site,
-#        'username': user.username,
-#        'parent_comment': parent_comment.comment,
-#        'comment': comment.comment,
-#        'reply_from': comment.user.username,
-#        'path': parent_comment.get_content_object_url(),
-#    }
-#    comment_replied_subj_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_replied_subject.txt')
-#    subject = template.loader.render_to_string(comment_replied_subj_template, content_dict)
-#    # Email subject *must not* contain newlines
-#    subject = ''.join(subject.splitlines())
-#    comment_replied_msg_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_replied.txt')
-#    message = template.loader.render_to_string(comment_replied_msg_template, content_dict)
-#    user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
-#
-#def send_comment_deleted_email(request, comment):
-#    site = get_site(request)
-#    user = comment.user
-#    content_dict = {
-#        'site': site,
-#        'username': user.username,
-#        'comment': comment.comment,
-#        'path': comment.get_content_object_url(),
-#    }
-#    comment_deleted_subj_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_deleted_subject.txt')
-#    subject = template.loader.render_to_string(comment_deleted_subj_template, content_dict)
-#    # Email subject *must not* contain newlines
-#    subject = ''.join(subject.splitlines())
-#    comment_deleted_msg_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_deleted.txt')
-#    message = template.loader.render_to_string(comment_deleted_msg_template, content_dict)
-#    user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
-#
-#def get_redirect_value(request):
-#    redirect_field_name = settings.REDIRECT_FIELD_NAME
-#    if redirect_field_name in request.session:
-#        redirect_to = request.session[redirect_field_name]
-#        del request.session[redirect_field_name]
-#    elif redirect_field_name in request.COOKIES:
-#        redirect_to = urllib2.unquote(request.COOKIES[redirect_field_name])
-#    elif redirect_field_name in request.GET:
-#        redirect_to = request.GET.get(redirect_field_name)
-#    elif redirect_field_name in request.POST:
-#        redirect_to = request.POST.get(redirect_field_name)
-#    else:
-#        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
-#    if not redirect_to or ' ' in redirect_to:
-#        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
-#    elif '//' in redirect_to and re.match(r'[^\?]*//', redirect_to):
-#        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
-#    return redirect_to
+    #
+    #
+    #def get_class_for_path(path):
+    #    i = path.rfind('.')
+    #    module, attr = path[:i], path[i+1:]
+    #    try:
+    #        mod = importlib.import_module(module)
+    #    except ImportError, e:
+    #        raise exceptions.ImproperlyConfigured('Error loading class %s: "%s"' % (module, e))
+    #    try:
+    #        module_class = getattr(mod, attr)
+    #    except AttributeError:
+    #        raise exceptions.ImproperlyConfigured('Module "%s" does not define a class named "%s"' % (module, attr))
+    #    return module_class
+    #
+    #def queue2tree(comments_queue, comments_tree):
+    #    while len(comments_queue)!=0:
+    #        comment = comments_queue.popleft()
+    #        if not recursively_parse_comment_tree(comment, comments_tree):
+    #            comments_queue.append(comment)
+    #
+    #
+    #def recursively_parse_comment_tree(comment, nested_comment_tree):
+    #    # if the comment does not have a parent comment, then append the node directly to the tree.
+    #    if not comment.parent_comment:
+    #        nested_comment_tree.append({
+    #            'comment': comment.dict(),
+    #            'children': []
+    #        })
+    #        return True
+    #    # else the comment has a parent.
+    #    for comment_node in nested_comment_tree:
+    #        # go through every node in the tree, if the comment's parent is there, then append the noce to the children of such commet.
+    #        # if not, check the children of this comment.
+    #        # whenever found one, this function will return True.
+    #        # if a true is cought inside of the for loop, exit the loop and return directly.
+    #        if comment.parent_comment.id == comment_node['comment']['id']:
+    #            comment_node['children'].append({
+    #                'comment': comment.dict(),
+    #                'children': []
+    #            })
+    #            return True
+    #        if recursively_parse_comment_tree(comment, comment_node['children']):
+    #            return True
+    #    return False
+    #
+    #def comment_is_prepend():
+    #    default_ordering = settings.GOSCALE_DEFAULT_COMMENTS_SORTING_ORDER
+    #    if default_ordering[:1] == '-':
+    #        return 'true'
+    #    return 'false'
+    #
+    #def nested_remove_comment(comment):
+    #    parent_comment = comment.parent_comment
+    #    if not parent_comment:
+    #        return remove_comment(comment)
+    #    if not parent_comment.is_removed:
+    #        return remove_comment(comment)
+    #    parent_sublings = models.Comment.objects.filter(parent_comment = parent_comment)
+    #    if len(parent_sublings)!=1:
+    #        # in this case, there are more children in this parent_comment, then just delete the comment.
+    #        return remove_comment(comment)
+    #    else:
+    #        # in this case, such parent has only one child and this child is being removed.
+    #        # check nested_removed_comment(parent_comment)
+    #        id_to_remove = nested_remove_comment(parent_comment)
+    #    return str(id_to_remove)
+    #
+    #def remove_comment(comment):
+    #    id_to_remove = comment.id
+    #    comment.delete()
+    #    return str(id_to_remove)
+    #
+    #def add_label_filter(query, label):
+    #    if label:
+    #        label = '[%s]' % label
+    #        query = query.filter(categories__contains=label)
+    #    return query
+    #
+    #def weighted_rating(rating, votes, minimum_votes=settings.GOSCALE_RATING_MINIMUM_VOTES, mean_value=settings.GOSCALE_RATING_MEAN_VALUE):
+    #    """Bayesian estimate
+    #    rating- average for the picture
+    #    votes - number of votes for the picture
+    #    m - minimum votes required to be listed
+    #    mean_value - the mean vote across the whole report
+    #    """
+    #    if votes==0:
+    #        return 0.0
+    #    return (float(votes) / (float(votes) + float(minimum_votes))) * float(rating) + (float(minimum_votes) / (float(votes) + float(minimum_votes))) * float(mean_value)
+    #
+    #def send_comment_replied_email(request, parent_comment, comment):
+    #    site = get_site(request)
+    #    user = parent_comment.user
+    #    content_dict = {
+    #        'site': site,
+    #        'username': user.username,
+    #        'parent_comment': parent_comment.comment,
+    #        'comment': comment.comment,
+    #        'reply_from': comment.user.username,
+    #        'path': parent_comment.get_content_object_url(),
+    #    }
+    #    comment_replied_subj_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_replied_subject.txt')
+    #    subject = template.loader.render_to_string(comment_replied_subj_template, content_dict)
+    #    # Email subject *must not* contain newlines
+    #    subject = ''.join(subject.splitlines())
+    #    comment_replied_msg_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_replied.txt')
+    #    message = template.loader.render_to_string(comment_replied_msg_template, content_dict)
+    #    user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+    #
+    #def send_comment_deleted_email(request, comment):
+    #    site = get_site(request)
+    #    user = comment.user
+    #    content_dict = {
+    #        'site': site,
+    #        'username': user.username,
+    #        'comment': comment.comment,
+    #        'path': comment.get_content_object_url(),
+    #    }
+    #    comment_deleted_subj_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_deleted_subject.txt')
+    #    subject = template.loader.render_to_string(comment_deleted_subj_template, content_dict)
+    #    # Email subject *must not* contain newlines
+    #    subject = ''.join(subject.splitlines())
+    #    comment_deleted_msg_template = os.path.join(settings.GOSCALE_ROOT_TEMPLATE_DIR, 'comments', 'email', 'email_comment_deleted.txt')
+    #    message = template.loader.render_to_string(comment_deleted_msg_template, content_dict)
+    #    user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+    #
+    #def get_redirect_value(request):
+    #    redirect_field_name = settings.REDIRECT_FIELD_NAME
+    #    if redirect_field_name in request.session:
+    #        redirect_to = request.session[redirect_field_name]
+    #        del request.session[redirect_field_name]
+    #    elif redirect_field_name in request.COOKIES:
+    #        redirect_to = urllib2.unquote(request.COOKIES[redirect_field_name])
+    #    elif redirect_field_name in request.GET:
+    #        redirect_to = request.GET.get(redirect_field_name)
+    #    elif redirect_field_name in request.POST:
+    #        redirect_to = request.POST.get(redirect_field_name)
+    #    else:
+    #        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
+    #    if not redirect_to or ' ' in redirect_to:
+    #        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
+    #    elif '//' in redirect_to and re.match(r'[^\?]*//', redirect_to):
+    #        redirect_to = settings.get('LOGIN_REDIRECT_URL', '/')
+    #    return redirect_to

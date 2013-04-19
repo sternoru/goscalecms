@@ -80,7 +80,9 @@ class Feed(FeedBase):
     """
     RSS Feed posts
     """
-    pass
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Feed, self).copy_relations(oldinstance)
 
 signals.post_save.connect(goscale_models.update_posts, sender=Feed)
 
@@ -100,6 +102,10 @@ class Blogger(BlogBase):
     """
     Blogger posts
     """
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Blogger, self).copy_relations(oldinstance)
 
     def _regex_id(self):
         try:
@@ -133,6 +139,10 @@ class Tumblr(BlogBase):
     """
     Tumblr posts
     """
+
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Tumblr, self).copy_relations(oldinstance)
 
     def _regex_id(self):
         try:

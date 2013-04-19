@@ -35,6 +35,10 @@ class Picasa(goscale_models.GoscaleCMSPlugin):
     album = None
     type = 'photos'
 
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Picasa, self).copy_relations(oldinstance)
+
     def _regex_id(self, url=None):
         if not url:
             url = self.url

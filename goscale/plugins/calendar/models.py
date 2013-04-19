@@ -26,6 +26,10 @@ class Calendar(goscale_models.GoscaleCMSPlugin):
         help_text=_('If set past events will be shown.'))
     order = 'updated'
 
+    def copy_relations(self, oldinstance):
+        # FIXME: remove after this issue is resolved: https://github.com/divio/django-cms/issues/1723
+        super(Calendar, self).copy_relations(oldinstance)
+
     def get_past_events(self):
         query = self.posts.all()
         return self._format(query.filter(updated__lt=datetime.datetime.now()).order_by('-updated')[:self.page_size])
