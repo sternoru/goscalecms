@@ -93,8 +93,8 @@ GOSCALE_BOOTSTRAP_THEMES = getattr(settings, 'GOSCALE_BOOTSTRAP_THEMES', [
 GOSCALE_BOOTSTRAP_THEME = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', GOSCALE_BOOTSTRAP_THEMES[0])
 
 """ Ajaxlinks settings """
-GOSCALE_AJAXLINKS = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', False)
-GOSCALE_AJAXLINKS_EXCEPTIONS = getattr(settings, 'GOSCALE_BOOTSTRAP_THEME', [
+GOSCALE_AJAXLINKS = getattr(settings, 'GOSCALE_AJAXLINKS', False)
+GOSCALE_AJAXLINKS_EXCEPTIONS = getattr(settings, 'GOSCALE_AJAXLINKS_EXCEPTIONS', [
     '#',
     '*/accounts/*',
     '*/goscale/signup/*',
