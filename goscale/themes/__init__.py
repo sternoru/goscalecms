@@ -10,6 +10,9 @@ def init_themes():
     if not hasattr(settings, 'THEME'):
         setattr(settings, 'THEME', None)
     if not hasattr(settings, 'THEMES_DIR'):
+        if not hasattr(settings, 'PROJECT_PATH'):
+            print "Error: Couldn't init themes because neither THEMES_DIR nor PROJECT_PATH settings are provided."
+            return
         THEMES_DIR = os.path.join(settings.PROJECT_PATH, 'themes')
         if not os.path.exists(THEMES_DIR):
             os.makedirs(THEMES_DIR)
@@ -27,6 +30,9 @@ def init_themes():
         setattr(settings, 'DEFAULT_STATICFILES_DIRS', settings.STATICFILES_DIRS)
 
 def set_themes():
+    if not hasattr(settings, 'THEMES_DIR'):
+        print "Themes not set because neither THEMES_DIR nor PROJECT_PATH settings are provided."
+        return
     try:
         if not Site.objects.filter(id=settings.SITE_ID):
             return

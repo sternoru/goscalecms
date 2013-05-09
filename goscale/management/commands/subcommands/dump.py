@@ -53,10 +53,11 @@ class Dump(BaseCommand):
         with open(file, 'w+') as f:
             management.call_command('dumpdata', indent=4, use_natural_keys=True, use_base_manager=True, exclude=[
                 'contenttypes',
+                'auth',
+                'sessions.Session',
                 'cms.Placeholder',
                 'cms.Page',
                 'goscale.Post',
-                'auth.Permission',
                 'admin',
                 'sites',
                 'themes',
