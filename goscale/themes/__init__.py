@@ -51,6 +51,9 @@ def set_themes():
     if hasattr(site, 'themes'):
         try:
             themes = [theme.name for theme in site.themes.all()]
+        except utils.DatabaseError, ex:
+            print 'Couldn\'t set up themes: %s' % ex
+            return
         except:
             raise
             pass
@@ -118,5 +121,4 @@ try:
     set_themes()
 except Exception, ex:
     raise
-    print 'An error occured setting up the themes: %s' % ex
-
+    print 'An error occured setting up themes: %s' % ex

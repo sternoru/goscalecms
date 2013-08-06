@@ -16,6 +16,9 @@ import unidecode
 from django.template import defaultfilters
 from goscale import conf, utils
 
+# http://stackoverflow.com/questions/16682693/django-cms-warning-on-django-mptt
+CMSPlugin.tree = CMSPlugin.objects
+
 
 class Post(models.Model):
     link = models.URLField(blank=True, null=True, db_index=True) # link is also unique identifier for each entry
