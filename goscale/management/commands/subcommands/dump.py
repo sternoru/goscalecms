@@ -65,6 +65,7 @@ class Dump(BaseCommand):
                     'auth',
                     'sessions.Session',
                     'goscale.Post',
+                    'cms',
                     'admin',
                     'sites',
                     'themes',
