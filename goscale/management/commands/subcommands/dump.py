@@ -49,17 +49,24 @@ class Dump(BaseCommand):
                                     format=dump_format)
         print 'Saved %s' % file
 
-        file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'rest')
+        file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'cms')
         with open(file, 'w+') as f:
-            management.call_command('dumpdata', indent=4, use_natural_keys=True, use_base_manager=True, exclude=[
-                'contenttypes',
-                'auth',
-                'sessions.Session',
+            management.call_command('dumpdata', 'cms', indent=4, use_natural_keys=True, use_base_manager=True, exclude=[
                 'cms.Placeholder',
                 'cms.Page',
-                'goscale.Post',
-                'admin',
-                'sites',
-                'themes',
                 ], stdout=f, format=dump_format)
         print 'Saved %s' % file
+
+        if not options['cms_only']:
+            file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'rest')
+            with open(file, 'w+') as f:
+                management.call_command('dumpdata', indent=4, use_natural_keys=True, use_base_manager=True, exclude=[
+                    'contenttypes',
+                    'auth',
+                    'sessions.Session',
+                    'goscale.Post',
+                    'admin',
+                    'sites',
+                    'themes',
+                    ], stdout=f, format=dump_format)
+            print 'Saved %s' % file

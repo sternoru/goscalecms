@@ -18,6 +18,8 @@ class Command(SubcommandsCommand):
                     help='Site ID to filter plugins.'),
         make_option('-t', '--theme', default=None,
                     help='Theme name to filter plugins.'),
+        make_option('-c', '--cms-only', action='store_true',
+                    help='Only dump/load CMS related models.'),
     )
 
     command_name = 'goscale'

@@ -40,7 +40,13 @@ class Load(BaseCommand):
             management.call_command('loaddata', file)
             print 'Restored %s' % file
 
-        # restore the rest
-        file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'rest')
+        # restore the cms
+        file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'cms')
         management.call_command('loaddata', file)
         print 'Restored %s' % file
+
+        if not options['cms_only']:
+            # restore the rest
+            file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'rest')
+            management.call_command('loaddata', file)
+            print 'Restored %s' % file
