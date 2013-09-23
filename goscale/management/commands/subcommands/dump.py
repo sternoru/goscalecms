@@ -16,22 +16,31 @@ class Dump(BaseCommand):
         # delete posts
         Post.objects.all().delete()
 
-        # serialize pages for themes
-        for theme in models.Theme.objects.all():
-            site = theme.sites.all()[0]
-            pages = Page.objects.filter(site=site)
-            file = '%s/fixtures/pages_%s.json' % (settings.PROJECT_PATH, theme.name)
+        # serialize pages
+        try:
+            for theme in models.Theme.objects.all():
+                site = theme.sites.all()[0]
+                pages = Page.objects.filter(site=site)
+                file = '%s/fixtures/pages_%s.json' % (settings.PROJECT_PATH, theme.name)
+                with open(file, 'w+') as f:
+                    f.write(serializers.serialize(dump_format, pages, indent=4, use_natural_keys=True))
+                print 'Saved %s' % file
+        except Exception, e:
+            print 'Couldn\'t load themes: %s' % str(e)
+            pages = Page.objects.all()
+            file = '%s/fixtures/pages.json' % settings.PROJECT_PATH
             with open(file, 'w+') as f:
                 f.write(serializers.serialize(dump_format, pages, indent=4, use_natural_keys=True))
             print 'Saved %s' % file
 
+        # serialize themes if enabled
+        if 'goscale.themes' in settings.INSTALLED_APPS:
+            file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'themes')
+            with open(file, 'w+') as f:
+                management.call_command('dumpdata', 'themes', indent=4, use_natural_keys=True, stdout=f, format=dump_format)
+            print 'Saved %s' % file
 
         # serialize the rest
-        file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'themes')
-        with open(file, 'w+') as f:
-            management.call_command('dumpdata', 'themes', indent=4, use_natural_keys=True, stdout=f, format=dump_format)
-        print 'Saved %s' % file
-
         file = '%s/fixtures/%s.json' % (settings.PROJECT_PATH, 'sites')
         with open(file, 'w+') as f:
             management.call_command('dumpdata', 'sites', indent=4, use_natural_keys=True, stdout=f, format=dump_format)
