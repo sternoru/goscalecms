@@ -48,7 +48,8 @@ class SiteOnFlyDetectionMiddleware:
         res = self.lookup()
 #        res = self.theme_lookup()
 
-        set_themes()
+        if 'goscale.themes' in settings.INSTALLED_APPS:
+            set_themes()
 
     def get_domain_and_port(self):
         """

@@ -10,20 +10,24 @@ def init_themes():
     if not hasattr(settings, 'THEME'):
         setattr(settings, 'THEME', None)
     if not hasattr(settings, 'THEMES_DIR'):
-        if not hasattr(settings, 'PROJECT_PATH'):
-            print "Error: Couldn't init themes because neither THEMES_DIR nor PROJECT_PATH settings are provided."
-            return
-        THEMES_DIR = os.path.join(settings.PROJECT_PATH, 'themes')
+        if hasattr(settings, 'PROJECT_PATH'):
+            THEMES_DIR = os.path.join(settings.PROJECT_PATH, 'themes')
+        elif hasattr(settings, 'PROJECT_HOME'):
+            THEMES_DIR = os.path.join(settings.PROJECT_HOME, 'themes')
+        else:
+            THEMES_DIR = os.path.join(settings.STATIC_ROOT, 'themes')
         if not os.path.exists(THEMES_DIR):
             os.makedirs(THEMES_DIR)
         settings.STATICFILES_DIRS = (
-            ('themes', os.path.join(settings.PROJECT_PATH, "themes")),
+            ('themes', THEMES_DIR),
         ) + settings.STATICFILES_DIRS
         setattr(settings, 'THEMES_DIR', THEMES_DIR)
+    if not hasattr(settings, 'CMS_TEMPLATES'):
+        setattr(settings, 'CMS_TEMPLATES', (('blank.html', 'Blank'),))
     if not hasattr(settings, 'DEFAULT_CMS_TEMPLATES'):
         setattr(settings, 'DEFAULT_CMS_TEMPLATES', settings.CMS_TEMPLATES)
     if settings.THEMES_DIR not in settings.TEMPLATE_DIRS:
-        settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS + (settings.THEMES_DIR,)
+        settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS) + (settings.THEMES_DIR,)
     if not hasattr(settings, 'DEFAULT_TEMPLATE_DIRS'):
         setattr(settings, 'DEFAULT_TEMPLATE_DIRS', settings.TEMPLATE_DIRS)
     if not hasattr(settings, 'DEFAULT_STATICFILES_DIRS'):
@@ -71,7 +75,7 @@ def set_themes():
                     # handle templates
                     template_path = os.path.join(theme_full_path, 'templates')
                     if template_path not in settings.TEMPLATE_DIRS:
-                        TEMPLATE_DIRS = (template_path,) + settings.TEMPLATE_DIRS
+                        TEMPLATE_DIRS = (template_path,) + tuple(settings.TEMPLATE_DIRS)
                         setattr(settings, 'TEMPLATE_DIRS', TEMPLATE_DIRS)
                     for template in os.listdir(template_path):
                         if '.' not in template:
@@ -96,8 +100,8 @@ def set_themes():
                         # This theme doesn't exist or doesn't have a settings file
                             pass
 
-    setattr(settings, 'CMS_TEMPLATES', tuple(theme_templates) + settings.DEFAULT_CMS_TEMPLATES)
-    setattr(settings, 'STATICFILES_DIRS', (settings.THEMES_DIR,) + settings.DEFAULT_STATICFILES_DIRS)
+    setattr(settings, 'CMS_TEMPLATES', tuple(theme_templates) + tuple(settings.DEFAULT_CMS_TEMPLATES))
+    setattr(settings, 'STATICFILES_DIRS', (settings.THEMES_DIR,) + tuple(settings.DEFAULT_STATICFILES_DIRS))
     # update SITE_ALIASES
     SITE_ALIASES = getattr(settings, "SITE_ALIASES", {})
     for theme_dir in os.listdir(settings.THEMES_DIR):
@@ -111,14 +115,10 @@ def set_themes():
 try:
     from django.conf import settings
     from django.contrib.sites.models import Site
-    try:
-        from cms.conf.patch import post_patch
-    except ImportError:
-        pass # patch deprecated in django-cms>=2.4
-    from goscale.themes.models import Theme
-
-    init_themes()
-    set_themes()
+    if 'goscale.themes' in settings.INSTALLED_APPS:
+        from goscale.themes.models import Theme
+        init_themes()
+        set_themes()
 except Exception, ex:
-    raise
-    print 'An error occured setting up themes: %s' % ex
+    print 'An error occured setting up the themes: %s' % ex
+

@@ -24,7 +24,7 @@ class Theme(models.Model):
     def save(self, *args, **kwargs):
         if not self.id and not self.name:
             f = tarfile.open(fileobj=self.theme_file, mode='r:gz')
-            self.name = f.getnames()[-1]
+            self.name = os.path.commonprefix(f.getnames())
             f.extractall(settings.THEMES_DIR)
 
         super(Theme, self).save(*args, **kwargs)
